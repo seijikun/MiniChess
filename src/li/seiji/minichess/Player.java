@@ -2,7 +2,11 @@ package li.seiji.minichess;
 
 public enum Player {
 
-    BLACK,
-    WHITE
+    WHITE,
+    BLACK;
+
+    public static Player parseIdentifier(char identifier) {
+        return Character.isUpperCase(identifier) ? WHITE : BLACK;
+    }
 
 }
