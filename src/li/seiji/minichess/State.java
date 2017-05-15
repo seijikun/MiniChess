@@ -2,12 +2,22 @@ package li.seiji.minichess;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.Writer;
 
 public class State {
 
     public char board[][] = new char[6][5];
     public Player turn = Player.WHITE;
+
+    private void initialize() {
+        StringReader reader = new StringReader(Board.DEFAULT_BOARD);
+        try {
+            read(reader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String toString() {
