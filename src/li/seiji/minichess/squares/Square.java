@@ -1,7 +1,7 @@
-package li.seiji.minitchess.squares;
+package li.seiji.minichess.squares;
 
-import li.seiji.minitchess.Move;
-import li.seiji.minitchess.Team;
+import li.seiji.minichess.Move;
+import li.seiji.minichess.Team;
 
 import java.util.List;
 

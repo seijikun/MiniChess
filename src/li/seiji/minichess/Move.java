@@ -1,6 +1,6 @@
-package li.seiji.minitchess;
+package li.seiji.minichess;
 
-import li.seiji.minitchess.squares.Square;
+import li.seiji.minichess.squares.Square;
 
 /**
  * Created by seiji on 5/15/17.

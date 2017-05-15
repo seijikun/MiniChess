@@ -1,6 +1,6 @@
-package li.seiji.minitchess;
+package li.seiji.minichess;
 
-import li.seiji.minitchess.squares.Square;
+import li.seiji.minichess.squares.Square;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
