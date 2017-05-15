@@ -15,6 +15,7 @@ public interface IFigure {
     static boolean isMoveValid(State state, Move move) {
         if(!IFigure.isMoveWithinBounds(state, move)) return false;
         if(IFigure.getFieldPlayer(state, move.to) == state.turn) return false;
+        if(IFigure.getFieldPlayer(state, move.from) != state.turn) return false;
         return true;
     }
 
