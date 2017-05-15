@@ -23,4 +23,14 @@ public class Move {
         return from.toString() + "-" + to.toString();
     }
 
+    @Override
+    public int hashCode() {
+        return from.hashCode() ^ to.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Move o = (Move) obj;
+        return (o.to == to && o.from == from);
+    }
 }

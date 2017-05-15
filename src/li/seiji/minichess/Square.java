@@ -1,5 +1,7 @@
 package li.seiji.minichess;
 
+import java.util.concurrent.SynchronousQueue;
+
 public class Square {
 
     public int x;
@@ -28,5 +30,16 @@ public class Square {
                 (char)((int)'1' + y)
         };
         return new String(posStr);
+    }
+
+    @Override
+    public int hashCode() {
+        return (x | (y << 16));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Square o = (Square)obj;
+        return (o.x == x && o.y == y);
     }
 }
