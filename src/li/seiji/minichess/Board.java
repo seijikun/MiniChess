@@ -9,6 +9,9 @@ import java.util.List;
 
 public class Board {
 
+    public static final int ROWS = 6;
+    public static final int COLUMNS = 5;
+
     public static List<Move> getPossibleMoves(State state) {
         List<Move> moves = new ArrayList<Move>();
 
@@ -19,22 +22,22 @@ public class Board {
 
                 switch(identifier) {
                     case Pawn.identifier:
-                        Pawn.getPossibleMoves(state, new Square(x, y), moves);
+                        Pawn.getPossibleMoves(state, new Square(x, y), player, moves);
                         break;
                     case Rook.identifier:
-                        Rook.getPossibleMoves(state, new Square(x, y), moves);
+                        Rook.getPossibleMoves(state, new Square(x, y), player, moves);
                         break;
                     case Bishop.identifier:
-                        Bishop.getPossibleMoves(state, new Square(x, y), moves);
+                        Bishop.getPossibleMoves(state, new Square(x, y), player, moves);
                         break;
                     case Knight.identifier:
-                        Knight.getPossibleMoves(state, new Square(x, y), moves);
+                        Knight.getPossibleMoves(state, new Square(x, y), player, moves);
                         break;
                     case King.identifier:
-                        King.getPossibleMoves(state, new Square(x, y), moves);
+                        King.getPossibleMoves(state, new Square(x, y), player, moves);
                         break;
                     case Queen.identifier:
-                        Queen.getPossibleMoves(state, new Square(x, y), moves);
+                        Queen.getPossibleMoves(state, new Square(x, y), player, moves);
                         break;
                 }
             }
