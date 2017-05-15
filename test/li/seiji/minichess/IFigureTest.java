@@ -1,7 +1,19 @@
 package li.seiji.minichess;
 
-/**
- * Created by seiji on 5/15/17.
- */
+import org.junit.Test;
+
 public class IFigureTest {
+
+    public static final String testState = "";
+
+    @Test
+    public void testCheckStraightIsBlocked() {
+
+    }
+
+    @Test
+    public void testCheckDiagonalIsBlocked() {
+
+    }
+
 }
