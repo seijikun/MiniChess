@@ -7,7 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
-public class King {
+public class King implements IFigure {
 
     public static void getPossibleMoves(State state, Square square, List<Move> result) {
         throw new NotImplementedException(); //TODO: implement

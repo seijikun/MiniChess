@@ -7,7 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
-public class Rook {
+public class Rook implements IFigure {
 
     public static void getPossibleMoves(State state, Square square, List<Move> result) {
         throw new NotImplementedException(); //TODO: implement
