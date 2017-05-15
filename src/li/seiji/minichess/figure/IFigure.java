@@ -29,6 +29,12 @@ public interface IFigure {
     }
 
     //delta
+    static int getMoveDirX(Move move) {
+        return getMoveDeltaX(move) / getAbsMoveDeltaX(move);
+    }
+    static int getMoveDirY(Move move) {
+        return getMoveDeltaY(move) / getAbsMoveDeltaY(move);
+    }
     static int getMoveDeltaX(Move move) {
         return (move.to.x - move.from.x);
     }
@@ -55,14 +61,18 @@ public interface IFigure {
             return getAbsMoveDeltaX(move);
     }
     static boolean checkStraightIsBlocked(State state, Move move, Function<Player, Boolean> isBlockade) {
-        for(int x = move.from.x; x < move.to.x; ++x) {
+        int xDir = getMoveDirX(move);
+        int yDir = getMoveDirY(move);
+
+        for(int x = move.from.x; x != move.to.x; x += xDir) {
             Square square = new Square(x, move.to.y);
             if(isBlockade.apply(getFieldPlayer(state, square))) return true;
         }
-        for(int y = move.from.y; y < move.to.y; ++y) {
+        for(int y = move.from.y; y != move.to.y; y += yDir) {
             Square square = new Square(move.to.x, y);
             if(isBlockade.apply(getFieldPlayer(state, square))) return true;
         }
+        return false;
     }
 
     /* DIAGONAL */
