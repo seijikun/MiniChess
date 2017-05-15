@@ -1,5 +1,8 @@
 package li.seiji.minichess;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import javax.management.Notification;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -24,9 +27,10 @@ public class State implements Cloneable {
         return  result;
     }
 
-    public void move(String moveString) {
+    public State move(String moveString) {
         Move move = new Move(moveString);
-        move.isValid()
+        //TODO implement
+        throw new NotImplementedException();
     }
 
 
