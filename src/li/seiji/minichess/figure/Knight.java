@@ -1,7 +1,16 @@
-package li.seiji.minichess.squares;
+package li.seiji.minichess.figure;
 
-/**
- * Created by seiji on 5/15/17.
- */
+import li.seiji.minichess.Move;
+import li.seiji.minichess.Square;
+import li.seiji.minichess.State;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.List;
+
 public class Knight {
+
+    public static void getPossibleMoves(State state, Square square, List<Move> result) {
+        throw new NotImplementedException(); //TODO: implement
+    }
+
 }
