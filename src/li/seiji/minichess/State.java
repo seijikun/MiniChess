@@ -2,7 +2,6 @@ package li.seiji.minichess;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.management.Notification;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;

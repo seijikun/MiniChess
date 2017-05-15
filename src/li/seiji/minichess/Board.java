@@ -1,5 +1,11 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.figure.IFigure;
+import org.omg.PortableServer.POAPackage.AdapterAlreadyExistsHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Board {
 
     /* BOARD DEFINITIONS */
@@ -11,5 +17,41 @@ public class Board {
             "....." + System.lineSeparator() +
             "PPPPP" + System.lineSeparator() +
             "RNBQK";
+
+    /**
+     * Get a list of all possible moves for the current player on the current board as defined by state.
+     * @param state Board state (defines the board itself and the current player)
+     * @return The list of all possible moves that can be done by the current player.
+     */
+    public static List<Move> getPossibleMoves(State state) {
+        List<Move> result = new ArrayList<>();
+
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                char identifier = state.board[y][x];
+                Player player = Player.parseIdentifier(identifier);
+
+                if(identifier != '.' && player == state.turn)
+                    IFigure.moveList(state, result, new Square(x, y));
+            }
+        }
+
+        return  result;
+    }
+
+    public static void prettyPrint(State state) {
+        for(int y = 0; y < Board.ROWS; ++y) {
+            System.out.print("| " + (y+1) + " |");
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                char identifier = state.board[y][x];
+                System.out.print('_');
+                System.out.print((identifier != '.') ? identifier : '_');
+                System.out.print("_|");
+            }
+            System.out.println();
+        }
+
+        System.out.println("|   | a | b | c | d | e |");
+    }
 
 }
