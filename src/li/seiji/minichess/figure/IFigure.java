@@ -68,9 +68,9 @@ public interface IFigure {
     static boolean isDestinationFieldAnEnemy(State state, Move move, Player currentPlayer) {
         Player fieldPlayer = getFieldPlayer(state, move.to);
         if(currentPlayer == Player.BLACK)
-            return (currentPlayer == Player.WHITE);
+            return (fieldPlayer == Player.WHITE);
         else
-            return (currentPlayer == Player.BLACK);
+            return (fieldPlayer == Player.BLACK);
     }
 
     static void scan(State state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {

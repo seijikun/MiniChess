@@ -8,7 +8,7 @@ public class Knight implements IFigure {
     public static final char identifier = 'n';
 
     static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveWithinBounds(state, move)) return false;
+        if(!IFigure.isMoveValid(state, move)) return false;
         //TODO: implement
         return true;
     }

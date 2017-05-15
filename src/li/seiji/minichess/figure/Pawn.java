@@ -9,7 +9,7 @@ public class Pawn implements IFigure {
     public static final char identifier = 'p';
 
     static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveWithinBounds(state, move)) return false;
+        if(!IFigure.isMoveValid(state, move)) return false;
         Player player = Player.parseIdentifier(move.from.getIdentifier(state));
 
         boolean isValidStraightMove = IFigure.isStraightMove(move) && (
