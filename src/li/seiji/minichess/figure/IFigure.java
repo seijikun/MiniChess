@@ -30,10 +30,10 @@ public interface IFigure {
 
     //delta
     static int getMoveDirX(Move move) {
-        return getMoveDeltaX(move) / getAbsMoveDeltaX(move);
+        return move.from.x > move.to.x ? -1 : 1;
     }
     static int getMoveDirY(Move move) {
-        return getMoveDeltaY(move) / getAbsMoveDeltaY(move);
+        return move.from.y > move.to.y ? -1 : 1;
     }
     static int getMoveDeltaX(Move move) {
         return (move.to.x - move.from.x);
@@ -91,8 +91,17 @@ public interface IFigure {
             return (fieldPlayer == Player.BLACK);
     }
 
+    static boolean checkDiagonalIsBlocked(State state, Move move, Function<Player, Boolean> isBlockade) {
+        int xDir = getMoveDirX(move);
+        int yDir = getMoveDirY(move);
 
+        for(int x = move.from.x, y = move.from.y; x < move.to.x; x+=xDir, y+=yDir) {
+            Square square = new Square(x, y);
+            if(isBlockade.apply(getFieldPlayer(state, square))) return true;
+        }
 
+        return false;
+    }
 
 
     static void scan(State state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {
