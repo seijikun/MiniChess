@@ -21,34 +21,33 @@ public class Board {
     /**
      * Get a list of all possible moves for the given state.
      * @param state Current state for which to get all possible moves.
-     * @param player Player to get all currently possible moves for.
-     * @return List of all possible moves for the given player
+     * @return List of all possible moves for the current player
      */
-    public static List<Move> getPossibleMoves(State state, Player player) {
+    public static List<Move> getPossibleMoves(State state) {
         List<Move> moves = new ArrayList<Move>();
 
         for(int x = 0; x < state.board.length; ++x) {
             for(int y = 0; y < state.board[x].length; ++y) {
                 char identifier = Character.toLowerCase(state.board[x][y]);
-                if(Player.parseIdentifier(state.board[x][y]) == player) {
+                if(Player.parseIdentifier(state.board[x][y]) == state.turn) {
                     switch(identifier) {
                         case Pawn.identifier:
-                            Pawn.getPossibleMoves(state, new Square(x, y), player, moves);
+                            Pawn.getPossibleMoves(state, new Square(x, y), state.turn, moves);
                             break;
                         case Rook.identifier:
-                            Rook.getPossibleMoves(state, new Square(x, y), player, moves);
+                            Rook.getPossibleMoves(state, new Square(x, y), state.turn, moves);
                             break;
                         case Bishop.identifier:
-                            Bishop.getPossibleMoves(state, new Square(x, y), player, moves);
+                            Bishop.getPossibleMoves(state, new Square(x, y), state.turn, moves);
                             break;
                         case Knight.identifier:
-                            Knight.getPossibleMoves(state, new Square(x, y), player, moves);
+                            Knight.getPossibleMoves(state, new Square(x, y), state.turn, moves);
                             break;
                         case King.identifier:
-                            King.getPossibleMoves(state, new Square(x, y), player, moves);
+                            King.getPossibleMoves(state, new Square(x, y), state.turn, moves);
                             break;
                         case Queen.identifier:
-                            Queen.getPossibleMoves(state, new Square(x, y), player, moves);
+                            Queen.getPossibleMoves(state, new Square(x, y), state.turn, moves);
                             break;
                     }
                 }
