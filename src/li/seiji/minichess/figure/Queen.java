@@ -15,15 +15,16 @@ public class Queen implements IFigure {
         Player currentPlayer = Player.parseIdentifier(move.from.getIdentifier(state));
 
         if(IFigure.isStraightMove(move))
-            if(!IFigure.checkStraightIsBlocked(state, move, straightBlockChecker))
+            if(!IFigure.checkStraightIsBlocked(state, move, blockChecker))
                 return true;
 
-        //TODO: implement diagonal
+        if(IFigure.isDiagonalMove(move) && !IFigure.checkDiagonalIsBlocked(state, move, blockChecker))
+            return true;
 
         return false;
     }
 
     //Queen is blocked by any figure that is not an empty field
-    private static Function<Player, Boolean> straightBlockChecker = (Player player) -> player != Player.NONE;
+    private static Function<Player, Boolean> blockChecker = (Player player) -> player != Player.NONE;
 
 }
