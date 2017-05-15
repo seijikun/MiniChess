@@ -56,14 +56,4 @@ public class Board {
         return moves;
     }
 
-
-    public static void executeMove(State state, Move move) throws InvalidMoveException {
-        Player destSquarePlayer = Player.parseIdentifier(move.to.getIdentifier(state));
-        if(destSquarePlayer == state.turn)
-            throw new InvalidMoveException(state, move);
-        //move figure from move.from to move.to
-        move.to.setIdentifier(state, move.from.getIdentifier(state));
-        move.from.setIdentifier(state, '.');
-    }
-
 }

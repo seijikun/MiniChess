@@ -12,8 +12,4 @@ public class Knight implements IFigure {
 
     public static final char identifier = 'n';
 
-    public static void getPossibleMoves(State state, Square from, Player player, List<Move> result) {
-        throw new NotImplementedException(); //TODO: implement
-    }
-
 }

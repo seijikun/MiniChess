@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface IFigure {
 
-    static void getPossibleMoves(State state, Square from, Player player, List<Move> result){}
+    static Boolean isMoveValid(State state, Square from) { return false; }
 
 }

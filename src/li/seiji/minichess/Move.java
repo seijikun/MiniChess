@@ -15,8 +15,13 @@ public class Move {
         this.to = new Square(move.substring(3, 5));
     }
 
+    public void isValid(State state) {
+
+    }
+
     @Override
     public String toString() {
         return from.toString() + "-" + to.toString();
     }
+
 }
