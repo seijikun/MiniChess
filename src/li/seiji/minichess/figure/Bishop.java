@@ -1,6 +1,7 @@
 package li.seiji.minichess.figure;
 
 import li.seiji.minichess.Move;
+import li.seiji.minichess.Player;
 import li.seiji.minichess.State;
 
 public class Bishop implements IFigure {
@@ -9,7 +10,13 @@ public class Bishop implements IFigure {
 
     static boolean isMoveValid(State state, Move move) {
         if(!IFigure.isMoveValid(state, move)) return false;
-        //TODO: implement
+        Player player = Player.parseIdentifier(move.to.getIdentifier(state));
+
+        if(IFigure.isStraightMove(move) && IFigure.getStraightMoveLen(move) == 1 && !IFigure.isDestinationFieldAnEnemy(state, move, player))
+            return true;
+
+        //TODO: add diagonal test
+
         return true;
     }
 
