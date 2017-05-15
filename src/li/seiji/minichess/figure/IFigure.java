@@ -3,6 +3,8 @@ package li.seiji.minichess.figure;
 import li.seiji.minichess.*;
 
 import java.util.List;
+import java.util.function.Function;
+
 import li.seiji.minichess.Board;
 import li.seiji.minichess.Move;
 import li.seiji.minichess.State;
@@ -22,6 +24,9 @@ public interface IFigure {
     static boolean isMoveWithinBounds(State state, Move move) {
         return (move.to.x >= 0 && move.to.x < Board.COLUMNS && move.to.y >= 0 && move.to.y < Board.ROWS);
     }
+    static Player getFieldPlayer(State state, Square dst) {
+        return Player.parseIdentifier(dst.getIdentifier(state));
+    }
 
     //delta
     static int getMoveDeltaX(Move move) {
@@ -38,31 +43,34 @@ public interface IFigure {
     }
 
 
-
-
-
+    /* STRAIGHT */
     static boolean isStraightMove(Move move) {
         return (move.from.x == move.to.x && move.from.y != move.to.y) ||
                 (move.from.x != move.to.x && move.from.y == move.to.y);
     }
-
     static int getStraightMoveLen(Move move) {
         if(move.from.x == move.to.x) //y changed
             return getAbsMoveDeltaY(move);
         else //x changed
             return getAbsMoveDeltaX(move);
     }
+    static boolean checkStraightIsBlocked(State state, Move move, Function<Player, Boolean> isBlockade) {
+        for(int x = move.from.x; x < move.to.x; ++x) {
+            Square square = new Square(x, move.to.y);
+            if(isBlockade.apply(getFieldPlayer(state, square))) return true;
+        }
+        for(int y = move.from.y; y < move.to.y; ++y) {
+            Square square = new Square(move.to.x, y);
+            if(isBlockade.apply(getFieldPlayer(state, square))) return true;
+        }
+    }
 
+    /* DIAGONAL */
     static boolean isDiagonalMove(Move move) {
         return getAbsMoveDeltaX(move) == getAbsMoveDeltaY(move);
     }
-
     static int getDiagonalMoveLen(Move move) {
         return getAbsMoveDeltaX(move);
-    }
-
-    static Player getFieldPlayer(State state, Square dst) {
-        return Player.parseIdentifier(dst.getIdentifier(state));
     }
 
     static boolean isDestinationFieldAnEnemy(State state, Move move, Player currentPlayer) {
@@ -72,6 +80,10 @@ public interface IFigure {
         else
             return (fieldPlayer == Player.BLACK);
     }
+
+
+
+
 
     static void scan(State state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {
         int x = from.x, y = from.y;
