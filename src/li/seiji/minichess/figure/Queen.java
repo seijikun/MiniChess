@@ -14,9 +14,8 @@ public class Queen implements IFigure {
         if(!IFigure.isMoveValid(state, move)) return false;
         Player currentPlayer = Player.parseIdentifier(move.from.getIdentifier(state));
 
-        if(IFigure.isStraightMove(move))
-            if(!IFigure.checkStraightIsBlocked(state, move, blockChecker))
-                return true;
+        if(IFigure.isStraightMove(move) && !IFigure.checkStraightIsBlocked(state, move, blockChecker))
+            return true;
 
         if(IFigure.isDiagonalMove(move) && !IFigure.checkDiagonalIsBlocked(state, move, blockChecker))
             return true;

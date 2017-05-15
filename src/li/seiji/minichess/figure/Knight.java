@@ -9,8 +9,11 @@ public class Knight implements IFigure {
 
     static boolean isMoveValid(State state, Move move) {
         if(!IFigure.isMoveValid(state, move)) return false;
-        //TODO: implement
-        return true;
+
+        return (
+            (IFigure.getAbsMoveDeltaX(move) == 2 && IFigure.getAbsMoveDeltaY(move) == 1) ||
+            (IFigure.getAbsMoveDeltaX(move) == 1 && IFigure.getAbsMoveDeltaY(move) == 2)
+        );
     }
 
 }

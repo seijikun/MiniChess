@@ -14,7 +14,7 @@ public class Bishop implements IFigure {
         if(!IFigure.isMoveValid(state, move)) return false;
         Player player = Player.parseIdentifier(move.to.getIdentifier(state));
 
-        if(IFigure.isStraightMove(move) && IFigure.getStraightMoveLen(move) == 1 && !IFigure.isDestinationFieldAnEnemy(state, move, player))
+        if(IFigure.isStraightMove(move) && IFigure.getStraightMoveLen(move) == 1 && IFigure.getFieldPlayer(state, move.to) == Player.NONE)
             return true;
 
         if(IFigure.isDiagonalMove(move) && !IFigure.checkDiagonalIsBlocked(state, move, diagonalBlockChecker))

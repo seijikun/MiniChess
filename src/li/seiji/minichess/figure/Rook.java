@@ -13,9 +13,8 @@ public class Rook implements IFigure {
     static boolean isMoveValid(State state, Move move) {
         if(!IFigure.isMoveValid(state, move)) return false;
 
-        if(IFigure.isStraightMove(move))
-            if(!IFigure.checkStraightIsBlocked(state, move, straightBlockChecker))
-                return true;
+        if(IFigure.isStraightMove(move) && !IFigure.checkStraightIsBlocked(state, move, straightBlockChecker))
+            return true;
 
         return false;
     }

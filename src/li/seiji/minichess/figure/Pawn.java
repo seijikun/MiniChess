@@ -16,11 +16,8 @@ public class Pawn implements IFigure {
         boolean isValidStraightMove = IFigure.isStraightMove(move) &&
                 IFigure.getMoveDeltaY(move) == deltaY &&
                 IFigure.getFieldPlayer(state, move.to) == Player.NONE;
-
-        boolean isValidDiagonalMove = (
-                (player == Player.WHITE && IFigure.getMoveDeltaY(move) == 1 && IFigure.getAbsMoveDeltaX(move) == 1) ||
-                (player == Player.BLACK && IFigure.getMoveDeltaY(move) == -1 && IFigure.getAbsMoveDeltaX(move) == 1)
-        );
+        
+        boolean isValidDiagonalMove = IFigure.getMoveDeltaY(move) == deltaY && IFigure.getAbsMoveDeltaX(move) == 1;
 
         return (isValidDiagonalMove || isValidStraightMove);
     }
