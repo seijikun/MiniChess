@@ -1,6 +1,5 @@
 package li.seiji.minichess;
 
-import li.seiji.minichess.squares.Square;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
@@ -16,4 +15,17 @@ public class Board {
         throw new NotImplementedException();
     }
 
+    public abstract static class Square {
+
+        public int row;
+        public int col;
+
+        public
+
+        public Square(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+    }
 }

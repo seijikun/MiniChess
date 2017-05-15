@@ -1,4 +1,4 @@
-package li.seiji.minichess.squares;
+package li.seiji.minichess.figure;
 
 /**
  * Created by seiji on 5/15/17.
