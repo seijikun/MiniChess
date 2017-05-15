@@ -30,10 +30,14 @@ public interface IFigure {
 
     //delta
     static int getMoveDirX(Move move) {
-        return move.from.x > move.to.x ? -1 : 1;
+        if(move.from.x > move.to.x) return -1;
+        if(move.from.x < move.to.x) return 1;
+        return 0;
     }
     static int getMoveDirY(Move move) {
-        return move.from.y > move.to.y ? -1 : 1;
+        if(move.from.y > move.to.y) return -1;
+        if(move.from.y < move.to.y) return 1;
+        return 0;
     }
     static int getMoveDeltaX(Move move) {
         return (move.to.x - move.from.x);
@@ -64,11 +68,11 @@ public interface IFigure {
         int xDir = getMoveDirX(move);
         int yDir = getMoveDirY(move);
 
-        for(int x = move.from.x; x != move.to.x; x += xDir) {
+        for(int x = move.from.x + xDir; x != move.to.x; x += xDir) {
             Square square = new Square(x, move.to.y);
             if(isBlockade.apply(getFieldPlayer(state, square))) return true;
         }
-        for(int y = move.from.y; y != move.to.y; y += yDir) {
+        for(int y = move.from.y + yDir; y != move.to.y; y += yDir) {
             Square square = new Square(move.to.x, y);
             if(isBlockade.apply(getFieldPlayer(state, square))) return true;
         }
