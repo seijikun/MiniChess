@@ -19,6 +19,8 @@ public class Square {
         return state.board[y][x];
     }
 
+    public void setIdentifier(State state, char identifier) { state.board[y][x] = identifier; }
+
     @Override
     public String toString() {
         char[] posStr = {

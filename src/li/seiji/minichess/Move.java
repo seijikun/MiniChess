@@ -12,7 +12,7 @@ public class Move {
 
     public Move(String move) {
         this.from = new Square(move.substring(0, 2));
-        this.from = new Square(move.substring(3, 5));
+        this.to = new Square(move.substring(3, 5));
     }
 
     @Override
