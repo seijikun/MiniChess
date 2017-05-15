@@ -49,7 +49,7 @@ public class State implements Cloneable {
         return result;
     }
 
-    private void initialize() {
+    public void initialize() {
         StringReader reader = new StringReader(Board.DEFAULT_BOARD);
         try {
             read(reader);
