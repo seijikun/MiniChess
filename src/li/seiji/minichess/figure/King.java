@@ -18,6 +18,7 @@ public class King implements IFigure {
             result.add(new Move(from, new Square(from.x, from.y-1)));
         if(from.y < Board.ROWS)
             result.add(new Move(from, new Square(from.x, from.y+1)));
+
         if(from.x > 0 && from.y > 0)
             result.add(new Move(from, new Square(from.x-1, from.y-1)));
         if(from.x > 0 && from.y < Board.ROWS)
