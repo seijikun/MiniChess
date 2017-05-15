@@ -5,7 +5,6 @@ import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 public class StateTest {
@@ -29,5 +28,8 @@ public class StateTest {
             fail("Expected InvalidMoveException");
         } catch (InvalidMoveException e) {}
     }
-    
+
+
+    //TODO: implement a test that checks every invalid move for negative validity?
+
 }
