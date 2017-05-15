@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Board {
 
-    Square[] squares;
+    Square[][] squares = new Square[6][5];
 
     public List<Move> getPossibleMovesForPlayer(Team team) {
         throw new NotImplementedException();
