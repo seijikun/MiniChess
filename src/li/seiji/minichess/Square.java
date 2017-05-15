@@ -19,4 +19,12 @@ public class Square {
         return state.board[y][x];
     }
 
+    @Override
+    public String toString() {
+        char[] posStr = {
+                (char)((int)'a' + x),
+                (char)((int)'1' + y)
+        };
+        return new String(posStr);
+    }
 }

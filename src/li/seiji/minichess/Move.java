@@ -10,4 +10,13 @@ public class Move {
         this.to = to;
     }
 
+    public Move(String move) {
+        this.from = new Square(move.substring(0, 2));
+        this.from = new Square(move.substring(3, 5));
+    }
+
+    @Override
+    public String toString() {
+        return from.toString() + "-" + to.toString();
+    }
 }

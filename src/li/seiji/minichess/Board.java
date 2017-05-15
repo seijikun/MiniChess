@@ -1,9 +1,6 @@
 package li.seiji.minichess;
 
-
 import li.seiji.minichess.figure.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.ArrayList;
 import java.util.List;
 
