@@ -12,10 +12,10 @@ public class Pawn implements IFigure {
         if(!IFigure.isMoveValid(state, move)) return false;
         Player player = Player.parseIdentifier(move.from.getIdentifier(state));
 
-        boolean isValidStraightMove = IFigure.isStraightMove(move) && (
-                    (player == Player.WHITE && IFigure.getMoveDeltaY(move) == -1) ||
-                    (player == Player.BLACK && IFigure.getMoveDeltaY(move) == 1)
-                ) && IFigure.getFieldPlayer(state, move.to) == Player.NONE;
+        int deltaY = (player == Player.WHITE) ? -1 : 1;
+        boolean isValidStraightMove = IFigure.isStraightMove(move) &&
+                IFigure.getMoveDeltaY(move) == deltaY &&
+                IFigure.getFieldPlayer(state, move.to) == Player.NONE;
 
         boolean isValidDiagonalMove = (
                 (player == Player.WHITE && IFigure.getMoveDeltaY(move) == 1 && IFigure.getAbsMoveDeltaX(move) == 1) ||
