@@ -9,7 +9,7 @@ import java.util.List;
 public class Bishop extends FigureBase {
 
     public Bishop(Team team){
-        super(team);
+        super(team, 'b');
     }
 
     @Override
