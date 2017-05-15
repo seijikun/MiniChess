@@ -22,6 +22,8 @@ public class PlayerTest {
         assertEquals(Player.parseIdentifier(Character.toUpperCase(Pawn.identifier)), Player.WHITE);
         assertEquals(Player.parseIdentifier(Character.toUpperCase(Queen.identifier)), Player.WHITE);
         assertEquals(Player.parseIdentifier(Character.toUpperCase(Rook.identifier)), Player.WHITE);
+
+        assertEquals(Player.parseIdentifier('.'), Player.NONE);
     }
 
 }
