@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Queen implements IFigure {
 
+    public static final char identifier = 'q';
+
     public static void getPossibleMoves(State state, Square square, List<Move> result) {
         throw new NotImplementedException(); //TODO: implement
     }

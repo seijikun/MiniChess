@@ -9,6 +9,8 @@ import java.util.List;
 
 public class King implements IFigure {
 
+    public static final char identifier = 'k';
+
     public static void getPossibleMoves(State state, Square square, List<Move> result) {
         throw new NotImplementedException(); //TODO: implement
     }
