@@ -19,17 +19,22 @@ public class Bishop implements IFigure {
         if(from.y < Board.ROWS)
             result.add(new Move(from, new Square(from.x, from.y+1)));
 
-        for(int x = from.x-1, y = from.y-1; x > 0 && y > 0; x--, y--)
+        for(int x = from.x-1, y = from.y-1; x >= 0 && y >= 0; x--, y--) {
             result.add(new Move(from, new Square(x, y)));
-
-        for(int x = from.x-1, y = from.y+1; x > 0 && y < Board.ROWS; x--, y++)
+            if (state.board[x][y] != '.') break;
+        }
+        for(int x = from.x-1, y = from.y+1; x >= 0 && y < Board.ROWS; x--, y++) {
             result.add(new Move(from, new Square(x, y)));
-
-        for(int x = from.x+1, y = from.y+1; x < Board.COLUMNS && y < Board.ROWS; x++, y++)
+            if (state.board[x][y] != '.') break;
+        }
+        for(int x = from.x+1, y = from.y+1; x < Board.COLUMNS && y < Board.ROWS; x++, y++) {
             result.add(new Move(from, new Square(x, y)));
-
-        for(int x = from.x+1, y = from.y-1; x < Board.COLUMNS && y > 0; x++, y--)
+            if (state.board[x][y] != '.') break;
+        }
+        for(int x = from.x+1, y = from.y-1; x < Board.COLUMNS && y >= 0; x++, y--) {
             result.add(new Move(from, new Square(x, y)));
+            if (state.board[x][y] != '.') break;
+        }
     }
 
 }
