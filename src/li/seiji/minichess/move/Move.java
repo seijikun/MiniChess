@@ -1,4 +1,7 @@
-package li.seiji.minichess;
+package li.seiji.minichess.move;
+
+import li.seiji.minichess.Square;
+import li.seiji.minichess.State;
 
 public class Move {
 

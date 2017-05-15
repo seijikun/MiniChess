@@ -1,6 +1,6 @@
 package li.seiji.minichess.figure;
 
-import li.seiji.minichess.Move;
+import li.seiji.minichess.move.Move;
 import li.seiji.minichess.State;
 
 public class Knight implements IFigure {

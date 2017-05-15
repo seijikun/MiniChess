@@ -1,6 +1,6 @@
 package li.seiji.minichess.figure;
 
-import li.seiji.minichess.Move;
+import li.seiji.minichess.move.Move;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.State;
 
@@ -16,7 +16,7 @@ public class Pawn implements IFigure {
         boolean isValidStraightMove = IFigure.isStraightMove(move) &&
                 IFigure.getMoveDeltaY(move) == deltaY &&
                 IFigure.getFieldPlayer(state, move.to) == Player.NONE;
-        
+
         boolean isValidDiagonalMove = IFigure.getMoveDeltaY(move) == deltaY && IFigure.getAbsMoveDeltaX(move) == 1;
 
         return (isValidDiagonalMove || isValidStraightMove);

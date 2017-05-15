@@ -1,5 +1,6 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

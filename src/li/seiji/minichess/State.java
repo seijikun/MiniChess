@@ -1,5 +1,6 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.move.Move;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;

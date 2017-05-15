@@ -1,5 +1,7 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.move.Move;
+
 public class InvalidMoveException extends Exception {
 
     public InvalidMoveException(State state, Move move) {

@@ -1,6 +1,7 @@
 package li.seiji.minichess;
 
 import li.seiji.minichess.figure.IFigure;
+import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
 import java.io.IOException;

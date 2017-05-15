@@ -1,6 +1,7 @@
 package li.seiji;
 
 import li.seiji.minichess.*;
+import li.seiji.minichess.move.Move;
 
 import java.util.List;
 

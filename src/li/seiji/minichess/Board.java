@@ -1,7 +1,7 @@
 package li.seiji.minichess;
 
 import li.seiji.minichess.figure.IFigure;
-import org.omg.PortableServer.POAPackage.AdapterAlreadyExistsHelper;
+import li.seiji.minichess.move.Move;
 
 import java.util.ArrayList;
 import java.util.List;
