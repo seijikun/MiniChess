@@ -10,6 +10,13 @@ public class Square {
         this.y = y;
     }
 
-    //TODO: implement string constructor for expressions like: "c4"
+    public Square(String position) {
+        x = (position.charAt(0) - 'a');
+        y = (position.charAt(1) - '1');
+    }
+
+    public char getIdentifier(State state) {
+        return state.board[y][x];
+    }
 
 }
