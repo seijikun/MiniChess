@@ -6,13 +6,11 @@ import li.seiji.minichess.State;
 
 import java.util.function.Function;
 
-public class Rook implements IFigure {
+public class Rook {
 
     public static final char identifier = 'r';
 
-    static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveValid(state, move)) return false;
-
+    public static boolean isMoveValid(State state, Move move) {
         if(IFigure.isStraightMove(move) && !IFigure.checkStraightIsBlocked(state, move, straightBlockChecker))
             return true;
 

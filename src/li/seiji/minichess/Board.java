@@ -2,6 +2,7 @@ package li.seiji.minichess;
 
 import li.seiji.minichess.figure.IFigure;
 import li.seiji.minichess.move.Move;
+import li.seiji.minichess.move.MoveGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Board {
                 Player player = Player.parseIdentifier(identifier);
 
                 if(identifier != '.' && player == state.turn)
-                    IFigure.moveList(state, result, new Square(x, y));
+                    MoveGenerator.moveList(state, result, new Square(x, y));
             }
         }
 

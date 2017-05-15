@@ -6,12 +6,11 @@ import li.seiji.minichess.State;
 
 import java.util.function.Function;
 
-public class Queen implements IFigure {
+public class Queen {
 
     public static final char identifier = 'q';
 
-    static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveValid(state, move)) return false;
+    public static boolean isMoveValid(State state, Move move) {
         Player currentPlayer = Player.parseIdentifier(move.from.getIdentifier(state));
 
         if(IFigure.isStraightMove(move) && !IFigure.checkStraightIsBlocked(state, move, blockChecker))

@@ -10,16 +10,6 @@ import li.seiji.minichess.State;
 
 public interface IFigure {
 
-    /* INTERFACE */
-    static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveWithinBounds(state, move)) return false;
-        if(IFigure.getFieldPlayer(state, move.to) == state.turn) return false;
-        if(IFigure.getFieldPlayer(state, move.from) != state.turn) return false;
-        return true;
-    }
-
-
-
     /* HELPERS */
     static boolean isMoveWithinBounds(State state, Move move) {
         return (move.to.x >= 0 && move.to.x < Board.COLUMNS && move.to.y >= 0 && move.to.y < Board.ROWS);

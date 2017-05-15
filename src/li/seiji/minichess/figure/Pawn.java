@@ -4,12 +4,11 @@ import li.seiji.minichess.move.Move;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.State;
 
-public class Pawn implements IFigure {
+public class Pawn {
 
     public static final char identifier = 'p';
 
-    static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveValid(state, move)) return false;
+    public static boolean isMoveValid(State state, Move move) {
         Player player = Player.parseIdentifier(move.from.getIdentifier(state));
 
         int deltaY = (player == Player.WHITE) ? -1 : 1;

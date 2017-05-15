@@ -6,12 +6,11 @@ import li.seiji.minichess.State;
 
 import java.util.function.Function;
 
-public class Bishop implements IFigure {
+public class Bishop {
 
     public static final char identifier = 'b';
 
-    static boolean isMoveValid(State state, Move move) {
-        if(!IFigure.isMoveValid(state, move)) return false;
+    public static boolean isMoveValid(State state, Move move) {
         Player player = Player.parseIdentifier(move.to.getIdentifier(state));
 
         if(IFigure.isStraightMove(move) && IFigure.getStraightMoveLen(move) == 1 && IFigure.getFieldPlayer(state, move.to) == Player.NONE)
