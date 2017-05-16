@@ -14,7 +14,7 @@ public class RandomPlayer implements IPlayer {
 
     @Override
     public Move getMove(Board state) {
-        List<Move> currentMoves = Board.getPossibleMoves(state);
+        List<Move> currentMoves = state.getPossibleMoves();
 
         int index = ThreadLocalRandom.current().nextInt(0, currentMoves.size() - 1);
 

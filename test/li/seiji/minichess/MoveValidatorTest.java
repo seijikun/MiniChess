@@ -19,7 +19,7 @@ public class MoveValidatorTest {
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
                 HashSet<Move> allMoves = MoveHelper.generateAllPhysicallyPossibleMoves(state, new Square(x, y));
-                HashSet<Move> validMoves = new HashSet<>(Board.getPossibleMoves(state));
+                HashSet<Move> validMoves = new HashSet<>(state.getPossibleMoves());
 
                 for(Move move : allMoves) {
                     boolean should = validMoves.contains(move);
