@@ -1,6 +1,8 @@
 package li.seiji.minichess;
 
 import com.sun.media.sound.InvalidFormatException;
+import li.seiji.minichess.figure.Pawn;
+import li.seiji.minichess.figure.Queen;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
@@ -60,8 +62,24 @@ public class Board {
         //move figure from move.from to move.to
         move.to.setIdentifier(result, move.from.getIdentifier(this));
         move.from.setIdentifier(result, '.');
+
+
+        if(move.from.getIdentifier(this) == Pawn.identifier)
+            checkPawnForTransformation(move);
+
         result.turn = (turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
         return  result;
+    }
+
+    private void checkPawnForTransformation(Move move) {
+        int endOfField = turn == Player.BLACK ? ROWS : 0;
+
+        if(move.to.y == endOfField) {
+            char queenIdentifier =
+                    turn == Player.BLACK ? Character.toLowerCase(Queen.identifier) : Character.toUpperCase(Queen.identifier);
+
+            move.to.setIdentifier(this, queenIdentifier);
+        }
     }
 
     /**
