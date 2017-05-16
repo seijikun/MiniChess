@@ -9,7 +9,15 @@ import java.io.IOException;
 
 public class IMCSPlayer implements IPlayer {
 
+    public enum IMCSGameMode {
+        NONE,
+        ACCEPT,
+        OFFER
+    }
+
     private Client imcs;
+
+    private IMCSGameMode gameMode = IMCSGameMode.NONE;
     private String gameId = null;
     private Player player = Player.NONE;
 
@@ -17,18 +25,31 @@ public class IMCSPlayer implements IPlayer {
         imcs = new Client(domain, Integer.toString(port), username, password);
     }
 
-    public void setGameConfig(String gameId, Player player) {
+    public void setOfferGame(Player ownPlayer) throws IOException {
+        player = ownPlayer;
+        gameMode = IMCSGameMode.OFFER;
+    }
+
+    public void setAcceptGame(String gameId, Player ownPlayer) {
         this.gameId = gameId;
-        this.player = player;
+        this.player = ownPlayer;
+        gameMode = IMCSGameMode.ACCEPT;
     }
 
 
     @Override
     public void start() {
-        if(gameId == null || player == Player.NONE)
+        if(gameMode == IMCSGameMode.ACCEPT && (gameId == null || player == Player.NONE))
             throw new RuntimeException("Accepting gameId and player has not been set.");
+        if(gameMode == IMCSGameMode.OFFER && player == Player.NONE)
+            throw new RuntimeException("Own player for game offering has not been set.");
+
         try {
-            imcs.accept(gameId, player.toString().charAt(0));
+            if(gameMode == IMCSGameMode.OFFER) {
+                imcs.offer(player.toString().charAt(0));
+            } else {
+                imcs.accept(gameId, player.toString().charAt(0));
+            }
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
