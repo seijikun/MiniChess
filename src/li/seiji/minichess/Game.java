@@ -28,9 +28,11 @@ public class Game {
                 turnPlayer = black; otherPlayer = white;
             }
 
-            Move move = turnPlayer.getMove(board);
-            board.state = board.move(move);
-            otherPlayer.setMove(board, move);
+            Move move = turnPlayer.getMove(state);
+            state = state.move(move);
+            otherPlayer.setMove(state, move);
+
+            state.prettyPrint();
         }
     }
 
