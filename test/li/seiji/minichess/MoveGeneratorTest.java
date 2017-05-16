@@ -18,7 +18,7 @@ public class MoveGeneratorTest {
             state.initialize();
 
             for(int i = 0; i < 40; ++i) {
-                List<Move> moves = Board.getPossibleMoves(state);
+                List<Move> moves = state.getPossibleMoves();
                 if(moves.size() > 0) {
                     for(Move move : moves)
                         assertTrue(MoveValidator.isMoveValid(state, move));
