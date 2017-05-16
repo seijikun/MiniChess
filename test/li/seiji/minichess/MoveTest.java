@@ -1,5 +1,6 @@
 package li.seiji.minichess;
 
+import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
@@ -11,10 +12,10 @@ import static junit.framework.TestCase.assertTrue;
 public class MoveTest {
 
     @Test
-    public void testMoveStringParsing() {
-        for(int y = 0; y < 250; ++y) {
-            for(int x = 0; x < 250; ++x) {
-                Move move = new Move(new Square(x, y), new Square(250-x, 250-y));
+    public void testMoveStringParsing() throws InvalidFormatException {
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                Move move = new Move(new Square(x, y), new Square(Board.COLUMNS-x - 1, Board.ROWS-y - 1));
                 Move parsedMove = new Move(move.toString());
                 assertEquals(move.toString(), parsedMove.toString());
             }
@@ -25,9 +26,9 @@ public class MoveTest {
     @Test
     public void testHashAndEquality() {
         HashSet<Move> moves = new HashSet<>();
-        for(int y = 0; y < 250; ++y) {
-            for(int x = 0; x < 250; ++x) {
-                moves.add(new Move(new Square(x, y), new Square(250-x, 250-y)));
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                moves.add(new Move(new Square(x, y), new Square(Board.COLUMNS - x - 1, Board.ROWS - y - 1)));
             }
         }
 

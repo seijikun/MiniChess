@@ -1,7 +1,7 @@
 package li.seiji.minichess.move;
 
+import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.Square;
-import li.seiji.minichess.State;
 
 public class Move {
 
@@ -13,7 +13,7 @@ public class Move {
         this.to = to;
     }
 
-    public Move(String move) {
+    public Move(String move) throws InvalidFormatException {
         this.from = new Square(move.substring(0, 2));
         this.to = new Square(move.substring(3, 5));
     }

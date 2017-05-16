@@ -1,7 +1,8 @@
 package li.seiji.minichess;
 
+import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.move.Move;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import li.seiji.minichess.move.MoveValidator;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -27,10 +28,11 @@ public class State implements Cloneable {
         return  result;
     }
 
-    public State move(String moveString) {
-        Move move = new Move(moveString);
-        //TODO implement
-        throw new NotImplementedException();
+    public State move(String moveString) throws InvalidFormatException, InvalidMoveException {
+        Move parsedMove = new Move(moveString);
+        if(!MoveValidator.isMoveValid(this, parsedMove))
+            throw new InvalidMoveException(this, parsedMove);
+        return move(parsedMove);
     }
 
 
