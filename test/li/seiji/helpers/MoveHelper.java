@@ -18,7 +18,7 @@ public class MoveHelper {
         do {
             sqr.x = rand.nextInt(Board.COLUMNS - 1);
             sqr.y = rand.nextInt(Board.ROWS - 1);
-        } while(sqr.getIdentifier(state) == '.');
+        } while(sqr.getFieldValue(state) == '.');
         return sqr;
     }
 
@@ -27,7 +27,7 @@ public class MoveHelper {
         do {
             sqr.x = rand.nextInt(Board.COLUMNS - 1);
             sqr.y = rand.nextInt(Board.ROWS - 1);
-        } while(sqr.getIdentifier(state) != '.');
+        } while(sqr.getFieldValue(state) != '.');
         return sqr;
     }
 
@@ -42,7 +42,7 @@ public class MoveHelper {
         do {
             from = selectRandomFigure(state);
             to = selectRandomFigure(state); //search two squares that contain figures of the same team
-        } while(Player.parseIdentifier(to.getIdentifier(state)) != state.turn);
+        } while(Player.parseIdentifier(to.getFieldValue(state)) != state.turn);
 
         return new Move(from, to);
     }

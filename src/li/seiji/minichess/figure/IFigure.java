@@ -15,7 +15,7 @@ public interface IFigure {
         return (move.to.x >= 0 && move.to.x < Board.COLUMNS && move.to.y >= 0 && move.to.y < Board.ROWS);
     }
     static Player getFieldPlayer(State state, Square dst) {
-        return Player.parseIdentifier(dst.getIdentifier(state));
+        return Player.parseIdentifier(dst.getFieldValue(state));
     }
 
     //delta

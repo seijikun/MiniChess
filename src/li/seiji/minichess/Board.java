@@ -40,21 +40,21 @@ public class Board {
         if(!MoveValidator.isMoveValid(state, move))
             throw new InvalidMoveException(state, move);
 
-        Player destSquarePlayer = Player.parseIdentifier(move.to.getIdentifier(state));
+        Player destSquarePlayer = Player.parseIdentifier(move.to.getFieldValue(state));
         if(destSquarePlayer == state.turn)
             throw new InvalidMoveException(state, move);
 
         State result = state.clone();
         //move figure from move.from to move.to
-        move.to.setIdentifier(result, move.from.getIdentifier(state));
+        move.to.setIdentifier(result, move.from.getFieldValue(state));
         move.from.setIdentifier(result, '.');
 
 
-        if(Character.toLowerCase(move.from.getIdentifier(state)) == Pawn.identifier)
+        if(move.from.getIdentifier(state) == Pawn.identifier)
             checkPawnForTransformation(result, move);
         if(result.turnCounter >= 40)
             result.gameState = GameState.TIE;
-        if(Character.toLowerCase(move.to.getIdentifier(state)) == King.identifier)
+        if(move.to.getIdentifier(state) == King.identifier)
             result.gameState = result.turn == Player.BLACK ? GameState.WIN_BLACK : GameState.WIN_WHITE;
 
 

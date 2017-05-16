@@ -1,6 +1,5 @@
 package li.seiji.minichess.figure;
 
-import li.seiji.minichess.Board;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
@@ -12,7 +11,7 @@ public class Queen {
     public static final char identifier = 'q';
 
     public static boolean isMoveValid(State state, Move move) {
-        Player currentPlayer = Player.parseIdentifier(move.from.getIdentifier(state));
+        Player currentPlayer = Player.parseIdentifier(move.from.getFieldValue(state));
 
         if(IFigure.isStraightMove(move) && !IFigure.checkStraightIsBlocked(state, move, blockChecker))
             return true;
