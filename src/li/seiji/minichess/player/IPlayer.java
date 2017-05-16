@@ -4,6 +4,6 @@ import li.seiji.minichess.Square;
 import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
 
-public interface Player {
+public interface IPlayer {
     Move getMove(State state);
 }

@@ -1,15 +1,9 @@
 package li.seiji.minichess.player;
 
-import li.seiji.minichess.Square;
 import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
-import li.seiji.minichess.move.MoveGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
-public class RandomPlayer implements Player {
+public class RandomPlayer implements IPlayer {
     @Override
     public Move getMove(State state) {
         //TODO: implement
