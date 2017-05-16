@@ -1,5 +1,6 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -32,14 +33,13 @@ public class SquareTest {
 
     @Test
     public void testPositionStringParsing() {
-        Square square;
-
-        square = new Square("c4");
-        assertSquareCorrect(square, 2, 3);
-        square = new Square("a6");
-        assertSquareCorrect(square, 0, 5);
-        square = new Square("e1");
-        assertSquareCorrect(square, 4, 0);
+        for(int y = 0; y < 250; ++y) {
+            for(int x = 0; x < 250; ++x) {
+                Square square = new Square(x, y);
+                Square parsedSquare = new Square(square.toString());
+                assertEquals(parsedSquare.toString(), square.toString());
+            }
+        }
     }
 
 
