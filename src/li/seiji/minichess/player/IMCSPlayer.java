@@ -2,7 +2,7 @@ package li.seiji.minichess.player;
 
 import li.seiji.minichess.Player;
 import li.seiji.minichess.Board;
-import li.seiji.minichess.imcs.Client;
+import li.seiji.minichess.imcs.Client2;
 import li.seiji.minichess.move.Move;
 
 import java.io.IOException;
@@ -15,14 +15,15 @@ public class IMCSPlayer implements IPlayer {
         OFFER
     }
 
-    private Client imcs;
+    private Client2 imcs;
 
     private IMCSGameMode gameMode = IMCSGameMode.NONE;
     private String gameId = null;
     private Player player = Player.NONE;
 
     public IMCSPlayer(String domain, int port, String username, String password) throws IOException {
-        imcs = new Client(domain, Integer.toString(port), username, password);
+        imcs = new Client2(domain, Integer.toString(port));
+        imcs.login(username, password);
     }
 
     public void setOfferGame(Player ownPlayer) throws IOException {
@@ -46,7 +47,8 @@ public class IMCSPlayer implements IPlayer {
 
         try {
             if(gameMode == IMCSGameMode.OFFER) {
-                imcs.offer(player.toString().charAt(0));
+                imcs.changePassword("31337");
+                imcs.offerGameAndWait(player.toString().charAt(0));
             } else {
                 imcs.accept(gameId, player.toString().charAt(0));
             }
