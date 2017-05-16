@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class HumanPlayer implements IPlayer {
 
+    public void start() {}
+
     @Override
     public Move getMove(Board state) {
         Move move = null;
@@ -26,5 +28,8 @@ public class HumanPlayer implements IPlayer {
         reader.close();
         return move;
     }
+
+    @Override
+    public void setMove(Board state, Move move) {}
 
 }
