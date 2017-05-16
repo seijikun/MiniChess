@@ -40,35 +40,35 @@ public class IFigureTest {
         assertTrue(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
 
         //up to bottom
-        move = new Move("a2-a3");
+        move = new Move("a5-a4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a2-a4");
+        move = new Move("a5-a3");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a2-a5");
+        move = new Move("a5-a2");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a2-a6");
+        move = new Move("a5-a1");
         assertTrue(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
 
         //left to right
         state.read(new StringReader(testState));
-        move = new Move("a3-b3");
+        move = new Move("a4-b4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a3-c3");
+        move = new Move("a4-c4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a3-d3");
+        move = new Move("a4-d4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a3-e3");
+        move = new Move("a4-e4");
         assertTrue(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
 
         //right to left
         state.read(new StringReader(testState2));
-        move = new Move("e3-d3");
+        move = new Move("e4-d4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("e3-c3");
+        move = new Move("e4-c4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("e3-b3");
+        move = new Move("e4-b4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("e3-a3");
+        move = new Move("e4-a4");
         assertTrue(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
     }
 
