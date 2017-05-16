@@ -19,7 +19,7 @@ public class Game {
         white.start();
         black.start();
 
-        while(board.state.turn != Player.NONE) {
+        while(board.state.gameState == GameState.ONGOING) {
             IPlayer turnPlayer;
             IPlayer otherPlayer;
             if(board.state.turn == Player.WHITE) {
@@ -34,6 +34,8 @@ public class Game {
 
             board.prettyPrint();
         }
+
+        System.out.println("And the winner is: " + board.state.gameState.toString());
     }
 
 }
