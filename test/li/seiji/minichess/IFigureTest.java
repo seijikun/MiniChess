@@ -25,6 +25,14 @@ public class IFigureTest {
             "....." + System.lineSeparator() +
             "....." + System.lineSeparator();
 
+    public static final String testState3 =
+            "....." + System.lineSeparator() +
+            ".p.p." + System.lineSeparator() +
+            "....." + System.lineSeparator() +
+            ".p.p." + System.lineSeparator() +
+            "....." + System.lineSeparator() +
+            "....." + System.lineSeparator();
+
     @Test
     public void testCheckStraightIsBlocked() throws IOException {
         State state = new State();
@@ -73,8 +81,40 @@ public class IFigureTest {
     }
 
     @Test
-    public void testCheckDiagonalIsBlocked() {
+    public void testCheckDiagonalIsBlocked() throws IOException {
+        State state = new State();
+        state.read(new StringReader(testState3));
+        //bottom-left to top-right
+        Move move = new Move("b3-c4");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("b3-d5");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("b3-e6");
+        assertTrue(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
 
+        //top-right to bottom-left
+        move = new Move("d5-c4");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("d5-b3");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("d5-a2");
+        assertTrue(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+
+        // bottom-right to top-left
+        move = new Move("d3-c4");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("d3-b5");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("d3-a6");
+        assertTrue(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+
+        //top-left to bottom-right
+        move = new Move("b5-c4");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("b5-d3");
+        assertFalse(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
+        move = new Move("b5-e2");
+        assertTrue(IFigure.checkDiagonalIsBlocked(state, move, player -> player != Player.NONE));
     }
 
 }
