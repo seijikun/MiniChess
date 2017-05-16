@@ -1,8 +1,12 @@
 package li.seiji.minichess;
 
-import java.util.concurrent.SynchronousQueue;
+import com.sun.media.sound.InvalidFormatException;
+
+import java.util.regex.Pattern;
 
 public class Square {
+
+    private static Pattern positionStringPattern = Pattern.compile("[a-e][1-6]");
 
     public int x;
     public int y;
@@ -12,7 +16,10 @@ public class Square {
         this.y = y;
     }
 
-    public Square(String position) {
+    public Square(String position) throws InvalidFormatException {
+        if(!positionStringPattern.matcher(position).matches())
+            throw new InvalidFormatException("Not a valid position string");
+
         x = (position.charAt(0) - 'a');
         y = Board.ROWS - (position.charAt(1) - '1') - 1;
     }

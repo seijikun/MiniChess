@@ -1,6 +1,6 @@
 package li.seiji.minichess;
 
-import li.seiji.minichess.move.Move;
+import com.sun.media.sound.InvalidFormatException;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertTrue;
 public class SquareTest {
 
     @Test
-    public void testAutoPositionStringParsing() {
+    public void testAutoPositionStringParsing() throws InvalidFormatException {
         String[][] positions = new String[Board.ROWS][Board.COLUMNS];
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
@@ -32,9 +32,9 @@ public class SquareTest {
     }
 
     @Test
-    public void testPositionStringParsing() {
-        for(int y = 0; y < 250; ++y) {
-            for(int x = 0; x < 250; ++x) {
+    public void testPositionStringParsing() throws InvalidFormatException {
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
                 Square square = new Square(x, y);
                 Square parsedSquare = new Square(square.toString());
                 assertEquals(parsedSquare.toString(), square.toString());
@@ -46,8 +46,8 @@ public class SquareTest {
     @Test
     public void testHashAndEquality() {
         HashSet<Square> squares = new HashSet<>();
-        for(int y = 0; y < 250; ++y) {
-            for(int x = 0; x < 250; ++x) {
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
                 squares.add(new Square(x, y));
             }
         }
