@@ -15,7 +15,8 @@ public class Main {
         IMCSPlayer netPlayer = null;
         try {
             netPlayer = new IMCSPlayer("imcs.svcs.cs.pdx.edu", 3589, "lazycat", "31337");
-            netPlayer.setGameConfig("12815", Player.BLACK);
+            netPlayer.setOfferGame(Player.BLACK);
+            //netPlayer.setGameConfig("12823", Player.BLACK);
         } catch (IOException e) {
             e.printStackTrace();
         }
