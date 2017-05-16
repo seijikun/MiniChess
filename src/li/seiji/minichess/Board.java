@@ -42,7 +42,7 @@ public class Board {
 
     public static void prettyPrint(State state) {
         for(int y = 0; y < Board.ROWS; ++y) {
-            System.out.print("| " + (y+1) + " |");
+            System.out.print("| " + (Board.ROWS - y) + " |");
             for(int x = 0; x < Board.COLUMNS; ++x) {
                 char identifier = state.board[y][x];
                 System.out.print('_');
