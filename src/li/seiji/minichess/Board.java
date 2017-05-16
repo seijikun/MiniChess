@@ -1,6 +1,7 @@
 package li.seiji.minichess;
 
 import com.sun.media.sound.InvalidFormatException;
+import li.seiji.minichess.figure.King;
 import li.seiji.minichess.figure.Pawn;
 import li.seiji.minichess.figure.Queen;
 import li.seiji.minichess.move.Move;
@@ -66,11 +67,17 @@ public class Board {
 
         if(move.from.getIdentifier(this) == Pawn.identifier)
             checkPawnForTransformation(move);
+        if(move.to.getIdentifier(this) == King.identifier)
+            //TODO King has been captured, finish the Game.
 
         result.turn = (turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
         return  result;
     }
 
+    /**
+     * Check if the Pawn is at the opposite end of the Field. If so, the pawn gets transformed into a queen.
+     * @param move Move the pawn is doing.
+     */
     private void checkPawnForTransformation(Move move) {
         int endOfField = turn == Player.BLACK ? ROWS : 0;
 
