@@ -82,7 +82,7 @@ public class Board {
             }
         }
 
-        return  result;
+        return result;
     }
 
     /* SERIALIZATION AND DESERIALIZATION */
