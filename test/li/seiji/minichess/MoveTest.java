@@ -12,13 +12,13 @@ public class MoveTest {
 
     @Test
     public void testMoveStringParsing() {
-        Move move = new Move("c2-e4");
-        assertSquareCorrect(move.from, 2, 1);
-        assertSquareCorrect(move.to, 4, 3);
-
-        move = new Move("e4-c2");
-        assertSquareCorrect(move.from, 4, 3);
-        assertSquareCorrect(move.to, 2, 1);
+        for(int y = 0; y < 250; ++y) {
+            for(int x = 0; x < 250; ++x) {
+                Move move = new Move(new Square(x, y), new Square(250-x, 250-y));
+                Move parsedMove = new Move(move.toString());
+                assertEquals(move.toString(), parsedMove.toString());
+            }
+        }
     }
 
 
