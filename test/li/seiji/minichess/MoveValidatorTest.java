@@ -13,7 +13,7 @@ public class MoveValidatorTest {
 
     @Test
     public void testMoveValidity() {
-        State state = new State();
+        Board state = new Board();
         state.initialize();
 
         for(int y = 0; y < Board.ROWS; ++y) {

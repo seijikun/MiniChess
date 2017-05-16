@@ -12,7 +12,7 @@ public class BoardTest {
 
     @Test
     public void testBoardParsing() throws IOException {
-        State state = new State();
+        Board state = new Board();
         state.read(new StringReader(Board.DEFAULT_BOARD));
 
         char[][] defaultBoard = {

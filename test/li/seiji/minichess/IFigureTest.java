@@ -35,7 +35,7 @@ public class IFigureTest {
 
     @Test
     public void testCheckStraightIsBlocked() throws IOException {
-        State state = new State();
+        Board state = new Board();
         state.initialize();
         //bottom to up
         Move move = new Move("a2-a3");
@@ -82,7 +82,7 @@ public class IFigureTest {
 
     @Test
     public void testCheckDiagonalIsBlocked() throws IOException {
-        State state = new State();
+        Board state = new Board();
         state.read(new StringReader(testState3));
         //bottom-left to top-right
         Move move = new Move("b3-c4");

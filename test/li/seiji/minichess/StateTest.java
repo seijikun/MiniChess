@@ -9,15 +9,6 @@ import static org.junit.Assert.fail;
 
 public class StateTest {
 
-    @Test //Tests a move that is physically valid (does not follow the rules)
-    public void testExecutePhysicallyValidMove() throws InvalidMoveException {
-        Board state = new Board();
-        state.initialize();
-        Move move = MoveHelper.generateRandomPhysicallyValidMove(state);
-        Board newState = state.move(move);
-        assertEquals(Player.BLACK, newState.turn);
-    }
-
     @Test
     public void testExecutePhysicallyInvalidMove() {
         Board state = new Board();

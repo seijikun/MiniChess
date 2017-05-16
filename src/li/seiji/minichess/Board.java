@@ -49,6 +49,9 @@ public class Board {
     }
 
     public Board move(Move move) throws InvalidMoveException {
+        if(!MoveValidator.isMoveValid(this, move))
+            throw new InvalidMoveException(this, move);
+
         Player destSquarePlayer = Player.parseIdentifier(move.to.getIdentifier(this));
         if(destSquarePlayer == turn)
             throw new InvalidMoveException(this, move);
@@ -59,13 +62,6 @@ public class Board {
         move.from.setIdentifier(result, '.');
         result.turn = (turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
         return  result;
-    }
-
-    public Board move(String moveString) throws InvalidFormatException, InvalidMoveException {
-        Move parsedMove = new Move(moveString);
-        if(!MoveValidator.isMoveValid(this, parsedMove))
-            throw new InvalidMoveException(this, parsedMove);
-        return move(parsedMove);
     }
 
     /**

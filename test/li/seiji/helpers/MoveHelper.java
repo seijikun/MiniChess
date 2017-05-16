@@ -3,7 +3,6 @@ package li.seiji.helpers;
 import li.seiji.minichess.Board;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.Square;
-import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
 
 import java.util.HashSet;
@@ -13,7 +12,7 @@ public class MoveHelper {
 
     private static Random rand = new Random();
 
-    public static Square selectRandomFigure(State state) {
+    public static Square selectRandomFigure(Board state) {
         Square sqr = new Square(0, 0);
         do {
             sqr.x = rand.nextInt(Board.COLUMNS - 1);
@@ -22,7 +21,7 @@ public class MoveHelper {
         return sqr;
     }
 
-    public static Square selectRandomEmptyField(State state) {
+    public static Square selectRandomEmptyField(Board state) {
         Square sqr = new Square(0, 0);
         do {
             sqr.x = rand.nextInt(Board.COLUMNS - 1);
@@ -31,13 +30,13 @@ public class MoveHelper {
         return sqr;
     }
 
-    public static Move generateRandomPhysicallyValidMove(State state) {
+    public static Move generateRandomPhysicallyValidMove(Board state) {
         Square from = selectRandomFigure(state);
         Square to = selectRandomEmptyField(state);
         return new Move(from, to);
     }
 
-    public static Move generateRandomPhysicallyInvalidMove(State state) {
+    public static Move generateRandomPhysicallyInvalidMove(Board state) {
         Square from = null; Square to = null;
         do {
             from = selectRandomFigure(state);
@@ -47,7 +46,7 @@ public class MoveHelper {
         return new Move(from, to);
     }
 
-    public static HashSet<Move> generateAllPhysicallyPossibleMoves(State state, Square from) {
+    public static HashSet<Move> generateAllPhysicallyPossibleMoves(Board state, Square from) {
         HashSet<Move> result = new HashSet<>();
 
         for(int y = 0; y < Board.ROWS; ++y) {
