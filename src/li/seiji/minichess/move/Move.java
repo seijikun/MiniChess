@@ -2,7 +2,6 @@ package li.seiji.minichess.move;
 
 import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.Square;
-import li.seiji.minichess.State;
 
 public class Move {
 

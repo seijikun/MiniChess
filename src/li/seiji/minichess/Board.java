@@ -1,6 +1,5 @@
 package li.seiji.minichess;
 
-import li.seiji.minichess.figure.IFigure;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
 

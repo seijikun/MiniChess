@@ -3,7 +3,6 @@ package li.seiji.minichess;
 import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveValidator;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.io.Reader;

@@ -4,8 +4,11 @@ package li.seiji.minichess.imcs;
 // Licensed under the "MIT License"
 // Please see the file COPYING at http://github.com/BartMassey/imcs
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 
 /**
  * Provides an interface to the Internet MiniChess Server.

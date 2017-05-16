@@ -1,6 +1,9 @@
 package li.seiji.minichess.move;
 
-import li.seiji.minichess.*;
+import li.seiji.minichess.Board;
+import li.seiji.minichess.Player;
+import li.seiji.minichess.Square;
+import li.seiji.minichess.State;
 import li.seiji.minichess.figure.*;
 
 import java.util.List;

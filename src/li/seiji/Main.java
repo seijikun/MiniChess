@@ -1,9 +1,9 @@
 package li.seiji;
 
-import li.seiji.minichess.*;
+import li.seiji.minichess.Board;
+import li.seiji.minichess.InvalidMoveException;
+import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
-import li.seiji.minichess.move.MoveGenerator;
-import li.seiji.minichess.move.MoveValidator;
 
 import java.util.List;
 
