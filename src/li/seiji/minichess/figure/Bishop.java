@@ -1,7 +1,7 @@
 package li.seiji.minichess.figure;
 
+import li.seiji.minichess.Board;
 import li.seiji.minichess.Player;
-import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
 
 import java.util.function.Function;
@@ -10,7 +10,7 @@ public class Bishop {
 
     public static final char identifier = 'b';
 
-    public static boolean isMoveValid(State state, Move move) {
+    public static boolean isMoveValid(Board state, Move move) {
         Player player = Player.parseIdentifier(move.to.getIdentifier(state));
 
         if(IFigure.isStraightMove(move) && IFigure.getStraightMoveLen(move) == 1 && IFigure.getFieldPlayer(state, move.to) == Player.NONE)

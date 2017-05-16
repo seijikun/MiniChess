@@ -24,11 +24,11 @@ public class Square {
         y = Board.ROWS - (position.charAt(1) - '1') - 1;
     }
 
-    public char getIdentifier(State state) {
+    public char getIdentifier(Board state) {
         return state.board[y][x];
     }
 
-    public void setIdentifier(State state, char identifier) { state.board[y][x] = identifier; }
+    public void setIdentifier(Board state, char identifier) { state.board[y][x] = identifier; }
 
     @Override
     public String toString() {

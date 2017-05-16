@@ -11,16 +11,16 @@ public class StateTest {
 
     @Test //Tests a move that is physically valid (does not follow the rules)
     public void testExecutePhysicallyValidMove() throws InvalidMoveException {
-        State state = new State();
+        Board state = new Board();
         state.initialize();
         Move move = MoveHelper.generateRandomPhysicallyValidMove(state);
-        State newState = state.move(move);
+        Board newState = state.move(move);
         assertEquals(Player.BLACK, newState.turn);
     }
 
     @Test
     public void testExecutePhysicallyInvalidMove() {
-        State state = new State();
+        Board state = new Board();
         state.initialize();
         for(int i = 0; i < 5; ++i) {
             Move move = MoveHelper.generateRandomPhysicallyInvalidMove(state);
