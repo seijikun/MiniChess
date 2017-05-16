@@ -9,6 +9,7 @@ import java.io.Reader;
 public class State {
     public char board[][] = new char[6][5];
     public Player turn = Player.WHITE;
+    public GameState gameState = GameState.ONGOING;
     public int turnCounter = 0;
 
 
