@@ -10,7 +10,7 @@ public class MoveValidator {
         if(IFigure.getFieldPlayer(state, move.to) == state.turn) return false;
         if(IFigure.getFieldPlayer(state, move.from) != state.turn) return false;
 
-        char identifier = Character.toLowerCase(move.from.getIdentifier(state));
+        char identifier = move.from.getIdentifier(state);
         switch(identifier) {
             case Pawn.identifier:
                 return Pawn.isMoveValid(state, move);
