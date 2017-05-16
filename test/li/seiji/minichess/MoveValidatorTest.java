@@ -13,17 +13,17 @@ public class MoveValidatorTest {
 
     @Test
     public void testMoveValidity() {
-        Board state = new Board();
-        state.initialize();
+        Board board = new Board();
+        board.initialize();
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                HashSet<Move> allMoves = MoveHelper.generateAllPhysicallyPossibleMoves(state, new Square(x, y));
-                HashSet<Move> validMoves = new HashSet<>(state.getPossibleMoves());
+                HashSet<Move> allMoves = MoveHelper.generateAllPhysicallyPossibleMoves(board.state, new Square(x, y));
+                HashSet<Move> validMoves = new HashSet<>(board.getPossibleMoves());
 
                 for(Move move : allMoves) {
                     boolean should = validMoves.contains(move);
-                    boolean actual = MoveValidator.isMoveValid(state, move);
+                    boolean actual = MoveValidator.isMoveValid(board.state, move);
                     assertEquals(should, actual);
                 }
             }

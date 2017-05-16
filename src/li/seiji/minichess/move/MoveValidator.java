@@ -1,11 +1,11 @@
 package li.seiji.minichess.move;
 
-import li.seiji.minichess.Board;
+import li.seiji.minichess.State;
 import li.seiji.minichess.figure.*;
 
 public class MoveValidator {
 
-    public static boolean isMoveValid(Board state, Move move) {
+    public static boolean isMoveValid(State state, Move move) {
         if(!IFigure.isMoveWithinBounds(state, move)) return false;
         if(IFigure.getFieldPlayer(state, move.to) == state.turn) return false;
         if(IFigure.getFieldPlayer(state, move.from) != state.turn) return false;

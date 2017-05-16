@@ -12,8 +12,8 @@ public class BoardTest {
 
     @Test
     public void testBoardParsing() throws IOException {
-        Board state = new Board();
-        state.read(new StringReader(Board.DEFAULT_BOARD));
+        Board board = new Board();
+        board.state.read(new StringReader(Board.DEFAULT_BOARD));
 
         char[][] defaultBoard = {
                 {'k', 'q', 'b', 'n', 'r'},
@@ -26,7 +26,7 @@ public class BoardTest {
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                assertTrue(state.board[y][x] == defaultBoard[y][x]);
+                assertTrue(board.state.board[y][x] == defaultBoard[y][x]);
             }
         }
     }

@@ -27,50 +27,37 @@ public class Board {
             "PPPPP" + System.lineSeparator() +
             "RNBQK";
 
-    public char board[][] = new char[6][5];
-    public Player turn = Player.WHITE;
-
-    /* CONSTRUCTION AND INITIALIZATION */
-
-    @Override
-    public Board clone() {
-        Board result = new Board();
-        for(int i=0; i<board.length; i++)
-            for(int j=0; j<board[i].length; j++)
-                result.board[i][j] = board[i][j];
-        result.turn = turn;
-        return result;
-    }
+    public State state = new State();
 
     public void initialize() {
         StringReader reader = new StringReader(Board.DEFAULT_BOARD);
         try {
-            read(reader);
+            state.read(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public Board move(Move move) throws InvalidMoveException {
-        if(!MoveValidator.isMoveValid(this, move))
-            throw new InvalidMoveException(this, move);
+    public State move(Move move) throws InvalidMoveException {
+        if(!MoveValidator.isMoveValid(state, move))
+            throw new InvalidMoveException(state, move);
 
-        Player destSquarePlayer = Player.parseIdentifier(move.to.getIdentifier(this));
-        if(destSquarePlayer == turn)
-            throw new InvalidMoveException(this, move);
+        Player destSquarePlayer = Player.parseIdentifier(move.to.getIdentifier(state));
+        if(destSquarePlayer == state.turn)
+            throw new InvalidMoveException(state, move);
 
-        Board result = clone();
+        State result = state.clone();
         //move figure from move.from to move.to
-        move.to.setIdentifier(result, move.from.getIdentifier(this));
+        move.to.setIdentifier(result, move.from.getIdentifier(state));
         move.from.setIdentifier(result, '.');
 
 
-        if(move.from.getIdentifier(this) == Pawn.identifier)
+        if(move.from.getIdentifier(state) == Pawn.identifier)
             checkPawnForTransformation(move);
-        if(move.to.getIdentifier(this) == King.identifier)
+        if(move.to.getIdentifier(state) == King.identifier)
             //TODO King has been captured, finish the Game.
 
-        result.turn = (turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
+        result.turn = (state.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
         return  result;
     }
 
@@ -79,13 +66,13 @@ public class Board {
      * @param move Move the pawn is doing.
      */
     private void checkPawnForTransformation(Move move) {
-        int endOfField = turn == Player.BLACK ? ROWS : 0;
+        int endOfField = state.turn == Player.BLACK ? ROWS : 0;
 
         if(move.to.y == endOfField) {
             char queenIdentifier =
-                    turn == Player.BLACK ? Character.toLowerCase(Queen.identifier) : Character.toUpperCase(Queen.identifier);
+                    state.turn == Player.BLACK ? Character.toLowerCase(Queen.identifier) : Character.toUpperCase(Queen.identifier);
 
-            move.to.setIdentifier(this, queenIdentifier);
+            move.to.setIdentifier(state, queenIdentifier);
         }
     }
 
@@ -98,11 +85,11 @@ public class Board {
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                char identifier = board[y][x];
+                char identifier = state.board[y][x];
                 Player player = Player.parseIdentifier(identifier);
 
-                if(identifier != '.' && player == turn)
-                    MoveGenerator.moveList(this, result, new Square(x, y));
+                if(identifier != '.' && player == state.turn)
+                    MoveGenerator.moveList(state, result, new Square(x, y));
             }
         }
 
@@ -116,7 +103,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                sb.append(board[y][x]);
+                sb.append(state.board[y][x]);
             }
             sb.append(System.getProperty("line.separator"));
         }
@@ -127,20 +114,11 @@ public class Board {
         writer.write(toString());
     }
 
-    public void read(Reader reader) throws IOException {
-        for(int y = 0; y < Board.ROWS; ++y) {
-            for(int x = 0; x < Board.COLUMNS; ++x) {
-                board[y][x] = (char)reader.read();
-            }
-            reader.skip(System.getProperty("line.separator").length());
-        }
-    }
-
     public void prettyPrint() {
         for(int y = 0; y < Board.ROWS; ++y) {
             System.out.print("| " + (Board.ROWS - y) + " |");
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                char identifier = board[y][x];
+                char identifier = state.board[y][x];
                 System.out.print('_');
                 System.out.print((identifier != '.') ? identifier : '_');
                 System.out.print("_|");

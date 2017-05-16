@@ -3,6 +3,7 @@ package li.seiji.minichess.figure;
 import li.seiji.minichess.Board;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.Square;
+import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
 
 import java.util.function.Function;
@@ -10,10 +11,10 @@ import java.util.function.Function;
 public interface IFigure {
 
     /* HELPERS */
-    static boolean isMoveWithinBounds(Board state, Move move) {
+    static boolean isMoveWithinBounds(State state, Move move) {
         return (move.to.x >= 0 && move.to.x < Board.COLUMNS && move.to.y >= 0 && move.to.y < Board.ROWS);
     }
-    static Player getFieldPlayer(Board state, Square dst) {
+    static Player getFieldPlayer(State state, Square dst) {
         return Player.parseIdentifier(dst.getIdentifier(state));
     }
 
@@ -53,7 +54,7 @@ public interface IFigure {
         else //x changed
             return getAbsMoveDeltaX(move);
     }
-    static boolean checkStraightIsBlocked(Board state, Move move, Function<Player, Boolean> isBlockade) {
+    static boolean checkStraightIsBlocked(State state, Move move, Function<Player, Boolean> isBlockade) {
         int xDir = getMoveDirX(move);
         int yDir = getMoveDirY(move);
 
@@ -76,7 +77,7 @@ public interface IFigure {
         return getAbsMoveDeltaX(move);
     }
 
-    static boolean isDestinationFieldAnEnemy(Board state, Move move, Player currentPlayer) {
+    static boolean isDestinationFieldAnEnemy(State state, Move move, Player currentPlayer) {
         Player fieldPlayer = getFieldPlayer(state, move.to);
         if(currentPlayer == Player.BLACK)
             return (fieldPlayer == Player.WHITE);
@@ -84,7 +85,7 @@ public interface IFigure {
             return (fieldPlayer == Player.BLACK);
     }
 
-    static boolean checkDiagonalIsBlocked(Board state, Move move, Function<Player, Boolean> isBlockade) {
+    static boolean checkDiagonalIsBlocked(State state, Move move, Function<Player, Boolean> isBlockade) {
         int xDir = getMoveDirX(move);
         int yDir = getMoveDirY(move);
 

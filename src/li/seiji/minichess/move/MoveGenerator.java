@@ -3,13 +3,14 @@ package li.seiji.minichess.move;
 import li.seiji.minichess.Board;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.Square;
+import li.seiji.minichess.State;
 import li.seiji.minichess.figure.*;
 
 import java.util.List;
 
 public class MoveGenerator {
 
-    public static void moveList(Board state, List<Move> result, Square from) {
+    public static void moveList(State state, List<Move> result, Square from) {
         char identifier = Character.toLowerCase(state.board[from.y][from.x]);
         boolean stopShort;
 
@@ -46,7 +47,7 @@ public class MoveGenerator {
 
 
 
-    private static void scan(Board state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {
+    private static void scan(State state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {
         int x = from.x, y = from.y;
         Player player = IFigure.getFieldPlayer(state, from);
 
@@ -69,7 +70,7 @@ public class MoveGenerator {
         } while(!stopShort);
     }
 
-    private static void symmScan(Board state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {
+    private static void symmScan(State state, List<Move> result, Square from, int dx, int dy, boolean stopShort, Capture capture) {
         for(int i = 0; i < 4; i++) {
             scan(state, result, from, dx, dy, stopShort, capture);
 
@@ -80,7 +81,7 @@ public class MoveGenerator {
         }
     }
 
-    private static void symmScan(Board state, List<Move> result, Square from, int dx, int dy, boolean stopShort) {
+    private static void symmScan(State state, List<Move> result, Square from, int dx, int dy, boolean stopShort) {
         symmScan(state, result, from, dx, dy, stopShort, Capture.TRUE);
     }
 

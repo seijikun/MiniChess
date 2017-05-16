@@ -11,12 +11,12 @@ public class StateTest {
 
     @Test
     public void testExecutePhysicallyInvalidMove() {
-        Board state = new Board();
-        state.initialize();
+        Board board = new Board();
+        board.initialize();
         for(int i = 0; i < 5; ++i) {
-            Move move = MoveHelper.generateRandomPhysicallyInvalidMove(state);
+            Move move = MoveHelper.generateRandomPhysicallyInvalidMove(board.state);
             try {
-                state.move(move);
+                board.move(move);
                 fail("Expected InvalidMoveException");
             } catch (InvalidMoveException e) {}
         }

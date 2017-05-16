@@ -23,7 +23,7 @@ public class HumanPlayer implements IPlayer {
             } catch (InvalidFormatException e) {
                 System.out.println("Not a valid move string");
             }
-        } while (move == null || !MoveValidator.isMoveValid(state, move));
+        } while (move == null || !MoveValidator.isMoveValid(state.state, move));
 
         reader.close();
         return move;

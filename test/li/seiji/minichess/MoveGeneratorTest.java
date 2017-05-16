@@ -14,15 +14,15 @@ public class MoveGeneratorTest {
     @Test
     public void testPossibleMoveValidity() throws InvalidMoveException {
         for(int run = 0; run < 500; ++run) {
-            Board state = new Board();
-            state.initialize();
+            Board board = new Board();
+            board.initialize();
 
             for(int i = 0; i < 40; ++i) {
-                List<Move> moves = state.getPossibleMoves();
+                List<Move> moves = board.getPossibleMoves();
                 if(moves.size() > 0) {
                     for(Move move : moves)
-                        assertTrue(MoveValidator.isMoveValid(state, move));
-                    state = state.move(DataHelper.selectRandom(moves));
+                        assertTrue(MoveValidator.isMoveValid(board.state, move));
+                    board.state = board.move(DataHelper.selectRandom(moves));
                 }
             }
         }
