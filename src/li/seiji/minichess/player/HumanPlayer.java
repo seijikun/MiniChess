@@ -9,15 +9,18 @@ import java.util.Scanner;
 
 public class HumanPlayer implements IPlayer {
 
-    public void start() {}
+    Scanner scanner = null;
+
+    public void start() {
+        scanner = new Scanner(System.in);
+    }
 
     @Override
     public Move getMove(Board state) {
         Move move = null;
-        Scanner reader = new Scanner(System.in);
 
         do {
-            String moveString = reader.nextLine();
+            String moveString = scanner.nextLine();
             try {
                 move = new Move(moveString);
             } catch (InvalidFormatException e) {
@@ -25,7 +28,6 @@ public class HumanPlayer implements IPlayer {
             }
         } while (move == null || !MoveValidator.isMoveValid(state, move));
 
-        reader.close();
         return move;
     }
 
