@@ -18,6 +18,7 @@ public class Game {
     public void run() throws InvalidMoveException {
         white.start();
         black.start();
+        board.prettyPrint();
 
         while(board.state.gameState == GameState.ONGOING) {
             IPlayer turnPlayer;
