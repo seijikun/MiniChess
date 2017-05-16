@@ -27,55 +27,8 @@ public class Board {
 
     public State state = new State();
 
-    public void initialize() {
-        StringReader reader = new StringReader(Board.DEFAULT_BOARD);
-        try {
-            state.read(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void move(Move move) throws InvalidMoveException {
-        if(!MoveValidator.isMoveValid(state, move))
-            throw new InvalidMoveException(state, move);
-
-        Player destSquarePlayer = Player.parseIdentifier(move.to.getFieldValue(state));
-        if(destSquarePlayer == state.turn)
-            throw new InvalidMoveException(state, move);
-
-        State result = state.clone();
-        //move figure from move.from to move.to
-        move.to.setIdentifier(result, move.from.getFieldValue(state));
-        move.from.setIdentifier(result, '.');
-
-
-        if(move.from.getIdentifier(state) == Pawn.identifier)
-            checkPawnForTransformation(result, move);
-        if(result.turnCounter >= 40)
-            result.gameState = GameState.TIE;
-        if(move.to.getIdentifier(state) == King.identifier)
-            result.gameState = result.turn == Player.BLACK ? GameState.WIN_BLACK : GameState.WIN_WHITE;
-
-
-        result.turn = (state.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
-        result.turnCounter++;
-        state = result;
-    }
-
-    /**
-     * Check if the Pawn is at the opposite end of the Field. If so, the pawn gets transformed into a queen.
-     * @param move Move the pawn is doing.
-     */
-    private void checkPawnForTransformation(State newState, Move move) {
-        int endOfField = newState.turn == Player.BLACK ? ROWS : 0;
-
-        if(move.to.y == endOfField) {
-            char queenIdentifier =
-                    newState.turn == Player.BLACK ? Character.toLowerCase(Queen.identifier) : Character.toUpperCase(Queen.identifier);
-
-            move.to.setIdentifier(newState, queenIdentifier);
-        }
+        state = state.move(move);
     }
 
     /**

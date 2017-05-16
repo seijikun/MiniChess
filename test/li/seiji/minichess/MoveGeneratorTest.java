@@ -15,7 +15,7 @@ public class MoveGeneratorTest {
     public void testPossibleMoveValidity() throws InvalidMoveException {
         for(int run = 0; run < 500; ++run) {
             Board board = new Board();
-            board.initialize();
+            board.state.initialize();
 
             for(int i = 0; i < 40; ++i) {
                 List<Move> moves = board.getPossibleMoves();

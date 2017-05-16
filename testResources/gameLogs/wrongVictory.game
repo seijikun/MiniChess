@@ -1,0 +1,79 @@
+! e2-e3
+
+1 B
+kqbnr
+ppppp
+.....
+....P
+PPPP.
+RNBQK
+
+d5-d4
+! e3-d4
+
+2 B
+kqbnr
+ppp.p
+...P.
+.....
+PPPP.
+RNBQK
+
+e5-d4
+! d1-e2
+
+3 B
+kqbnr
+ppp..
+...p.
+.....
+PPPPQ
+RNB.K
+
+c5-c4
+! e2-e6
+
+4 B
+kqbnQ
+pp...
+..pp.
+.....
+PPPP.
+RNB.K
+
+c6-d5
+! e6-d5
+
+5 B
+kq.n.
+pp.Q.
+..pp.
+.....
+PPPP.
+RNB.K
+
+b6-c5
+! d5-c5
+
+6 B
+k..n.
+ppQ..
+..pp.
+.....
+PPPP.
+RNB.K
+
+d6-e4
+! c5-d4
+
+7 B
+k....
+pp...
+..pQn
+.....
+PPPP.
+RNB.K
+
+a6-b6
+
+And the winner is: WIN_BLACK

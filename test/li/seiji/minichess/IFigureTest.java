@@ -36,7 +36,7 @@ public class IFigureTest {
     @Test
     public void testCheckStraightIsBlocked() throws IOException {
         Board board = new Board();
-        board.initialize();
+        board.state.initialize();
         //bottom to up
         Move move = new Move("a2-a3");
         assertFalse(IFigure.checkStraightIsBlocked(board.state, move, player -> player != Player.NONE));
