@@ -1,6 +1,5 @@
 package li.seiji.minichess;
 
-import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.figure.King;
 import li.seiji.minichess.figure.Pawn;
 import li.seiji.minichess.figure.Queen;
@@ -9,7 +8,6 @@ import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
 
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -52,11 +50,11 @@ public class Board {
         move.from.setIdentifier(result, '.');
 
 
-        if(move.from.getIdentifier(state) == Pawn.identifier)
+        if(Character.toLowerCase(move.from.getIdentifier(state)) == Pawn.identifier)
             checkPawnForTransformation(result, move);
         if(result.turnCounter >= 40)
             result.gameState = GameState.TIE;
-        if(move.to.getIdentifier(state) == King.identifier)
+        if(Character.toLowerCase(move.to.getIdentifier(state)) == King.identifier)
             result.gameState = result.turn == Player.BLACK ? GameState.WIN_BLACK : GameState.WIN_WHITE;
 
 

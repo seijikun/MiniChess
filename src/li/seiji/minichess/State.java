@@ -3,9 +3,6 @@ package li.seiji.minichess;
 import java.io.IOException;
 import java.io.Reader;
 
-/**
- * Created by Lyot on 16.05.2017.
- */
 public class State {
     public char board[][] = new char[6][5];
     public Player turn = Player.WHITE;
