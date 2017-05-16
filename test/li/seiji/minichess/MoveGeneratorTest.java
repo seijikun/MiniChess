@@ -22,7 +22,7 @@ public class MoveGeneratorTest {
                 if(moves.size() > 0) {
                     for(Move move : moves)
                         assertTrue(MoveValidator.isMoveValid(board.state, move));
-                    board.state = board.move(DataHelper.selectRandom(moves));
+                    board.move(DataHelper.selectRandom(moves));
                 }
             }
         }

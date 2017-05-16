@@ -38,7 +38,7 @@ public class Board {
         }
     }
 
-    public State move(Move move) throws InvalidMoveException {
+    public void move(Move move) throws InvalidMoveException {
         if(!MoveValidator.isMoveValid(state, move))
             throw new InvalidMoveException(state, move);
 
@@ -58,7 +58,7 @@ public class Board {
             //TODO King has been captured, finish the Game.
 
         result.turn = (state.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
-        return  result;
+        state = result;
     }
 
     /**
