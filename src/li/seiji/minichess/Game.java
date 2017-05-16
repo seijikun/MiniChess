@@ -31,6 +31,8 @@ public class Game {
             Move move = turnPlayer.getMove(state);
             state = state.move(move);
             otherPlayer.setMove(state, move);
+
+            state.prettyPrint();
         }
     }
 
