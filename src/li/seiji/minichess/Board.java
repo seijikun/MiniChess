@@ -53,7 +53,7 @@ public class Board {
 
 
         if(move.from.getIdentifier(state) == Pawn.identifier)
-            checkPawnForTransformation(move);
+            checkPawnForTransformation(result, move);
         if(move.to.getIdentifier(state) == King.identifier) {}
             //TODO King has been captured, finish the Game.
 
@@ -65,14 +65,14 @@ public class Board {
      * Check if the Pawn is at the opposite end of the Field. If so, the pawn gets transformed into a queen.
      * @param move Move the pawn is doing.
      */
-    private void checkPawnForTransformation(Move move) {
-        int endOfField = state.turn == Player.BLACK ? ROWS : 0;
+    private void checkPawnForTransformation(State newState, Move move) {
+        int endOfField = newState.turn == Player.BLACK ? ROWS : 0;
 
         if(move.to.y == endOfField) {
             char queenIdentifier =
-                    state.turn == Player.BLACK ? Character.toLowerCase(Queen.identifier) : Character.toUpperCase(Queen.identifier);
+                    newState.turn == Player.BLACK ? Character.toLowerCase(Queen.identifier) : Character.toUpperCase(Queen.identifier);
 
-            move.to.setIdentifier(state, queenIdentifier);
+            move.to.setIdentifier(newState, queenIdentifier);
         }
     }
 
