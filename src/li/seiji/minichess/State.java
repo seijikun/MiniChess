@@ -49,7 +49,7 @@ public class State implements Cloneable {
         move.to.setIdentifier(result, move.from.getFieldValue(result));
         move.from.setIdentifier(result, '.');
 
-        if(move.from.getIdentifier(result) == Pawn.identifier)
+        if(move.to.getIdentifier(result) == Pawn.identifier)
             checkPawnForTransformation(result, move);
 
         result.turn = (result.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
