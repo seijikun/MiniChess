@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class HumanPlayer implements Player {
 
     @Override
-    public Move getMove(State state, Square from) {
+    public Move getMove(State state) {
         Move move = null;
         Scanner reader = new Scanner(System.in);
 
