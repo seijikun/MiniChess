@@ -54,7 +54,7 @@ public class Board {
 
         if(move.from.getIdentifier(state) == Pawn.identifier)
             checkPawnForTransformation(move);
-        if(move.to.getIdentifier(state) == King.identifier)
+        if(move.to.getIdentifier(state) == King.identifier) {}
             //TODO King has been captured, finish the Game.
 
         result.turn = (state.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
