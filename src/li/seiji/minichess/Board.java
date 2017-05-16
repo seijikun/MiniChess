@@ -66,19 +66,18 @@ public class Board {
 
     /**
      * Get a list of all possible moves for the current player on the current board as defined by state.
-     * @param state Board state (defines the board itself and the current player)
      * @return The list of all possible moves that can be done by the current player.
      */
-    public static List<Move> getPossibleMoves(Board state) {
+    public List<Move> getPossibleMoves() {
         List<Move> result = new ArrayList<>();
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                char identifier = state.board[y][x];
+                char identifier = board[y][x];
                 Player player = Player.parseIdentifier(identifier);
 
-                if(identifier != '.' && player == state.turn)
-                    MoveGenerator.moveList(state, result, new Square(x, y));
+                if(identifier != '.' && player == turn)
+                    MoveGenerator.moveList(this, result, new Square(x, y));
             }
         }
 
@@ -112,11 +111,11 @@ public class Board {
         }
     }
 
-    public static void prettyPrint(Board state) {
+    public void prettyPrint() {
         for(int y = 0; y < Board.ROWS; ++y) {
             System.out.print("| " + (Board.ROWS - y) + " |");
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                char identifier = state.board[y][x];
+                char identifier = board[y][x];
                 System.out.print('_');
                 System.out.print((identifier != '.') ? identifier : '_');
                 System.out.print("_|");
