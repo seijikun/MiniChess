@@ -26,7 +26,7 @@ public class SquareTest {
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
                 Square square = new Square(positions[y][x]);
-                assertSquareCorrect(square, x, Board.ROWS - y);
+                assertSquareCorrect(square, x, Board.ROWS - y - 1);
             }
         }
     }

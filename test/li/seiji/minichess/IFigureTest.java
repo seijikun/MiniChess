@@ -30,13 +30,13 @@ public class IFigureTest {
         State state = new State();
         state.initialize();
         //bottom to up
-        Move move = new Move("a5-a4");
+        Move move = new Move("a2-a3");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a5-a3");
+        move = new Move("a2-a4");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a5-a2");
+        move = new Move("a2-a5");
         assertFalse(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
-        move = new Move("a5-a1");
+        move = new Move("a2-a6");
         assertTrue(IFigure.checkStraightIsBlocked(state, move, player -> player != Player.NONE));
 
         //up to bottom

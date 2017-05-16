@@ -14,7 +14,7 @@ public class Square {
 
     public Square(String position) {
         x = (position.charAt(0) - 'a');
-        y = Board.ROWS - (position.charAt(1) - '1');
+        y = Board.ROWS - (position.charAt(1) - '1') - 1;
     }
 
     public char getIdentifier(State state) {
@@ -27,7 +27,7 @@ public class Square {
     public String toString() {
         char[] posStr = {
                 (char)((int)'a' + x),
-                (char)((int)'1' +  (Board.ROWS - y))
+                (char)((int)'1' +  (Board.ROWS - y - 1))
         };
         return new String(posStr);
     }
