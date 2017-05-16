@@ -31,6 +31,6 @@ public class Move {
     @Override
     public boolean equals(Object obj) {
         Move o = (Move) obj;
-        return (o.to == to && o.from == from);
+        return (o.to.equals(to) && o.from.equals(from));
     }
 }

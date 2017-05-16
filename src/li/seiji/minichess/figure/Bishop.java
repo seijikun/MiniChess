@@ -19,7 +19,7 @@ public class Bishop {
         if(IFigure.isDiagonalMove(move) && !IFigure.checkDiagonalIsBlocked(state, move, diagonalBlockChecker))
             return true;
 
-        return true;
+        return false;
     }
 
     //Bishop is blocked by any figure that is not an empty field

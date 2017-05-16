@@ -89,7 +89,7 @@ public interface IFigure {
         int xDir = getMoveDirX(move);
         int yDir = getMoveDirY(move);
 
-        for(int x = move.from.x + xDir, y = move.from.y + yDir; x < move.to.x; x += xDir, y += yDir) {
+        for(int x = move.from.x + xDir, y = move.from.y + yDir; x != move.to.x; x += xDir, y += yDir) {
             Square square = new Square(x, y);
             if(isBlockade.apply(getFieldPlayer(state, square))) return true;
         }

@@ -2,7 +2,10 @@ package li.seiji.minichess;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class SquareTest {
 
@@ -37,6 +40,22 @@ public class SquareTest {
         assertSquareCorrect(square, 0, 5);
         square = new Square("e1");
         assertSquareCorrect(square, 4, 0);
+    }
+
+
+    @Test
+    public void testHashAndEquality() {
+        HashSet<Square> squares = new HashSet<>();
+        for(int y = 0; y < 250; ++y) {
+            for(int x = 0; x < 250; ++x) {
+                squares.add(new Square(x, y));
+            }
+        }
+
+        //test that the HashSet can find them
+        for(Square sqr : squares) {
+            assertTrue(squares.contains(sqr));
+        }
     }
 
 

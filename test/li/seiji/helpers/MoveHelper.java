@@ -6,6 +6,7 @@ import li.seiji.minichess.Square;
 import li.seiji.minichess.State;
 import li.seiji.minichess.move.Move;
 
+import java.util.HashSet;
 import java.util.Random;
 
 public class MoveHelper {
@@ -41,9 +42,21 @@ public class MoveHelper {
         do {
             from = selectRandomFigure(state);
             to = selectRandomFigure(state); //search two squares that contain figures of the same team
-        } while(Player.parseIdentifier(from.getIdentifier(state)) != Player.parseIdentifier(to.getIdentifier(state)));
+        } while(Player.parseIdentifier(to.getIdentifier(state)) != state.turn);
 
         return new Move(from, to);
+    }
+
+    public static HashSet<Move> generateAllPhysicallyPossibleMoves(State state, Square from) {
+        HashSet<Move> result = new HashSet<>();
+
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                if(from.x != x && from.y != y)
+                    result.add(new Move(from, new Square(x, y)));
+            }
+        }
+        return result;
     }
 
 }

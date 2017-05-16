@@ -16,7 +16,10 @@ public class Pawn {
                 IFigure.getMoveDeltaY(move) == deltaY &&
                 IFigure.getFieldPlayer(state, move.to) == Player.NONE;
 
-        boolean isValidDiagonalMove = IFigure.getMoveDeltaY(move) == deltaY && IFigure.getAbsMoveDeltaX(move) == 1;
+        boolean isValidDiagonalMove = (
+                (IFigure.getMoveDeltaY(move) == deltaY && IFigure.getAbsMoveDeltaX(move) == 1) &&
+                IFigure.isDestinationFieldAnEnemy(state, move, player)
+        );
 
         return (isValidDiagonalMove || isValidStraightMove);
     }

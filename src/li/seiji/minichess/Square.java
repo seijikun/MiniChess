@@ -34,7 +34,7 @@ public class Square {
 
     @Override
     public int hashCode() {
-        return (x | (y << 16));
+        return x^y;
     }
 
     @Override

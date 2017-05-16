@@ -22,14 +22,13 @@ public class StateTest {
     public void testExecutePhysicallyInvalidMove() {
         State state = new State();
         state.initialize();
-        Move move = MoveHelper.generateRandomPhysicallyInvalidMove(state);
-        try {
-            state.move(move);
-            fail("Expected InvalidMoveException");
-        } catch (InvalidMoveException e) {}
+        for(int i = 0; i < 5; ++i) {
+            Move move = MoveHelper.generateRandomPhysicallyInvalidMove(state);
+            try {
+                state.move(move);
+                fail("Expected InvalidMoveException");
+            } catch (InvalidMoveException e) {}
+        }
     }
-
-
-    //TODO: implement a test that checks every invalid move for negative validity?
 
 }
