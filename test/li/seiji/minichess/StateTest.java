@@ -12,7 +12,7 @@ public class StateTest {
     @Test
     public void testExecutePhysicallyInvalidMove() {
         Board board = new Board();
-        board.initialize();
+        board.state.initialize();
         for(int i = 0; i < 5; ++i) {
             Move move = MoveHelper.generateRandomPhysicallyInvalidMove(board.state);
             try {

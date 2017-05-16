@@ -10,7 +10,7 @@ public class Game {
     private IPlayer black;
 
     public Game(IPlayer white, IPlayer black) {
-        board.initialize();
+        board.state.initialize();
         this.white = white;
         this.black = black;
     }

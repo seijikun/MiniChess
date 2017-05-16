@@ -27,16 +27,6 @@ public class Board {
 
     public State state = new State();
 
-    public void initialize() {
-        StringReader reader = new StringReader(Board.DEFAULT_BOARD);
-        try {
-            state.read(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //TODO
     public void move(Move move) throws InvalidMoveException {
         state = state.move(move);
     }

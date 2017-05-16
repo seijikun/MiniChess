@@ -14,7 +14,7 @@ public class MoveValidatorTest {
     @Test
     public void testMoveValidity() {
         Board board = new Board();
-        board.initialize();
+        board.state.initialize();
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
