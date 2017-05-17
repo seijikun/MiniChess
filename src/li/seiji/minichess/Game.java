@@ -2,6 +2,7 @@ package li.seiji.minichess;
 
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
+import li.seiji.minichess.logging.IGameLogger;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.player.IPlayer;
 
@@ -12,11 +13,16 @@ public class Game {
     private Board board = new Board();
     private IPlayer white;
     private IPlayer black;
+    private IGameLogger logger = null;
 
     public Game(IPlayer white, IPlayer black) {
         board.state.initialize();
         this.white = white;
         this.black = black;
+    }
+
+    public void setLogger(IGameLogger logger) {
+        this.logger = logger;
     }
 
     public GameState getResult() {
@@ -26,13 +32,9 @@ public class Game {
     public void run() throws InvalidMoveException, IOException {
         white.start(Player.WHITE);
         black.start(Player.BLACK);
+        if(logger != null) logger.start(board);
 
-        board.prettyPrint();
-        System.out.println();
-
-        GameLogger logger = null;
         try {
-            logger = new GameLogger(GameLogger.Mode.WRITE);
 
             while(board.state.gameState == GameState.ONGOING) {
                 IPlayer turnPlayer;
@@ -44,20 +46,18 @@ public class Game {
                 }
 
                 Move move = turnPlayer.getMove(board);
-                logger.logMove(move);
                 board.move(move);
                 otherPlayer.setMove(board, move);
 
-                board.prettyPrint();
-                System.out.println();
+                if(logger != null) logger.logMove(board, move);
             }
         }
         finally {
-            if(logger != null)
+            if(logger != null) {
+                logger.end(board);
                 logger.close();
+            }
         }
-
-        System.out.println("And the winner is: " + board.state.gameState.toString());
     }
 
 }

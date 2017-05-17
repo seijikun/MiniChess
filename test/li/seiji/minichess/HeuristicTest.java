@@ -11,18 +11,24 @@ import static junit.framework.TestCase.assertTrue;
 
 public class HeuristicTest {
 
+    public static final int TESTED_GAMES = 10000;
+
     @Test
     public void test500Games() throws InvalidMoveException, IOException {
-        for(int i = 0; i < 500; ++i) {
+        int heuristicWins = 0;
+
+        for(int i = 0; i < TESTED_GAMES; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
             HeuristicPlayer heuristicPlayer = new HeuristicPlayer();
 
             Game game = new Game(randomPlayer, heuristicPlayer);
             game.run();
 
-            boolean valid = game.getResult() == GameState.TIE || game.getResult() == GameState.WIN_BLACK;
-            assertTrue(valid);
+            if(game.getResult() == GameState.WIN_BLACK)
+                heuristicWins++;
         }
+        System.out.println(heuristicWins);
+        assertTrue(heuristicWins > heuristicWins * 0.95);
     }
 
 }
