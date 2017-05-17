@@ -16,7 +16,7 @@ public class HumanPlayer implements IPlayer {
     }
 
     @Override
-    public Move getMove(Board state) {
+    public Move getMove(Board board) {
         Move move = null;
 
         do {
@@ -26,12 +26,12 @@ public class HumanPlayer implements IPlayer {
             } catch (InvalidFormatException e) {
                 System.out.println("Not a valid move string");
             }
-        } while (move == null || !MoveValidator.isMoveValid(state.state, move));
+        } while (move == null || !MoveValidator.isMoveValid(board.state, move));
 
         return move;
     }
 
     @Override
-    public void setMove(Board state, Move move) {}
+    public void setMove(Board board, Move move) {}
 
 }
