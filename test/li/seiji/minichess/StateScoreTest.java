@@ -57,6 +57,6 @@ public class StateScoreTest {
             state = state.move(m);
 
         float score = state.calculateScore();
-        assertEquals(Float.MAX_VALUE / (float)state.turnCounter, score);
+        assertEquals(-Float.MAX_VALUE / (float)state.turnCounter, score);
     }
 }
