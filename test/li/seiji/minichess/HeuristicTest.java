@@ -28,7 +28,7 @@ public class HeuristicTest {
                 heuristicWins++;
         }
         System.out.println(heuristicWins);
-        assertTrue(heuristicWins > heuristicWins * 0.95);
+        assertTrue(heuristicWins > TESTED_GAMES * 0.95);
     }
 
 }
