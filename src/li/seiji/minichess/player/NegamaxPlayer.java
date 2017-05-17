@@ -1,6 +1,5 @@
 package li.seiji.minichess.player;
 
-import com.sun.org.apache.bcel.internal.generic.FLOAD;
 import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
@@ -44,12 +43,13 @@ public class NegamaxPlayer implements IPlayer {
         List<Move> possibleMoves = state.getPossibleMoves();
         for(Move possibleMove : possibleMoves) {
             State subState = state.move(possibleMove);
+
             float score = -negamax(subState, depth - 1, false);
+
             if(score > bestValue) {
                 bestValue = score;
                 if(root) bestMove = possibleMove;
             }
-            bestValue = Math.max(bestValue, score);
         }
         return bestValue;
     }
