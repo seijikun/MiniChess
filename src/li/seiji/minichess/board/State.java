@@ -3,9 +3,7 @@ package li.seiji.minichess.board;
 import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.Square;
-import li.seiji.minichess.figure.King;
-import li.seiji.minichess.figure.Pawn;
-import li.seiji.minichess.figure.Queen;
+import li.seiji.minichess.figure.*;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
@@ -102,9 +100,21 @@ public class State implements Cloneable {
     }
 
     public float calculateScore() {
-        return 0.0f; //TODO: implement
-    }
+        float score = 0.0f;
+        int sign = (turn == Player.BLACK) ? 1 : -1;
 
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                char identifier = board[y][x];
+                if(Player.parseIdentifier(identifier) == Player.BLACK)
+                    score += sign * getScore(identifier);
+                else if(Player.parseIdentifier(identifier) == Player.WHITE)
+                    score += sign * (-1) * getScore(identifier);
+            }
+        }
+
+        return score;
+    }
 
 
 
@@ -115,7 +125,7 @@ public class State implements Cloneable {
      * @param move Move the pawn is doing.
      */
     private void checkPawnForTransformation(State newState, Move move) {
-        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS : 0;
+        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS - 1 : 0;
 
         if(move.to.y == endOfField) {
             char queenIdentifier =
@@ -125,4 +135,22 @@ public class State implements Cloneable {
         }
     }
 
+    private float getScore(char identifier) {
+        switch (identifier) {
+            case King.identifier:
+                return King.pointScore;
+            case Queen.identifier:
+                return Queen.pointScore;
+            case Rook.identifier:
+                return Rook.pointScore;
+            case Bishop.identifier:
+                return Bishop.pointScore;
+            case Knight.identifier:
+                return Knight.pointScore;
+            case Pawn.identifier:
+                return Pawn.pointScore;
+            default:
+                return 0.0f;
+        }
+    }
 }

@@ -9,6 +9,7 @@ import java.util.function.Function;
 public class Queen {
 
     public static final char identifier = 'q';
+    public static final float pointScore = 9.0f;
 
     public static boolean isMoveValid(State state, Move move) {
         Player currentPlayer = Player.parseIdentifier(move.from.getFieldValue(state));
