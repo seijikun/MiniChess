@@ -101,14 +101,22 @@ public class State implements Cloneable {
 
     public float calculateScore() {
         float score = 0.0f;
+
+        if(turn == Player.BLACK && gameState == GameState.WIN_BLACK ||
+                turn == Player.WHITE && gameState == GameState.WIN_WHITE) {
+
+            return  Float.MAX_VALUE / (float)turnCounter;
+        }
+
         int sign = (turn == Player.BLACK) ? 1 : -1;
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
-                char identifier = board[y][x];
-                if(Player.parseIdentifier(identifier) == Player.BLACK)
+                char fieldValue = board[y][x];
+                char identifier = Character.toLowerCase(board[y][x]);
+                if(Player.parseIdentifier(fieldValue) == Player.BLACK)
                     score += sign * getScore(identifier);
-                else if(Player.parseIdentifier(identifier) == Player.WHITE)
+                else if(Player.parseIdentifier(fieldValue) == Player.WHITE)
                     score += sign * (-1) * getScore(identifier);
             }
         }
