@@ -59,7 +59,7 @@ public class IMCSPlayer implements IPlayer {
     }
 
     @Override
-    public Move getMove(Board state) {
+    public Move getMove(Board board) {
         try {
             return new Move(imcs.getMove());
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class IMCSPlayer implements IPlayer {
     }
 
     @Override
-    public void setMove(Board state, Move move) {
+    public void setMove(Board board, Move move) {
         try {
             imcs.sendMove(move.toString());
         } catch (IOException e) {

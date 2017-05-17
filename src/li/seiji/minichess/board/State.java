@@ -91,4 +91,9 @@ public class State implements Cloneable {
             e.printStackTrace();
         }
     }
+
+    public float calculateScore() {
+        return 0.0f; //TODO: implement
+    }
+
 }

@@ -13,8 +13,8 @@ public class RandomPlayer implements IPlayer {
     }
 
     @Override
-    public Move getMove(Board state) {
-        List<Move> currentMoves = state.getPossibleMoves();
+    public Move getMove(Board board) {
+        List<Move> currentMoves = board.getPossibleMoves();
 
         int index = ThreadLocalRandom.current().nextInt(0, currentMoves.size() - 1);
 
@@ -22,7 +22,7 @@ public class RandomPlayer implements IPlayer {
     }
 
     @Override
-    public void setMove(Board state, Move move) {
+    public void setMove(Board board, Move move) {
 
     }
 }

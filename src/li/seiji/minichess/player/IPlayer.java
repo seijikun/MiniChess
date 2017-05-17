@@ -12,16 +12,16 @@ public interface IPlayer {
 
     /**
      * Called to get the players next move.
-     * @param state Current state of the boad.
+     * @param board Current state of the boad.
      * @return The new move of the player.
      */
-    Move getMove(Board state);
+    Move getMove(Board board);
 
     /**
      * This notifies the player about the other player's move.
-     * @param state Current state of the board.
+     * @param board Current state of the board.
      * @param move Move of the other player.
      */
-    void setMove(Board state, Move move);
+    void setMove(Board board, Move move);
 
 }
