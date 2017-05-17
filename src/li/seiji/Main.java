@@ -2,7 +2,10 @@ package li.seiji;
 
 import li.seiji.minichess.Game;
 import li.seiji.minichess.InvalidMoveException;
+import li.seiji.minichess.board.GameState;
+import li.seiji.minichess.logging.ConsoleLogger;
 import li.seiji.minichess.player.HeuristicPlayer;
+import li.seiji.minichess.player.NegamaxPlayer;
 import li.seiji.minichess.player.RandomPlayer;
 
 import java.io.IOException;
@@ -23,10 +26,20 @@ public class Main {
 //        Game game = new Game(netPlayer, randomPlayer);
 //        game.run();
 
-        RandomPlayer randomPlayer = new RandomPlayer();
-        HeuristicPlayer heuristicPlayer = new HeuristicPlayer();
+        int wins = 0;
 
-        Game game = new Game(randomPlayer, heuristicPlayer);
-        game.run();
+        for(int i = 0; i < 500; ++i) {
+            RandomPlayer randomPlayer = new RandomPlayer();
+            NegamaxPlayer negamaxPlayer = new NegamaxPlayer();
+
+            Game game = new Game(randomPlayer, negamaxPlayer);
+            game.setLogger(new ConsoleLogger());
+            game.run();
+
+            if(game.getResult() == GameState.WIN_BLACK)
+                wins++;
+        }
+
+        System.out.println("Wins: " + wins);
     }
 }

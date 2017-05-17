@@ -37,4 +37,9 @@ public class HeuristicPlayer implements IPlayer {
     public void setMove(Board state, Move move) {
     }
 
+    @Override
+    public void end() {
+
+    }
+
 }

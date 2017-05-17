@@ -27,8 +27,7 @@ public class HeuristicTest {
             if(game.getResult() == GameState.WIN_BLACK)
                 heuristicWins++;
         }
-        System.out.println(heuristicWins);
-        assertTrue(heuristicWins > TESTED_GAMES * 0.95);
+        assertTrue(heuristicWins > TESTED_GAMES * 0.98);
     }
 
 }

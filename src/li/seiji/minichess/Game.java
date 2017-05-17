@@ -51,12 +51,13 @@ public class Game {
 
                 if(logger != null) logger.logMove(board, move);
             }
-        }
-        finally {
+        } finally {
             if(logger != null) {
                 logger.end(board);
                 logger.close();
             }
+            white.end();
+            black.end();
         }
     }
 

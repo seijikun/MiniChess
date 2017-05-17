@@ -35,4 +35,9 @@ public class HumanPlayer implements IPlayer {
     @Override
     public void setMove(Board board, Move move) {}
 
+    @Override
+    public void end() {
+
+    }
+
 }

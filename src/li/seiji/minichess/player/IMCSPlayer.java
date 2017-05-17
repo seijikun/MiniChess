@@ -78,4 +78,9 @@ public class IMCSPlayer implements IPlayer {
         }
     }
 
+    @Override
+    public void end() {
+
+    }
+
 }

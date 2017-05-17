@@ -26,4 +26,9 @@ public class RandomPlayer implements IPlayer {
     public void setMove(Board board, Move move) {
 
     }
+
+    @Override
+    public void end() {
+
+    }
 }

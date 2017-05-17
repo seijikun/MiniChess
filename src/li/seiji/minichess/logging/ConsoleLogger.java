@@ -1,5 +1,6 @@
 package li.seiji.minichess.logging;
 
+import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
@@ -17,6 +18,8 @@ public class ConsoleLogger implements IGameLogger {
 
     @Override
     public void logMove(Board board, Move move) {
+        Player player = (board.state.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
+        System.out.println(player.toString() + ": " + move.toString());
         board.prettyPrint();
         System.out.println();
     }

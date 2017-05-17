@@ -14,20 +14,21 @@ import java.util.concurrent.*;
 
 public class NegamaxPlayer implements IPlayer {
 
-    private ExecutorService threadPool = Executors.newSingleThreadExecutor();
+    private ExecutorService threadPool = null;
 
     private Player color;
     private GameState victoryGameState;
 
     @Override
     public void start(Player color) {
+        threadPool = Executors.newFixedThreadPool(4);
         this.color = color;
         victoryGameState = (color == Player.BLACK) ? GameState.WIN_BLACK : GameState.WIN_WHITE;
     }
 
     @Override
     public Move getMove(Board board) throws InvalidMoveException {
-        boolean shouldStop = false;
+        //boolean shouldStop = false;
         List<Move> possibleMoves = board.getPossibleMoves();
 
         List<NegamaxTask> calculatorTasks = new ArrayList<>();
@@ -35,7 +36,7 @@ public class NegamaxPlayer implements IPlayer {
             State state = board.state.move(possibleMove);
             if(state.gameState == victoryGameState)
                 return possibleMove; //already found a winning move, exit
-            calculatorTasks.add(new NegamaxTask(state, 1));
+            calculatorTasks.add(new NegamaxTask(state, 5));
         }
 
         //execute
@@ -54,6 +55,10 @@ public class NegamaxPlayer implements IPlayer {
 
     }
 
+    @Override
+    public void end() {
+        threadPool.shutdown();
+    }
 
 
     private Move findBestMove(List<Future<Float>> results, List<Move> moves) {
@@ -62,7 +67,7 @@ public class NegamaxPlayer implements IPlayer {
 
         try {
             for(int i = 0; i < moves.size(); ++i) {
-                float newScore = results.get(i).get();
+                float newScore = -results.get(i).get();
                 if(newScore > bestScore) {
                     bestScore = newScore;
                     bestMove = moves.get(i);
@@ -95,16 +100,20 @@ public class NegamaxPlayer implements IPlayer {
 
 
         private float negamax(State state, int depth) throws InvalidMoveException {
-            if(depth == 0) return state.calculateScore();
+            if(depth == 0) return -state.calculateScore();
 
             List<Move> possibleMoves = state.getPossibleMoves();
-            Move bestMove = null;
             float bestScore = -Float.MAX_VALUE;
             for (Move possibleMove : possibleMoves) {
                 State moveResult = state.move(possibleMove);
                 if(moveResult.gameState == victoryGameState)
-                    return moveResult.calculateScore();
-                //TODO: implement recursion
+                    return -moveResult.calculateScore();
+                if(moveResult.gameState != GameState.ONGOING)
+                    break;
+
+                float score = negamax(state, depth - 1);
+                if(score > bestScore || (score == bestScore && ThreadLocalRandom.current().nextBoolean()))
+                    bestScore = score;
             }
 
             return bestScore;

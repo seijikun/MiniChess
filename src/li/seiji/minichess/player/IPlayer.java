@@ -27,4 +27,9 @@ public interface IPlayer {
      */
     void setMove(Board board, Move move);
 
+    /**
+     * Notifies the player that the game has ended.
+     */
+    void end();
+
 }
