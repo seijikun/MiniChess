@@ -64,7 +64,7 @@ public class State implements Cloneable {
      * @param move Move the pawn is doing.
      */
     private void checkPawnForTransformation(State newState, Move move) {
-        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS : 0;
+        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS-1 : 0;
 
         if(move.to.y == endOfField) {
             char queenIdentifier =
