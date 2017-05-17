@@ -29,6 +29,8 @@ public class Game {
         return board.state.gameState;
     }
 
+    public int getTurns() { return board.state.turnCounter; }
+
     public void run() throws InvalidMoveException, IOException {
         white.start(Player.WHITE);
         black.start(Player.BLACK);

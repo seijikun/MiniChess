@@ -74,7 +74,7 @@ public class NegamaxTest {
             else if(game.getResult() == GameState.WIN_BLACK)
                 loss++;
 
-            System.out.println(game.getResult());
+            System.out.println(game.getResult() + " - " + game.getTurns());
         }
         assertTrue(wins > ITERATIONS * 0.98);
         assertEquals(0, loss);
@@ -97,7 +97,7 @@ public class NegamaxTest {
             else if(game.getResult() == GameState.WIN_WHITE)
                 loss++;
 
-            System.out.println(game.getResult());
+            System.out.println(game.getResult() + " - " + game.getTurns());
         }
         assertTrue(wins > ITERATIONS * 0.98);
         assertEquals(0, loss);
