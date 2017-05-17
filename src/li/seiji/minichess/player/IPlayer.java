@@ -1,5 +1,6 @@
 package li.seiji.minichess.player;
 
+import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.move.Move;
 
@@ -15,7 +16,7 @@ public interface IPlayer {
      * @param board Current state of the boad.
      * @return The new move of the player.
      */
-    Move getMove(Board board);
+    Move getMove(Board board) throws InvalidMoveException;
 
     /**
      * This notifies the player about the other player's move.
