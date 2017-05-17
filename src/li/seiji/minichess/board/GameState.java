@@ -1,5 +1,9 @@
 package li.seiji.minichess.board;
 
 public enum GameState {
-    WIN_BLACK, WIN_WHITE, TIE, ONGOING
+    ONGOING, WIN_WHITE, WIN_BLACK, TIE;
+
+    public boolean isDefinitiveWin() {
+        return (this == WIN_WHITE || this == WIN_BLACK);
+    }
 }

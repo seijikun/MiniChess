@@ -102,9 +102,11 @@ public class State implements Cloneable {
     public float calculateScore() {
         float score = 0.0f;
 
-        if(turn == Player.BLACK && gameState == GameState.WIN_BLACK ||
-                turn == Player.WHITE && gameState == GameState.WIN_WHITE) {
-            return  Float.MAX_VALUE / (float)turnCounter;
+        if(gameState.isDefinitiveWin()) {
+            if(gameState.ordinal() == turn.ordinal()) // I win
+                return Float.MAX_VALUE / (float)turnCounter;
+
+            return -Float.MAX_VALUE / (float)turnCounter;
         }
 
         int sign = (turn == Player.BLACK) ? 1 : -1;
