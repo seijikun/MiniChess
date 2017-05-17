@@ -1,10 +1,12 @@
 package li.seiji.minichess;
 
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -26,17 +28,35 @@ public class StateScoreTest {
             "....." + System.lineSeparator() +
             ".....";
 
+    public static final String gameLog =
+            "b2-b3" + System.lineSeparator() +
+            "c5-c4" + System.lineSeparator() +
+            "b3-c4" + System.lineSeparator() +
+            "b6-c5" + System.lineSeparator() +
+            "c4-b5" + System.lineSeparator() +
+            "c6-b6" + System.lineSeparator() +
+            "b5-a6";
+
     @Test
-    public void testStateScore() throws IOException {
+    public void testStateScore() throws IOException, InvalidMoveException {
         State state = new State();
         state.initialize();
 
-        assertEquals(state.calculateScore(), 0.0f);
+        assertEquals(0.0f, state.calculateScore());
 
         state.read(new StringReader(testState));
-        assertEquals(state.calculateScore(), 37.0f);
+        assertEquals(37.0f, state.calculateScore());
 
         state.read(new StringReader(testState2));
-        assertEquals(state.calculateScore(), -37.0f);
+        assertEquals(-37.0f, state.calculateScore());
+
+        GameLogger logger = new GameLogger(GameLogger.Mode.READ);
+        List<Move> gameMoves = logger.readString(gameLog);
+        state.initialize();
+        for(Move m : gameMoves)
+            state = state.move(m);
+
+        float score = state.calculateScore();
+        assertEquals(Float.MAX_VALUE / (float)state.turnCounter, score);
     }
 }

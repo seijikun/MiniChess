@@ -102,8 +102,8 @@ public class State implements Cloneable {
     public float calculateScore() {
         float score = 0.0f;
 
-        if(turn == Player.BLACK && gameState == GameState.WIN_BLACK ||
-                turn == Player.WHITE && gameState == GameState.WIN_WHITE) {
+        if(turn == Player.WHITE && gameState == GameState.WIN_BLACK ||
+                turn == Player.BLACK && gameState == GameState.WIN_WHITE) {
 
             return  Float.MAX_VALUE / (float)turnCounter;
         }

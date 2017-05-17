@@ -1,10 +1,12 @@
 package li.seiji.minichess;
 
+import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.move.Move;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameLogger {
     private BufferedWriter writer;
@@ -39,6 +41,18 @@ public class GameLogger {
             moves.add(new Move(line));
 
         reader.close();
+
+        return moves;
+    }
+
+    public List<Move> readString(String log) throws InvalidFormatException {
+        Scanner scanner = new Scanner(log);
+
+        List<Move> moves = new ArrayList<>();
+        while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            moves.add(new Move(line));
+        }
 
         return moves;
     }
