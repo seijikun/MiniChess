@@ -28,15 +28,6 @@ public class StateScoreTest {
             "....." + System.lineSeparator() +
             ".....";
 
-    public static final String gameLog =
-            "b2-b3" + System.lineSeparator() +
-            "c5-c4" + System.lineSeparator() +
-            "b3-c4" + System.lineSeparator() +
-            "b6-c5" + System.lineSeparator() +
-            "c4-b5" + System.lineSeparator() +
-            "c6-b6" + System.lineSeparator() +
-            "b5-a6";
-
     @Test
     public void testStateScore() throws IOException, InvalidMoveException {
         State state = new State();
@@ -50,10 +41,17 @@ public class StateScoreTest {
         state.read(new StringReader(testState2));
         assertEquals(-37.0f, state.calculateScore());
 
-        GameLogger logger = new GameLogger(GameLogger.Mode.READ);
-        List<Move> gameMoves = logger.readString(gameLog);
+        Move[] gameLog = {
+                new Move("b2-b3"),
+                new Move("c5-c4"),
+                new Move("b3-c4"),
+                new Move("b6-c5"),
+                new Move("c4-b5"),
+                new Move("c6-b6"),
+                new Move("b5-a6")
+        };
         state.initialize();
-        for(Move m : gameMoves)
+        for(Move m : gameLog)
             state = state.move(m);
 
         float score = state.calculateScore();

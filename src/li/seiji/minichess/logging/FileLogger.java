@@ -4,7 +4,18 @@ import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class FileLogger implements IGameLogger {
+    private BufferedWriter writer;
+
+    public FileLogger(String path) throws IOException {
+        File logFile = new File(path + "/game_log.txt");
+        writer = new BufferedWriter(new FileWriter(logFile));
+    }
 
     @Override
     public void start(Board board) {
@@ -12,8 +23,8 @@ public class FileLogger implements IGameLogger {
     }
 
     @Override
-    public void logMove(Board board, Move move) {
-        //TODO: implement
+    public void logMove(Board board, Move move) throws IOException {
+        writer.write(move.toString() + System.lineSeparator());
     }
 
     @Override
@@ -22,7 +33,7 @@ public class FileLogger implements IGameLogger {
     }
 
     @Override
-    public void close() {
-
+    public void close() throws IOException {
+        writer.close();
     }
 }
