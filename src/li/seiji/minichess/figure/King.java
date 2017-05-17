@@ -6,6 +6,7 @@ import li.seiji.minichess.move.Move;
 public class King {
 
     public static final char identifier = 'k';
+    public static final float pointScore = 12.0f;
 
     public static boolean isMoveValid(State state, Move move) {
         if(IFigure.isStraightMove(move) && IFigure.getStraightMoveLen(move) == 1) return true;

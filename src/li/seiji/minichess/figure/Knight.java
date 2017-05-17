@@ -6,6 +6,7 @@ import li.seiji.minichess.move.Move;
 public class Knight {
 
     public static final char identifier = 'n';
+    public static final float pointScore = 3.0f;
 
     public static boolean isMoveValid(State state, Move move) {
         return (

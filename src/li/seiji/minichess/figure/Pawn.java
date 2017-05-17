@@ -7,6 +7,7 @@ import li.seiji.minichess.move.Move;
 public class Pawn {
 
     public static final char identifier = 'p';
+    public static final float pointScore = 1.0f;
 
     public static boolean isMoveValid(State state, Move move) {
         Player player = Player.parseIdentifier(move.from.getFieldValue(state));
