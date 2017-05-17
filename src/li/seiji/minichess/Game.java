@@ -50,8 +50,6 @@ public class Game {
                 logger.close();
         }
 
-
-
         System.out.println("And the winner is: " + board.state.gameState.toString());
     }
 
