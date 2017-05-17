@@ -3,10 +3,12 @@ package li.seiji.minichess.player;
 import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
+import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class NegamaxPlayer implements IPlayer {
 
@@ -43,10 +45,15 @@ public class NegamaxPlayer implements IPlayer {
         List<Move> possibleMoves = state.getPossibleMoves();
         for(Move possibleMove : possibleMoves) {
             State subState = state.move(possibleMove);
+            float score;
 
-            float score = -negamax(subState, depth - 1, false);
+            //TODO: warum macht die Bedingung alles kaputt?!
+            if(subState.gameState != GameState.ONGOING)
+                score = -subState.calculateScore();
+            else
+                score = -negamax(subState, depth - 1, false);
 
-            if(score > bestValue) {
+            if(score > bestValue || (score == bestValue && ThreadLocalRandom.current().nextBoolean())) {
                 bestValue = score;
                 if(root) bestMove = possibleMove;
             }
