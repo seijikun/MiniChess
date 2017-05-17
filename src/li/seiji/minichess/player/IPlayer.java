@@ -1,6 +1,7 @@
 package li.seiji.minichess.player;
 
 import li.seiji.minichess.InvalidMoveException;
+import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.move.Move;
 
@@ -8,8 +9,9 @@ public interface IPlayer {
 
     /**
      * Notifies the player that the game is about to start.
+     * @param color The color this player plays with.
      */
-    void start();
+    void start(Player color);
 
     /**
      * Called to get the players next move.

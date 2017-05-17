@@ -19,10 +19,16 @@ public class Game {
         this.black = black;
     }
 
+    public GameState getResult() {
+        return board.state.gameState;
+    }
+
     public void run() throws InvalidMoveException, IOException {
-        white.start();
-        black.start();
+        white.start(Player.WHITE);
+        black.start(Player.BLACK);
+
         board.prettyPrint();
+        System.out.println();
 
         GameLogger logger = null;
         try {
@@ -43,6 +49,7 @@ public class Game {
                 otherPlayer.setMove(board, move);
 
                 board.prettyPrint();
+                System.out.println();
             }
         }
         finally {

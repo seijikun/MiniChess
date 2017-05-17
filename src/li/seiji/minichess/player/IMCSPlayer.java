@@ -39,7 +39,7 @@ public class IMCSPlayer implements IPlayer {
 
 
     @Override
-    public void start() {
+    public void start(Player color) {
         if(gameMode == IMCSGameMode.ACCEPT && (gameId == null || player == Player.NONE))
             throw new RuntimeException("Accepting gameId and player has not been set.");
         if(gameMode == IMCSGameMode.OFFER && player == Player.NONE)
