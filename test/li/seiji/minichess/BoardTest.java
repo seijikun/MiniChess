@@ -1,8 +1,8 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.board.Board;
 import org.junit.Test;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.io.StringReader;
 

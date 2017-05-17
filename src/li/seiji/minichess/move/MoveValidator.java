@@ -1,6 +1,6 @@
 package li.seiji.minichess.move;
 
-import li.seiji.minichess.State;
+import li.seiji.minichess.board.State;
 import li.seiji.minichess.figure.*;
 
 public class MoveValidator {

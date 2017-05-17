@@ -1,5 +1,7 @@
 package li.seiji.minichess;
 
+import li.seiji.minichess.board.Board;
+import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.player.IPlayer;
 

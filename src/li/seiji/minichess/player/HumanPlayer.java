@@ -1,7 +1,7 @@
 package li.seiji.minichess.player;
 
 import com.sun.media.sound.InvalidFormatException;
-import li.seiji.minichess.Board;
+import li.seiji.minichess.board.Board;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveValidator;
 

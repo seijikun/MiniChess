@@ -1,6 +1,6 @@
 package li.seiji.minichess.figure;
 
-import li.seiji.minichess.State;
+import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
 
 public class King {

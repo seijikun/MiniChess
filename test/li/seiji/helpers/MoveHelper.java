@@ -1,9 +1,9 @@
 package li.seiji.helpers;
 
-import li.seiji.minichess.Board;
+import li.seiji.minichess.board.Board;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.Square;
-import li.seiji.minichess.State;
+import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
 
 import java.util.HashSet;

@@ -1,6 +1,7 @@
 package li.seiji.minichess;
 
 import li.seiji.helpers.MoveHelper;
+import li.seiji.minichess.board.Board;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveValidator;
 import org.junit.Test;

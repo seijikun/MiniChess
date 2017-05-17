@@ -1,7 +1,7 @@
 package li.seiji.minichess.player;
 
 import li.seiji.minichess.Player;
-import li.seiji.minichess.Board;
+import li.seiji.minichess.board.Board;
 import li.seiji.minichess.imcs.Client2;
 import li.seiji.minichess.move.Move;
 

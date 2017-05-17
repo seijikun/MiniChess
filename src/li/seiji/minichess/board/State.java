@@ -1,5 +1,7 @@
-package li.seiji.minichess;
+package li.seiji.minichess.board;
 
+import li.seiji.minichess.InvalidMoveException;
+import li.seiji.minichess.Player;
 import li.seiji.minichess.figure.King;
 import li.seiji.minichess.figure.Pawn;
 import li.seiji.minichess.figure.Queen;

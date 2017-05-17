@@ -1,6 +1,8 @@
 package li.seiji.minichess;
 
 import com.sun.media.sound.InvalidFormatException;
+import li.seiji.minichess.board.Board;
+import li.seiji.minichess.board.State;
 
 import java.util.regex.Pattern;
 
