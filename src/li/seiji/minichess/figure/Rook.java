@@ -9,7 +9,7 @@ import java.util.function.Function;
 public class Rook {
 
     public static final char identifier = 'r';
-    public static final float pointScore = 5.0f;
+    public static final float pointScore = 2.0f;
 
     public static boolean isMoveValid(State state, Move move) {
         if(IFigure.isStraightMove(move) && !IFigure.checkStraightIsBlocked(state, move, straightBlockChecker))

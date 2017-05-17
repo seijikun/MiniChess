@@ -21,7 +21,7 @@ public class NegamaxTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
-            NegamaxPlayer neger4 = new NegamaxPlayer(4);
+            NegamaxPlayer neger4 = new NegamaxPlayer(2);
 
             Game game = new Game(randomPlayer, neger4);
             game.run();
@@ -42,9 +42,9 @@ public class NegamaxTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
-            NegamaxPlayer neger4 = new NegamaxPlayer(4);
+            NegamaxPlayer neger6 = new NegamaxPlayer(2);
 
-            Game game = new Game(neger4, randomPlayer);
+            Game game = new Game(neger6, randomPlayer);
             game.run();
 
             if(game.getResult() == GameState.WIN_WHITE)
@@ -64,15 +64,17 @@ public class NegamaxTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer neger2 = new NegamaxPlayer(2);
-            NegamaxPlayer neger4 = new NegamaxPlayer(4);
+            NegamaxPlayer neger6 = new NegamaxPlayer(5);
 
-            Game game = new Game(neger4, neger2);
+            Game game = new Game(neger6, neger2);
             game.run();
 
             if(game.getResult() == GameState.WIN_WHITE)
                 wins++;
             else if(game.getResult() == GameState.WIN_BLACK)
                 loss++;
+
+            System.out.println(game.getResult());
         }
         assertTrue(wins > ITERATIONS * 0.98);
         assertEquals(0, loss);
@@ -85,7 +87,7 @@ public class NegamaxTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer neger2 = new NegamaxPlayer(2);
-            NegamaxPlayer neger4 = new NegamaxPlayer(4);
+            NegamaxPlayer neger4 = new NegamaxPlayer(5);
 
             Game game = new Game(neger2, neger4);
             game.run();
@@ -94,7 +96,8 @@ public class NegamaxTest {
                 wins++;
             else if(game.getResult() == GameState.WIN_WHITE)
                 loss++;
-            else System.out.println(game.getResult());
+
+            System.out.println(game.getResult());
         }
         assertTrue(wins > ITERATIONS * 0.98);
         assertEquals(0, loss);

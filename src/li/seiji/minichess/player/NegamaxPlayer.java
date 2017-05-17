@@ -5,6 +5,7 @@ import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class NegamaxPlayer implements IPlayer {
 
     @Override
     public Move getMove(Board board) throws InvalidMoveException {
-        negamax(board.state, maxDepth, true);
-        return bestMove;
+        FutureMove move = negamax(board.state, maxDepth, true);
+        return move.move;
     }
 
     @Override
@@ -35,30 +36,26 @@ public class NegamaxPlayer implements IPlayer {
     public void end() {}
 
 
-    private Move bestMove = null;
+    private FutureMove negamax(State state, int depth, boolean root) throws InvalidMoveException {
+        if(depth == 0) return new FutureMove(null, state.calculateScore());
 
-    private float negamax(State state, int depth, boolean root) throws InvalidMoveException {
-        if(depth == 0)
-            return state.calculateScore();
-
-        float bestValue = Float.NEGATIVE_INFINITY;
-        List<Move> possibleMoves = state.getPossibleMoves();
-        for(Move possibleMove : possibleMoves) {
+        FutureMove move = new FutureMove(null, Float.NEGATIVE_INFINITY);
+        for(Move possibleMove : state.getPossibleMoves()) {
             State subState = state.move(possibleMove);
-            float score;
 
-            //TODO: warum macht die Bedingung alles kaputt?!
-            if(subState.gameState != GameState.ONGOING)
-                score = -subState.calculateScore();
-            else
-                score = -negamax(subState, depth - 1, false);
+            if(subState.gameState != GameState.ONGOING) {
+                return new FutureMove(possibleMove, -1.0f * subState.calculateScore());
+            }
 
-            if(score > bestValue || (score == bestValue && ThreadLocalRandom.current().nextBoolean())) {
-                bestValue = score;
-                if(root) bestMove = possibleMove;
+            FutureMove next = negamax(subState, depth - 1, false);
+            float score = (-1) * next.value;
+
+            if(score > move.value || (score == move.value && ThreadLocalRandom.current().nextInt(3) == 0)) {
+                move.move = possibleMove;
+                move.value = score;
             }
         }
-        return bestValue;
+        return move;
     }
 
 }

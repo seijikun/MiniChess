@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  * the opponent did, and send the own move to the opponent, respectively.
  * <p>
  */
-public class Client2 {
+public class Client {
     private static final String sendLineEnding = "\r\n";
 
     BufferedReader in;
@@ -64,7 +64,7 @@ public class Client2 {
      * @param port  server port number, usually 3589
      * @throws IOException when the NetworkStream was unexpectedly closed.
      */
-    public Client2(String server, int port) throws IOException {
+    public Client(String server, int port) throws IOException {
         Socket s = new Socket(server, port);
         InputStreamReader isr = new InputStreamReader(s.getInputStream());
         in = new BufferedReader(isr);
@@ -81,7 +81,7 @@ public class Client2 {
      * @param portStr  server port number string, usually "3589"
      * @throws IOException when the NetworkStream was unexpectedly closed.
      */
-    public Client2(String server, String portStr) throws IOException {
+    public Client(String server, String portStr) throws IOException {
         this(server, Integer.parseInt(portStr));
     }
 

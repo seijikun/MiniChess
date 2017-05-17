@@ -39,26 +39,26 @@ public class State implements Cloneable {
         if(!MoveValidator.isMoveValid(this, move))
             throw new InvalidMoveException(this, move);
 
-        Player destSquarePlayer = Player.parseIdentifier(move.to.getFieldValue(this));
-        if(destSquarePlayer == this.turn)
-            throw new InvalidMoveException(this, move);
-
         State result = clone();
-
-        if(result.turnCounter >= 40)
-            result.gameState = GameState.TIE;
-        if(move.to.getIdentifier(result) == King.identifier)
-            result.gameState = (result.turn == Player.BLACK) ? GameState.WIN_BLACK : GameState.WIN_WHITE;
 
         //move figure from move.from to move.to
         move.to.setIdentifier(result, move.from.getFieldValue(result));
         move.from.setIdentifier(result, '.');
 
-        if(move.to.getIdentifier(result) == Pawn.identifier)
+        if(result.turnCounter >= 40)
+            result.gameState = GameState.TIE;
+        if(move.to.getIdentifier(this) == King.identifier) //destination field was king
+            result.gameState = (turn == Player.BLACK) ? GameState.WIN_BLACK : GameState.WIN_WHITE;
+
+        if(move.from.getIdentifier(this) == Pawn.identifier) //we moved a pawn
             checkPawnForTransformation(result, move);
 
-        result.turn = (result.turn == Player.WHITE) ? Player.BLACK : Player.WHITE;
-        result.turnCounter++;
+        if(turn == Player.WHITE) {
+            result.turn = Player.BLACK;
+        } else {
+            result.turn = Player.WHITE;
+            result.turnCounter++;
+        }
         return result;
     }
 
@@ -78,7 +78,6 @@ public class State implements Cloneable {
                     MoveGenerator.moveList(this, result, new Square(x, y));
             }
         }
-
         return result;
     }
 
@@ -87,7 +86,7 @@ public class State implements Cloneable {
             for (int x = 0; x < Board.COLUMNS; ++x) {
                 board[y][x] = (char) reader.read();
             }
-            reader.skip(System.getProperty("line.separator").length());
+            reader.skip(System.lineSeparator().length());
         }
     }
 
@@ -103,23 +102,14 @@ public class State implements Cloneable {
     public float calculateScore() {
         float score = 0.0f;
 
-        if(gameState.isDefinitiveWin()) {
-            if(gameState.ordinal() == turn.ordinal()) // I win
-                return Float.MAX_VALUE / (float)turnCounter;
-
-            return -Float.MAX_VALUE / (float)turnCounter;
-        }
-
-        int sign = (turn == Player.BLACK) ? 1 : -1;
-
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
                 char fieldValue = board[y][x];
-                char identifier = Character.toLowerCase(board[y][x]);
-                if(Player.parseIdentifier(fieldValue) == Player.BLACK)
-                    score += sign * getScore(identifier);
-                else if(Player.parseIdentifier(fieldValue) == Player.WHITE)
-                    score += sign * (-1) * getScore(identifier);
+                char identifier = Square.getIdentifier(board, x, y);
+                if(turn == Player.parseIdentifier(fieldValue))
+                    score += getScore(identifier);
+                else
+                    score -= getScore(identifier);
             }
         }
 

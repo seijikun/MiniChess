@@ -9,7 +9,7 @@ import java.util.function.Function;
 public class Bishop {
 
     public static final char identifier = 'b';
-    public static final float pointScore = 3.0f;
+    public static final float pointScore = 4.0f;
 
     public static boolean isMoveValid(State state, Move move) {
         Player player = Player.parseIdentifier(move.to.getFieldValue(state));

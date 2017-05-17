@@ -6,6 +6,7 @@ import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
 
 import java.lang.ref.Reference;
@@ -20,15 +21,6 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
     private Player color;
     private GameState victoryGameState;
 
-
-    private static class RankedMove {
-        public Move move;
-        public float value;
-        public RankedMove(Move move, float value) {
-            this.move = move;
-            this.value = value;
-        }
-    }
 
 
     @Override
@@ -53,7 +45,7 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
         }
 
         //execute
-        List<Future<RankedMove>> results = new ArrayList<>();
+        List<Future<FutureMove>> results = new ArrayList<>();
         try {
             results = threadPool.invokeAll(calculatorTasks);
         } catch (Exception e) {
@@ -74,12 +66,12 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
     }
 
 
-    private Move findBestMove(List<Future<RankedMove>> results) {
+    private Move findBestMove(List<Future<FutureMove>> results) {
         float bestScore = Float.NEGATIVE_INFINITY;
         Move bestMove = null;
 
         try {
-            for(Future<RankedMove> move : results) {
+            for(Future<FutureMove> move : results) {
                 float newScore = move.get().value;
                 if(newScore > bestScore || (newScore == bestScore && ThreadLocalRandom.current().nextBoolean())) {
                     bestScore = newScore;
@@ -94,7 +86,7 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
     }
 
 
-    public class NegamaxTask implements Callable<RankedMove> {
+    public class NegamaxTask implements Callable<FutureMove> {
 
         private Move rootMove;
         private State state;
@@ -109,8 +101,8 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
         }
 
         @Override
-        public RankedMove call() throws Exception {
-            return new RankedMove(rootMove, negamax(state, maxDepth));
+        public FutureMove call() throws Exception {
+            return new FutureMove(rootMove, negamax(state, maxDepth));
         }
 
 

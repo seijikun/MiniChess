@@ -31,7 +31,7 @@ public class Square {
     }
 
     public char getIdentifier(State state) {
-        return Character.toLowerCase(state.board[y][x]);
+        return getIdentifier(state.board, x, y);
     }
 
     public void setIdentifier(State state, char identifier) { state.board[y][x] = identifier; }
@@ -54,5 +54,13 @@ public class Square {
     public boolean equals(Object obj) {
         Square o = (Square)obj;
         return (o.x == x && o.y == y);
+    }
+
+
+    public static char getIdentifier(char[][] board, int x, int y) {
+        char fieldVal = board[y][x];
+        if(fieldVal >= 'A' && fieldVal <= 'Z')
+            fieldVal += 32;
+        return fieldVal;
     }
 }

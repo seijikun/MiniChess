@@ -11,7 +11,7 @@ import java.util.List;
 public class MoveGenerator {
 
     public static void moveList(State state, List<Move> result, Square from) {
-        char identifier = Character.toLowerCase(state.board[from.y][from.x]);
+        char identifier = from.getIdentifier(state);
         boolean stopShort;
 
         switch (identifier) {
