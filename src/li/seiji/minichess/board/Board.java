@@ -34,19 +34,7 @@ public class Board {
      * @return The list of all possible moves that can be done by the current player.
      */
     public List<Move> getPossibleMoves() {
-        List<Move> result = new ArrayList<>();
-
-        for(int y = 0; y < Board.ROWS; ++y) {
-            for(int x = 0; x < Board.COLUMNS; ++x) {
-                char identifier = state.board[y][x];
-                Player player = Player.parseIdentifier(identifier);
-
-                if(identifier != '.' && player == state.turn)
-                    MoveGenerator.moveList(state, result, new Square(x, y));
-            }
-        }
-
-        return result;
+        return state.getPossibleMoves();
     }
 
     /* SERIALIZATION AND DESERIALIZATION */

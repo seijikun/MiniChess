@@ -2,15 +2,19 @@ package li.seiji.minichess.board;
 
 import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
+import li.seiji.minichess.Square;
 import li.seiji.minichess.figure.King;
 import li.seiji.minichess.figure.Pawn;
 import li.seiji.minichess.figure.Queen;
 import li.seiji.minichess.move.Move;
+import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class State implements Cloneable {
     public char board[][] = new char[6][5];
@@ -60,18 +64,23 @@ public class State implements Cloneable {
     }
 
     /**
-     * Check if the Pawn is at the opposite end of the Field. If so, the pawn gets transformed into a queen.
-     * @param move Move the pawn is doing.
+     * Get a list of all possible moves for the current player on the current board as defined by state.
+     * @return The list of all possible moves that can be done by the current player.
      */
-    private void checkPawnForTransformation(State newState, Move move) {
-        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS : 0;
+    public List<Move> getPossibleMoves() {
+        List<Move> result = new ArrayList<>();
 
-        if(move.to.y == endOfField) {
-            char queenIdentifier =
-                    newState.turn == Player.BLACK ? Queen.identifier : Character.toUpperCase(Queen.identifier);
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                char identifier = board[y][x];
+                Player player = Player.parseIdentifier(identifier);
 
-            move.to.setIdentifier(newState, queenIdentifier);
+                if(identifier != '.' && player == turn)
+                    MoveGenerator.moveList(this, result, new Square(x, y));
+            }
         }
+
+        return result;
     }
 
     public void read(Reader reader) throws IOException {
@@ -94,6 +103,26 @@ public class State implements Cloneable {
 
     public float calculateScore() {
         return 0.0f; //TODO: implement
+    }
+
+
+
+
+
+
+    /**
+     * Check if the Pawn is at the opposite end of the Field. If so, the pawn gets transformed into a queen.
+     * @param move Move the pawn is doing.
+     */
+    private void checkPawnForTransformation(State newState, Move move) {
+        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS : 0;
+
+        if(move.to.y == endOfField) {
+            char queenIdentifier =
+                    newState.turn == Player.BLACK ? Queen.identifier : Character.toUpperCase(Queen.identifier);
+
+            move.to.setIdentifier(newState, queenIdentifier);
+        }
     }
 
 }
