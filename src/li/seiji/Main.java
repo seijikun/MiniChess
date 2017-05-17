@@ -5,8 +5,7 @@ import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.logging.ConsoleLogger;
 import li.seiji.minichess.player.HeuristicPlayer;
-import li.seiji.minichess.player.NegamaxPlayer;
-import li.seiji.minichess.player.RandomPlayer;
+import li.seiji.minichess.player.NegamaxMultiThreadPlayer;
 
 import java.io.IOException;
 
@@ -28,9 +27,9 @@ public class Main {
 
         int wins = 0;
 
-        for(int i = 0; i < 500; ++i) {
-            RandomPlayer randomPlayer = new RandomPlayer();
-            NegamaxPlayer negamaxPlayer = new NegamaxPlayer();
+        for(int i = 0; i < 20; ++i) {
+            HeuristicPlayer randomPlayer = new HeuristicPlayer();
+            NegamaxMultiThreadPlayer negamaxPlayer = new NegamaxMultiThreadPlayer();
 
             Game game = new Game(randomPlayer, negamaxPlayer);
             game.setLogger(new ConsoleLogger());

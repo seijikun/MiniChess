@@ -11,6 +11,7 @@ import li.seiji.minichess.move.MoveValidator;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +125,23 @@ public class State implements Cloneable {
 
         return score;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                sb.append(board[y][x]);
+            }
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+    public void write(Writer writer) throws IOException {
+        writer.write(toString());
+    }
+
 
 
 

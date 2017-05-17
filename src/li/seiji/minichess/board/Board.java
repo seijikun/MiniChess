@@ -39,22 +39,6 @@ public class Board {
 
     /* SERIALIZATION AND DESERIALIZATION */
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for(int y = 0; y < Board.ROWS; ++y) {
-            for(int x = 0; x < Board.COLUMNS; ++x) {
-                sb.append(state.board[y][x]);
-            }
-            sb.append(System.getProperty("line.separator"));
-        }
-        return sb.toString();
-    }
-
-    public void write(Writer writer) throws IOException {
-        writer.write(toString());
-    }
-
     public void prettyPrint() {
         for(int y = 0; y < Board.ROWS; ++y) {
             System.out.print("| " + (Board.ROWS - y) + " |");
