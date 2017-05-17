@@ -258,7 +258,7 @@ public class Client2 {
      */
     public void accept(String gameId, char player) throws IOException, RuntimeException {
         sendCommand(IMCSCommands.ACCEPT, gameId, player);
-        awaitResponse().assertHasCode(105); // game started
+        awaitResponse().assertHasCode(105, 106); // game started
     }
 
     /**
@@ -271,8 +271,8 @@ public class Client2 {
     public char accept(String gameId) throws IOException, RuntimeException {
         sendCommand(IMCSCommands.ACCEPT, gameId);
         IMCSResponse gameStartResponse = awaitResponse();
-        gameStartResponse.assertHasCode(105); // game started
-        return gameStartResponse.message.charAt(0);
+        int playerCode = gameStartResponse.assertHasCode(105, 106); // game started
+        return (playerCode == 105) ? 'W' : 'B';
     }
 
 
