@@ -60,7 +60,7 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
             e.printStackTrace();
         }
 
-        return findBestMove(results, possibleMoves);
+        return findBestMove(results);
     }
 
     @Override
@@ -74,14 +74,14 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
     }
 
 
-    private Move findBestMove(List<Future<RankedMove>> results, List<Move> moves) {
+    private Move findBestMove(List<Future<RankedMove>> results) {
         float bestScore = Float.NEGATIVE_INFINITY;
         Move bestMove = null;
 
         try {
             for(Future<RankedMove> move : results) {
                 float newScore = move.get().value;
-                if(newScore > bestScore) {
+                if(newScore > bestScore || (newScore == bestScore && ThreadLocalRandom.current().nextBoolean())) {
                     bestScore = newScore;
                     bestMove = move.get().move;
                 }
@@ -115,7 +115,7 @@ public class NegamaxMultiThreadPlayer implements IPlayer {
 
 
         private float negamax(State state, int depth) throws InvalidMoveException {
-            if(depth == 0) return -state.calculateScore();
+            if(depth == 0) return state.calculateScore();
 
             List<Move> possibleMoves = state.getPossibleMoves();
             float bestScore = Float.NEGATIVE_INFINITY;
