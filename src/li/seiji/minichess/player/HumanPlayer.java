@@ -1,6 +1,7 @@
 package li.seiji.minichess.player;
 
 import com.sun.media.sound.InvalidFormatException;
+import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveValidator;
@@ -11,7 +12,7 @@ public class HumanPlayer implements IPlayer {
 
     Scanner scanner = null;
 
-    public void start() {
+    public void start(Player color) {
         scanner = new Scanner(System.in);
     }
 
