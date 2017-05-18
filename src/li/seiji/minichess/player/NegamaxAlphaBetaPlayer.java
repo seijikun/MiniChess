@@ -64,32 +64,4 @@ public class NegamaxAlphaBetaPlayer implements IPlayer {
         return bestMove;
     }
 
-
-//    private FutureMove negamax(State state, int depth, float a, float b) throws InvalidMoveException {
-//        if(depth == 0) return new FutureMove(null, state.calculateScore());
-//
-//        FutureMove bestMove = new FutureMove(null, Float.NEGATIVE_INFINITY);
-//        for(Move possibleMove : state.getPossibleMoves()) {
-//            State subState = state.move(possibleMove);
-//
-//            float score;
-//            if(subState.gameState != GameState.ONGOING) {
-//                score = subState.calculateScore();
-//            } else {
-//                FutureMove next = negamax(subState, depth - 1, -b, -a);
-//                score = (-1) * next.value;
-//            }
-//
-//            if(score >= b)
-//                return new FutureMove(possibleMove, score);
-//            if(score > a)
-//                a = score;
-//            if(score > bestMove.value) {
-//                bestMove.move = possibleMove;
-//                bestMove.value = score;
-//            }
-//        }
-//        return bestMove;
-//    }
-
 }

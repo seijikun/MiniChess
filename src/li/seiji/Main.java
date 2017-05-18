@@ -21,14 +21,23 @@ public class Main {
 //            (!g.isRunning && g.ownerName.equals("TacklingDummy") && g.reservedPlayer == 'W')
 //        );
 //
+        Client client = new Client("imcs.svcs.cs.pdx.edu",  3589);
 
-        IMCSPlayer netPlayer = new IMCSPlayer("imcs.svcs.cs.pdx.edu",  3589, "lazycat", "31337");
-        netPlayer.setOfferGame(Player.WHITE);
+        for(int i = 0; i < 30; ++i) {
+            try{
+                IMCSGame serverGame = client.waitForGame(g -> !g.isRunning && g.reservedPlayer == 'B');
 
-        NegamaxAlphaBetaPlayer player = new NegamaxAlphaBetaPlayer(7);
-        Game game = new Game(player, netPlayer);
-        game.setLogger(new ConsoleLogger());
-        game.run();
+                IMCSPlayer netPlayer = new IMCSPlayer("imcs.svcs.cs.pdx.edu",  3589, "lazycat", "31337");
+                netPlayer.setAcceptGame(serverGame.gameId, Player.WHITE);
+
+                NegamaxAlphaBetaPlayer player = new NegamaxAlphaBetaPlayer(5);
+                Game game = new Game(player, netPlayer);
+                game.setLogger(new ConsoleLogger());
+                game.run();
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

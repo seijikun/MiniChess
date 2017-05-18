@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class NegamaxTest {
 
+    static final int RAND_ITERATIONS = 50;
     static final int ITERATIONS = 10;
 
     @Test
@@ -19,7 +20,7 @@ public class NegamaxTest {
         int wins = 0;
         int loss = 0;
 
-        for(int i = 0; i < ITERATIONS; ++i) {
+        for(int i = 0; i < RAND_ITERATIONS; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
             NegamaxPlayer neger4 = new NegamaxPlayer(2);
 
@@ -31,7 +32,7 @@ public class NegamaxTest {
             else if(game.getResult() == GameState.WIN_WHITE)
                 loss++;
         }
-        assertTrue(wins > ITERATIONS * 0.98);
+        assertTrue(wins > RAND_ITERATIONS * 0.95);
         assertTrue(loss <= 1);
     }
 
@@ -40,7 +41,7 @@ public class NegamaxTest {
         int wins = 0;
         int loss = 0;
 
-        for(int i = 0; i < ITERATIONS; ++i) {
+        for(int i = 0; i < RAND_ITERATIONS; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
             NegamaxPlayer neger6 = new NegamaxPlayer(2);
 
@@ -52,21 +53,21 @@ public class NegamaxTest {
             else if(game.getResult() == GameState.WIN_BLACK)
                 loss++;
         }
-        assertTrue(wins > ITERATIONS * 0.98);
+        assertTrue(wins > RAND_ITERATIONS * 0.95);
         assertTrue(loss <= 1);
     }
 
 
     @Test
-    public void test2vs5DepthWhite() throws InvalidMoveException, IOException {
+    public void test2vs4DepthWhite() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
         for(int i = 0; i < ITERATIONS; ++i) {
-            NegamaxPlayer negamax2 = new NegamaxPlayer(2);
-            NegamaxPlayer negamax6 = new NegamaxPlayer(5);
+            NegamaxPlayer smallNegamax = new NegamaxPlayer(2);
+            NegamaxPlayer deepNegamax = new NegamaxPlayer(5);
 
-            Game game = new Game(negamax6, negamax2);
+            Game game = new Game(deepNegamax, smallNegamax);
             game.run();
 
             if(game.getResult() == GameState.WIN_WHITE)
@@ -81,15 +82,15 @@ public class NegamaxTest {
     }
 
     @Test
-    public void test2vs5DepthBlack() throws InvalidMoveException, IOException {
+    public void test2vs4DepthBlack() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
         for(int i = 0; i < ITERATIONS; ++i) {
-            NegamaxPlayer negamax2 = new NegamaxPlayer(2);
-            NegamaxPlayer negamax5 = new NegamaxPlayer(5);
+            NegamaxPlayer smallNegamax = new NegamaxPlayer(2);
+            NegamaxPlayer deepNegamax = new NegamaxPlayer(5);
 
-            Game game = new Game(negamax2, negamax5);
+            Game game = new Game(smallNegamax, deepNegamax);
             game.run();
 
             if(game.getResult() == GameState.WIN_BLACK)
