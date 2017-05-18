@@ -21,7 +21,7 @@ public class NegamaxAlphaBetaTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
-            NegamaxAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxAlphaBetaPlayer(5);
+            NegamaxAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxAlphaBetaPlayer(6);
 
             Game game = new Game(negamaxAlphaBetaPlayer, negamaxPlayer);
             game.run();
@@ -44,7 +44,7 @@ public class NegamaxAlphaBetaTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
-            NegamaxAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxAlphaBetaPlayer(5);
+            NegamaxAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxAlphaBetaPlayer(6);
 
             Game game = new Game(negamaxPlayer, negamaxAlphaBetaPlayer);
             game.run();

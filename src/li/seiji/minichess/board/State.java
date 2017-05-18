@@ -13,7 +13,9 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class State implements Cloneable {
     public char board[][] = new char[6][5];
@@ -67,7 +69,7 @@ public class State implements Cloneable {
      * @return The list of all possible moves that can be done by the current player.
      */
     public List<Move> getPossibleMoves() {
-        List<Move> result = new ArrayList<>();
+        ArrayList<Move> result = new ArrayList<>();
 
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
@@ -78,6 +80,8 @@ public class State implements Cloneable {
                     MoveGenerator.moveList(this, result, new Square(x, y));
             }
         }
+        if(ThreadLocalRandom.current().nextBoolean())
+            Collections.shuffle(result); //avoid draw cycles
         return result;
     }
 
