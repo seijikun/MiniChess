@@ -14,15 +14,14 @@ public class NegamaxIterativeAlphaBetaPlayer implements IPlayer {
     private int maxDepth;
     private Player color;
 
-    public NegamaxIterativeAlphaBetaPlayer(Player color, int maxDepth) {
+    public NegamaxIterativeAlphaBetaPlayer(int maxDepth) {
         this.maxDepth = maxDepth;
-        this.color = color;
     }
 
 
     @Override
     public void start(Player color) {
-
+        this.color = color;
     }
 
     @Override

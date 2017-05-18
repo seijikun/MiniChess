@@ -22,7 +22,7 @@ public class NegamaxIterativeAlphaBetaTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
-            NegamaxIterativeAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxIterativeAlphaBetaPlayer(Player.WHITE, 5);
+            NegamaxIterativeAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxIterativeAlphaBetaPlayer(5);
 
             Game game = new Game(negamaxAlphaBetaPlayer, negamaxPlayer);
             game.run();
@@ -34,7 +34,7 @@ public class NegamaxIterativeAlphaBetaTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.5);
+        assertTrue(wins > ITERATIONS * 0.6);
         assertEquals(0, loss);
     }
 
@@ -45,7 +45,7 @@ public class NegamaxIterativeAlphaBetaTest {
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
-            NegamaxIterativeAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxIterativeAlphaBetaPlayer(Player.BLACK, 5);
+            NegamaxIterativeAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxIterativeAlphaBetaPlayer(5);
 
             Game game = new Game(negamaxPlayer, negamaxAlphaBetaPlayer);
             game.run();
@@ -57,7 +57,7 @@ public class NegamaxIterativeAlphaBetaTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.5);
+        assertTrue(wins > ITERATIONS * 0.6);
         assertEquals(0, loss);
     }
 }

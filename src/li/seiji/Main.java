@@ -25,13 +25,19 @@ public class Main {
 
         for(int i = 0; i < 30; ++i) {
             try{
-                IMCSGame serverGame = client.waitForGame(g -> !g.isRunning && g.reservedPlayer == 'B');
+                IMCSGame serverGame = client.waitForGame(g -> !g.isRunning && !g.ownerName.equals("TacklingDummy"));
 
                 IMCSPlayer netPlayer = new IMCSPlayer("imcs.svcs.cs.pdx.edu",  3589, "lazycat", "31337");
-                netPlayer.setAcceptGame(serverGame.gameId, Player.WHITE);
+                char ownPlayer = netPlayer.accept(serverGame.gameId);
 
-                NegamaxAlphaBetaPlayer player = new NegamaxAlphaBetaPlayer(5);
-                Game game = new Game(player, netPlayer);
+                NegamaxIterativeAlphaBetaPlayer player = new NegamaxIterativeAlphaBetaPlayer(9);
+                Game game = null;
+
+                if(ownPlayer == 'W') {
+                    game = new Game(player, netPlayer);
+                } else {
+                    game = new Game(netPlayer, player);
+                }
                 game.setLogger(new ConsoleLogger());
                 game.run();
             }catch(Exception e) {
