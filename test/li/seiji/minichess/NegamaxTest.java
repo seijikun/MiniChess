@@ -58,15 +58,15 @@ public class NegamaxTest {
 
 
     @Test
-    public void test2vs4DepthWhite() throws InvalidMoveException, IOException {
+    public void test2vs5DepthWhite() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
         for(int i = 0; i < ITERATIONS; ++i) {
-            NegamaxPlayer neger2 = new NegamaxPlayer(2);
-            NegamaxPlayer neger6 = new NegamaxPlayer(5);
+            NegamaxPlayer negamax2 = new NegamaxPlayer(2);
+            NegamaxPlayer negamax6 = new NegamaxPlayer(5);
 
-            Game game = new Game(neger6, neger2);
+            Game game = new Game(negamax6, negamax2);
             game.run();
 
             if(game.getResult() == GameState.WIN_WHITE)
@@ -81,15 +81,15 @@ public class NegamaxTest {
     }
 
     @Test
-    public void test2vs4DepthBlack() throws InvalidMoveException, IOException {
+    public void test2vs5DepthBlack() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
         for(int i = 0; i < ITERATIONS; ++i) {
-            NegamaxPlayer neger2 = new NegamaxPlayer(2);
-            NegamaxPlayer neger4 = new NegamaxPlayer(5);
+            NegamaxPlayer negamax2 = new NegamaxPlayer(2);
+            NegamaxPlayer negamax5 = new NegamaxPlayer(5);
 
-            Game game = new Game(neger2, neger4);
+            Game game = new Game(negamax2, negamax5);
             game.run();
 
             if(game.getResult() == GameState.WIN_BLACK)

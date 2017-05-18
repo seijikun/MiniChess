@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -28,8 +30,6 @@ import java.util.stream.Collectors;
  * <p>
  */
 public class Client {
-    private static final String sendLineEnding = "\r\n";
-
     BufferedReader in;
     PrintStream out;
 
@@ -164,7 +164,6 @@ public class Client {
      * Try to login to the IMCS with the given username and password.
      * @param username Username to use for logging into the IMCS.
      * @param password Password to use for logging into the IMCS.
-     * @return {@code true} when logging into the IMCS was successful, {@code false} when it wasn't.
      * @throws IOException when the NetworkStream was unexpectedly closed.
      * @throws RuntimeException When the required response code does not match the one received.
      */
@@ -176,7 +175,6 @@ public class Client {
     /**
      * Change the currently authenticated user's password to the given new password.
      * @param newPassword Password to change the currently authenticated user's password into.
-     * @return {@true} when changing the password was successful, {@false} otherwise.
      * @throws IOException when the NetworkStream was unexpectedly closed.
      * @throws RuntimeException When the required response code does not match the one received.
      */
@@ -211,6 +209,40 @@ public class Client {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Query the games known to the server for the first game matching the given filter.
+     * @param filter Filter to apply to the list of games known to the server.
+     * @return The first game that matches the given filter.
+     * @throws IOException when the NetworkStream was unexpectedly closed.
+     * @throws RuntimeException When the required response code does not match the one received.
+     */
+    public Optional<IMCSGame> queryForGame(Predicate<IMCSGame> filter) throws IOException {
+        return getGameList().stream().filter(filter).findFirst();
+    }
+
+    /**
+     * Wait until a game was found that matches the given filter.
+     * @param filter Filter to apply to the list of games known to the server.
+     * @return The game that matched the filter.
+     * @throws IOException when the NetworkStream was unexpectedly closed.
+     * @throws RuntimeException When the required response code does not match the one received.
+     */
+    public IMCSGame waitForGame(Predicate<IMCSGame> filter) throws IOException, InterruptedException {
+        Optional<IMCSGame> game = Optional.empty();
+        while(true) {
+            game = queryForGame(filter);
+            if(game.isPresent())
+                return game.get();
+            Thread.sleep(500); //Don't stress the server too much ;)
+        }
+    }
+
+    /**
+     * Get a list of player ratings.
+     * @return A Map from player name to his score.
+     * @throws IOException when the NetworkStream was unexpectedly closed.
+     * @throws RuntimeException When the required response code does not match the one received.
+     */
     public Map<String, Integer> getRatingsList() throws IOException, RuntimeException {
         sendCommand(IMCSCommands.RATINGS);
         awaitResponse().assertHasCode(212);
@@ -295,7 +327,6 @@ public class Client {
             line = in.readLine();
             if (line == null)
                 return null;
-            System.out.println(line);
             if (line.length() == 0)
                 continue;
             ch = line.charAt(0);
@@ -317,10 +348,8 @@ public class Client {
             line = in.readLine();
             if (line == null)
                 throw new IOException("server terminated unexpectedly");
-            System.out.println(line);
         } while (line.length() == 0 || line.charAt(0) != '?');
-        System.out.println(moveStr);
-        out.print(moveStr + sendLineEnding);
+        out.println(moveStr);
         out.flush();
     }
 

@@ -16,6 +16,11 @@ public class IMCSGame {
     public char reservedPlayer = 0;
     public boolean isRunning = false;
 
+    @Override
+    public String toString() {
+        return String.format("Game[gameId: '%s', owner: '%s', ownerPlayer: '%s']", gameId, ownerName, reservedPlayer);
+    }
+
     /**
      * Parse the given line (from the game listing) to a IMCSGame object.
      * @param line Line from the game listing to parse.

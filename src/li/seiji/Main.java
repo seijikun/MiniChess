@@ -19,49 +19,11 @@ import java.util.Optional;
 public class Main {
 
     public static void main(String[] args) throws InvalidMoveException, IOException, InterruptedException {
-        int wins = 0;
-        int loss = 0;
-
-        for(int i = 0; i < 20; ++i) {
-            NegamaxPlayer neger2 = new NegamaxPlayer(2);
-            NegamaxPlayer neger6 = new NegamaxPlayer(4);
-
-            Game game = new Game(neger6, neger2);
-            game.run();
-
-            if(game.getResult() == GameState.WIN_WHITE) {
-                wins++;
-                System.out.println("win");
-            }
-            else if(game.getResult() == GameState.WIN_BLACK) {
-                loss++;
-                System.out.println("loss");
-            } else
-                System.out.println("tie");
-        }
-
-        System.out.println("------");
-
-        for(int i = 0; i < 20; ++i) {
-            NegamaxPlayer neger2 = new NegamaxPlayer(2);
-            NegamaxPlayer neger6 = new NegamaxPlayer(4);
-
-            Game game = new Game(neger2, neger6);
-            game.run();
-
-            if(game.getResult() == GameState.WIN_BLACK) {
-                wins++;
-                System.out.println("win");
-            }
-            else if(game.getResult() == GameState.WIN_WHITE) {
-                loss++;
-                System.out.println("loss");
-            } else
-                System.out.println("tie");
-            System.out.println(game.getTurns());
-        }
-
-        System.out.println("Wins: " + wins);
-        System.out.println("Loss: " + loss);
+        Client client = new Client("imcs.svcs.cs.pdx.edu",  3589);
+        IMCSGame game = client.waitForGame(g ->
+            (!g.isRunning && g.ownerName.equals("TacklingDummy") && g.reservedPlayer == 'W')
+        );
+        System.out.println(game);
     }
+
 }
