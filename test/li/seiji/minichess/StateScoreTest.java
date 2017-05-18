@@ -1,6 +1,7 @@
 package li.seiji.minichess;
 
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.figure.*;
 import li.seiji.minichess.move.Move;
 import org.junit.Test;
 
@@ -33,13 +34,15 @@ public class StateScoreTest {
         State state = new State();
         state.initialize();
 
+        float maxScore = King.pointScore + Queen.pointScore + Rook.pointScore + Bishop.pointScore + Knight.pointScore + 5*Pawn.pointScore;
+
         assertEquals(0.0f, state.calculateScore());
 
         state.read(new StringReader(testState));
-        assertEquals(1023.0f, state.calculateScore());
+        assertEquals(maxScore, state.calculateScore());
 
         state.read(new StringReader(testState2));
-        assertEquals(-1023.0f, state.calculateScore());
+        assertEquals(-maxScore, state.calculateScore());
 
         Move[] gameLog = {
                 new Move("b2-b3"),
@@ -55,6 +58,6 @@ public class StateScoreTest {
             state.move(m);
 
         float score = state.calculateScore();
-        assertEquals(-Float.MAX_VALUE / (float)state.turnCounter, score);
+        assertEquals(-1010.0f, score);
     }
 }
