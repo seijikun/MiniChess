@@ -77,7 +77,7 @@ public class NegamaxAlphaBetaTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.9);
+        assertTrue(wins > ITERATIONS * 0.6);
         assertEquals(0, loss);
     }
 
@@ -100,7 +100,7 @@ public class NegamaxAlphaBetaTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.5);
+        assertTrue(wins > ITERATIONS * 0.6);
         assertEquals(0, loss);
     }
 
