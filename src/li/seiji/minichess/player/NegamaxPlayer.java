@@ -42,13 +42,15 @@ public class NegamaxPlayer implements IPlayer {
 
         FutureMove move = new FutureMove(null, Float.NEGATIVE_INFINITY);
         for(Move possibleMove : state.getPossibleMoves()) {
-            State subState = state.move(possibleMove);
+            state.move(possibleMove);
+            float subScore = state.calculateScore();
+            state.unmove(possibleMove);
 
-            if(subState.gameState != GameState.ONGOING) {
-                return new FutureMove(possibleMove, -1.0f * subState.calculateScore());
+            if(state.gameState != GameState.ONGOING) {
+                return new FutureMove(possibleMove, -1.0f * subScore);
             }
 
-            FutureMove next = negamax(subState, depth - 1);
+            FutureMove next = negamax(state, depth - 1);
             float score = (-1) * next.value;
 
             if(score > move.value || (score == move.value && ThreadLocalRandom.current().nextInt(3) == 0)) {

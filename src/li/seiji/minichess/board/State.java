@@ -7,6 +7,7 @@ import li.seiji.minichess.figure.*;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -37,31 +38,43 @@ public class State implements Cloneable {
         return result;
     }
 
-    public State move(Move move) throws InvalidMoveException {
-        if(!MoveValidator.isMoveValid(this, move))
+    public void move(Move move) throws InvalidMoveException {
+        if(!MoveValidator.isMovePhysicallyValid(this, move)) //only slight validation
             throw new InvalidMoveException(this, move);
 
-        State result = clone();
-
         //move figure from move.from to move.to
-        move.to.setIdentifier(result, move.from.getFieldValue(result));
-        move.from.setIdentifier(result, '.');
+        move.toOldVal = move.to.getFieldValue(this);
+        move.fromOldVal = move.from.getFieldValue(this);
+        move.oldGameState = gameState;
 
-        if(result.turnCounter >= 40)
-            result.gameState = GameState.TIE;
-        if(move.to.getIdentifier(this) == King.identifier) //destination field was king
-            result.gameState = (turn == Player.BLACK) ? GameState.WIN_BLACK : GameState.WIN_WHITE;
+        move.to.setIdentifier(this, move.fromOldVal);
+        move.from.setIdentifier(this, '.');
 
-        if(move.from.getIdentifier(this) == Pawn.identifier) //we moved a pawn
-            checkPawnForTransformation(result, move);
+        if(turnCounter >= 40)
+            gameState = GameState.TIE;
+        if(Square.toIdenifier(move.toOldVal) == King.identifier) //destination field was king
+            gameState = (turn == Player.BLACK) ? GameState.WIN_BLACK : GameState.WIN_WHITE;
+        if(Square.toIdenifier(move.fromOldVal) == Pawn.identifier) //we moved a pawn
+            checkPawnForTransformation(this, move); //TODO: remove parameter
 
         if(turn == Player.WHITE) {
-            result.turn = Player.BLACK;
+            turn = Player.BLACK;
         } else {
-            result.turn = Player.WHITE;
-            result.turnCounter++;
+            turn = Player.WHITE;
+            turnCounter++;
         }
-        return result;
+    }
+
+    public void unmove(Move move) {
+        gameState = move.oldGameState;
+        move.from.setIdentifier(this, move.fromOldVal);
+        move.to.setIdentifier(this, move.toOldVal);
+        if(turn == Player.WHITE) {
+            turn = Player.BLACK;
+            turnCounter--;
+        } else {
+            turn = Player.WHITE;
+        }
     }
 
     /**

@@ -36,10 +36,10 @@ public class StateScoreTest {
         assertEquals(0.0f, state.calculateScore());
 
         state.read(new StringReader(testState));
-        assertEquals(37.0f, state.calculateScore());
+        assertEquals(1023.0f, state.calculateScore());
 
         state.read(new StringReader(testState2));
-        assertEquals(-37.0f, state.calculateScore());
+        assertEquals(-1023.0f, state.calculateScore());
 
         Move[] gameLog = {
                 new Move("b2-b3"),
@@ -52,7 +52,7 @@ public class StateScoreTest {
         };
         state.initialize();
         for(Move m : gameLog)
-            state = state.move(m);
+            state.move(m);
 
         float score = state.calculateScore();
         assertEquals(-Float.MAX_VALUE / (float)state.turnCounter, score);

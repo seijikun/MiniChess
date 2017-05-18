@@ -63,4 +63,10 @@ public class Square {
             fieldVal += 32;
         return fieldVal;
     }
+
+    public static char toIdenifier(char fieldVal) {
+        if(fieldVal >= 'A' && fieldVal <= 'Z')
+            fieldVal += 32;
+        return fieldVal;
+    }
 }

@@ -5,6 +5,7 @@ import li.seiji.minichess.Player;
 import li.seiji.minichess.Square;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
+import li.seiji.minichess.move.MoveValidator;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -26,7 +27,7 @@ public class Board {
     public State state = new State();
 
     public void move(Move move) throws InvalidMoveException {
-        state = state.move(move);
+        state.move(move);
     }
 
     /**

@@ -37,38 +37,38 @@ public class PawnTransformationTest {
         state.read(new StringReader(testState));
         Move move = new Move("b2-b3");
         state.turn = Player.WHITE;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("b3").getIdentifier(state), Pawn.identifier);
         move = new Move("b3-b4");
         state.turn = Player.WHITE;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("b4").getIdentifier(state), Pawn.identifier);
         move = new Move("b4-b5");
         state.turn = Player.WHITE;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("b5").getIdentifier(state), Pawn.identifier);
         move = new Move("b5-b6");
         state.turn = Player.WHITE;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("b6").getIdentifier(state), Queen.identifier);
 
         // Black Pawn to Queen
         state.read(new StringReader(testState2));
         move = new Move("d5-d4");
         state.turn = Player.BLACK;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("d4").getIdentifier(state), Pawn.identifier);
         move = new Move("d4-d3");
         state.turn = Player.BLACK;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("d3").getIdentifier(state), Pawn.identifier);
         move = new Move("d3-d2");
         state.turn = Player.BLACK;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("d2").getIdentifier(state), Pawn.identifier);
         move = new Move("d2-d1");
         state.turn = Player.BLACK;
-        state = state.move(move);
+        state.move(move);
         assertEquals(new Square("d1").getIdentifier(state), Queen.identifier);
     }
 }

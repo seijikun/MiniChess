@@ -31,7 +31,7 @@ public class VictoryDetectionTest {
                 new Move("a6-b6")
         };
         for(int i = 0; i < moves.length; ++i) {
-            state = state.move(moves[i]);
+            state.move(moves[i]);
             assertEquals(GameState.ONGOING, state.gameState);
         }
     }

@@ -5,6 +5,12 @@ import li.seiji.minichess.figure.*;
 
 public class MoveValidator {
 
+    public static boolean isMovePhysicallyValid(State state, Move move) {
+        if(!IFigure.isMoveWithinBounds(state, move)) return false;
+        if(IFigure.getFieldPlayer(state, move.to) == state.turn) return false;
+        return  true;
+    }
+
     public static boolean isMoveValid(State state, Move move) {
         if(!IFigure.isMoveWithinBounds(state, move)) return false;
         if(IFigure.getFieldPlayer(state, move.to) == state.turn) return false;

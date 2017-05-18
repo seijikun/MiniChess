@@ -48,9 +48,9 @@ public class NegamaxAlphaBetaPlayer implements IPlayer {
 
         FutureMove bestMove = new FutureMove(null, Float.NEGATIVE_INFINITY);
         for(Move possibleMove : state.getPossibleMoves()) {
-            State subState = state.move(possibleMove);
-
-            FutureMove nextMove = negamax(subState, depth - 1, -b, -a);
+            state.move(possibleMove);
+            FutureMove nextMove = negamax(state, depth - 1, -b, -a);
+            state.unmove(possibleMove);
             float score = (-1) * nextMove.value;
 
             if(score > bestMove.value) {

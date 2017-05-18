@@ -2,11 +2,17 @@ package li.seiji.minichess.move;
 
 import com.sun.media.sound.InvalidFormatException;
 import li.seiji.minichess.Square;
+import li.seiji.minichess.board.GameState;
 
 public class Move {
 
     public Square from;
     public Square to;
+
+    /* MOVE / UNMOVE */
+    public char fromOldVal = 0;
+    public char toOldVal = 0;
+    public GameState oldGameState = GameState.ONGOING;
 
     public Move(Square from, Square to) {
         this.from = from;

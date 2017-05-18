@@ -21,8 +21,9 @@ public class HeuristicPlayer implements IPlayer {
         float bestScore = -Float.MAX_VALUE;
         for(Move possibleMove : possibleMoves) {
 
-            State moveResult = board.state.move(possibleMove);
-            float score = -moveResult.calculateScore();
+            board.state.move(possibleMove);
+            float score = -board.state.calculateScore();
+            board.state.unmove(possibleMove);
 
             if(score > bestScore || (score == bestScore && ThreadLocalRandom.current().nextBoolean())) {
                 bestMove = possibleMove;
