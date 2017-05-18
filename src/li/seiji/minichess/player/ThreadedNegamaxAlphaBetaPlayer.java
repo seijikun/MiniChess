@@ -25,24 +25,17 @@ public class ThreadedNegamaxAlphaBetaPlayer implements IPlayer {
 
     @Override
     public void start(Player color) {
-        threadPool = Executors.newSingleThreadExecutor();
+        threadPool = Executors.newFixedThreadPool(4);
     }
 
     @Override
     public Move getMove(Board board) throws InvalidMoveException {
-        List<Move> possibleMoves = board.getPossibleMoves();
-        List<NegamaxTask> tasks = new ArrayList<>();
-
-        for(Move possibleMove : possibleMoves) {
-            State stateCopy = board.state.clone();
-            tasks.add(new NegamaxTask(stateCopy, possibleMove));
-        }
-
         List<Future<FutureMove>> results = new ArrayList<>();
-        try {
-            results = threadPool.invokeAll(tasks);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        for(Move possibleMove : board.state.getPossibleMoves()) {
+            results.add(threadPool.submit(
+                new NegamaxTask(possibleMove, board.state.clone(), maxDepth - 1, -Float.MAX_VALUE, Float.MAX_VALUE)
+            ));
         }
 
         return findBestMove(results);
@@ -55,7 +48,7 @@ public class ThreadedNegamaxAlphaBetaPlayer implements IPlayer {
 
         try {
             for(Future<FutureMove> move : results) {
-                float newScore = move.get().value;
+                float newScore = (-1) * move.get().value;
                 if(newScore > bestScore || (newScore == bestScore && ThreadLocalRandom.current().nextBoolean())) {
                     bestScore = newScore;
                     bestMove = move.get().move;
@@ -80,13 +73,19 @@ public class ThreadedNegamaxAlphaBetaPlayer implements IPlayer {
 
 
 
-    private class NegamaxTask implements Callable<FutureMove> {
+    private static class NegamaxTask implements Callable<FutureMove> {
         private State stateCopy;
         private Move rootMove;
+        private int depth;
+        private float a;
+        private float b;
 
-        public NegamaxTask(State stateCopy, Move rootMove) {
+        public NegamaxTask(Move rootMove, State stateCopy, int depth, float a, float b) {
             this.stateCopy = stateCopy;
             this.rootMove = rootMove;
+            this.depth = depth;
+            this.a = a;
+            this.b = b;
         }
 
         @Override
@@ -95,11 +94,10 @@ public class ThreadedNegamaxAlphaBetaPlayer implements IPlayer {
             if(stateCopy.gameState != GameState.ONGOING)
                 return new FutureMove(rootMove, stateCopy.calculateScore());
 
-            FutureMove result = new FutureMove(
+            return new FutureMove(
                     rootMove,
-                    negamax(stateCopy, maxDepth - 1, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY).value
+                    negamax(stateCopy, depth, a, b).value
             );
-            return result;
         }
 
         private FutureMove negamax(State state, int depth, float a, float b) throws InvalidMoveException {
