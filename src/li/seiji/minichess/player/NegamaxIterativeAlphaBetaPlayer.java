@@ -26,7 +26,7 @@ public class NegamaxIterativeAlphaBetaPlayer implements IPlayer {
 
     @Override
     public Move getMove(Board board) throws InvalidMoveException {
-        FutureMove move = negamaxIterative(board.state, 6);
+        FutureMove move = negamaxIterative(board.state, 6000);
         return move.move;
     }
 

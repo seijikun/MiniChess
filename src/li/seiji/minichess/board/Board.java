@@ -26,6 +26,10 @@ public class Board {
 
     public State state = new State();
 
+    public Board() {
+        state.initialize();
+    }
+
     public void move(Move move) throws InvalidMoveException {
         state.move(move);
     }

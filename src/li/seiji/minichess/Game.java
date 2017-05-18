@@ -10,13 +10,12 @@ import java.io.IOException;
 
 public class Game {
 
-    private Board board = new Board();
+    private Board board = null;
     private IPlayer white;
     private IPlayer black;
     private IGameLogger logger = null;
 
     public Game(IPlayer white, IPlayer black) {
-        board.state.initialize();
         this.white = white;
         this.black = black;
     }
@@ -32,6 +31,8 @@ public class Game {
     public int getTurns() { return board.state.turnCounter; }
 
     public void run() throws InvalidMoveException, IOException {
+        board = new Board();
+
         white.start(Player.WHITE);
         black.start(Player.BLACK);
         if(logger != null) logger.start(board);
