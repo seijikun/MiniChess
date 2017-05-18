@@ -32,7 +32,7 @@ public class NegamaxTest {
             else if(game.getResult() == GameState.WIN_WHITE)
                 loss++;
         }
-        assertTrue(wins > RAND_ITERATIONS * 0.95);
+        assertTrue(wins > RAND_ITERATIONS * 0.9);
         assertTrue(loss <= 1);
     }
 
@@ -53,7 +53,7 @@ public class NegamaxTest {
             else if(game.getResult() == GameState.WIN_BLACK)
                 loss++;
         }
-        assertTrue(wins > RAND_ITERATIONS * 0.95);
+        assertTrue(wins > ITERATIONS * 0.9);
         assertTrue(loss <= 1);
     }
 
