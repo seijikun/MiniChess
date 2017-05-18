@@ -76,7 +76,7 @@ public class NegamaxTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.98);
+        assertTrue(wins > ITERATIONS * 0.9);
         assertEquals(0, loss);
     }
 
@@ -99,7 +99,7 @@ public class NegamaxTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.98);
+        assertTrue(wins > ITERATIONS * 0.9);
         assertEquals(0, loss);
     }
 
