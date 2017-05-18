@@ -50,12 +50,10 @@ public class State implements Cloneable {
         move.to.setIdentifier(this, move.fromOldVal);
         move.from.setIdentifier(this, '.');
 
-        if(turnCounter >= 40)
-            gameState = GameState.TIE;
         if(Square.toIdenifier(move.toOldVal) == King.identifier) //destination field was king
             gameState = (turn == Player.BLACK) ? GameState.WIN_BLACK : GameState.WIN_WHITE;
         if(Square.toIdenifier(move.fromOldVal) == Pawn.identifier) //we moved a pawn
-            checkPawnForTransformation(this, move); //TODO: remove parameter
+            checkPawnForTransformation(move);
 
         if(turn == Player.WHITE) {
             turn = Player.BLACK;
@@ -63,6 +61,8 @@ public class State implements Cloneable {
             turn = Player.WHITE;
             turnCounter++;
         }
+        if(turnCounter >= 40)
+            gameState = GameState.TIE;
     }
 
     public void unmove(Move move) {
@@ -158,14 +158,14 @@ public class State implements Cloneable {
      * Check if the Pawn is at the opposite end of the Field. If so, the pawn gets transformed into a queen.
      * @param move Move the pawn is doing.
      */
-    private void checkPawnForTransformation(State newState, Move move) {
-        int endOfField = (newState.turn == Player.BLACK) ? Board.ROWS - 1 : 0;
+    private void checkPawnForTransformation(Move move) {
+        int endOfField = (turn == Player.BLACK) ? Board.ROWS - 1 : 0;
 
         if(move.to.y == endOfField) {
             char queenIdentifier =
-                    newState.turn == Player.BLACK ? Queen.identifier : Character.toUpperCase(Queen.identifier);
+                    (turn == Player.BLACK) ? Queen.identifier : Character.toUpperCase(Queen.identifier);
 
-            move.to.setIdentifier(newState, queenIdentifier);
+            move.to.setIdentifier(this, queenIdentifier);
         }
     }
 

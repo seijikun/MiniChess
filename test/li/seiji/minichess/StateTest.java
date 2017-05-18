@@ -1,5 +1,6 @@
 package li.seiji.minichess;
 
+import com.sun.media.sound.InvalidFormatException;
 import li.seiji.helpers.MoveHelper;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
@@ -192,6 +193,25 @@ public class StateTest {
         assertEquals(GameState.ONGOING, state.gameState);
         assertEquals(0, state.turnCounter);
         assertEquals(Player.BLACK, state.turn);
+    }
+
+
+    @Test
+    public void testTieDetection() throws InvalidFormatException, InvalidMoveException {
+        Board board = new Board();
+
+        Move[] moves = {
+                new Move("b1-c3"),
+                new Move("d6-e4"),
+                new Move("c3-b1"),
+                new Move("e4-d6")
+        };
+        int turnCnt = 0;
+        while(board.state.gameState == GameState.ONGOING) {
+            board.move(moves[turnCnt % moves.length]);
+            turnCnt++;
+        }
+        assertEquals(80, turnCnt);
     }
 
 }
