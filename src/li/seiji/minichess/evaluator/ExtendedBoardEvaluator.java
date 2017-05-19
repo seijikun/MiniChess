@@ -11,6 +11,9 @@ public class ExtendedBoardEvaluator implements IBoardEvaluator {
 
     @Override
     public float calculate(State state, Move move) {
+        if(state.gameState.isDefinitiveWin() && state.gameState.ordinal() != state.turn.ordinal())
+            return -Float.MAX_VALUE / (float) state.turnCounter;
+
         float score = 0.0f;
 
         for(int y = 0; y < Board.ROWS; ++y) {
@@ -20,9 +23,9 @@ public class ExtendedBoardEvaluator implements IBoardEvaluator {
 
                 Piece p = new Piece(identifier, fieldValue, Player.parseIdentifier(fieldValue), x, y);
                 if(state.turn == Player.parseIdentifier(fieldValue))
-                    score += getScoreFromPieceOptimized(p);
+                    score += getScoreFromPieceOptimized(state, p);
                 else
-                    score -= getScoreFromPieceOptimized(p);
+                    score -= getScoreFromPieceOptimized(state, p);
             }
         }
 
@@ -38,22 +41,7 @@ public class ExtendedBoardEvaluator implements IBoardEvaluator {
         return score;
     }
 
-
-    private static float calculatePawnScore(Piece p) {
-        float score = Pawn.pointScore;
-
-        int sign = (Player.parseIdentifier(p.fieldValue) == Player.BLACK) ? 1 : -1;
-
-        if(p.player == Player.BLACK && p.y == Board.ROWS-1 || p.player == Player.WHITE && p.y == 1) {
-            score += Queen.pointScore/3.0f;
-        }
-
-
-        return score;
-    }
-
-
-    private static float getScoreFromPieceOptimized(Piece p) {
+    private static float getScoreFromPieceOptimized(State state, Piece p) {
         switch (p.identifier) {
             case King.identifier:
                 return King.pointScore;
@@ -66,13 +54,49 @@ public class ExtendedBoardEvaluator implements IBoardEvaluator {
             case Knight.identifier:
                 return Knight.pointScore;
             case Pawn.identifier:
-                return calculatePawnScore(p);
+                return calculatePawnScore(state, p);
             default:
                 return 0.0f;
         }
     }
 
+    private static float calculateBishopScore(State state, Piece b) {
+        float score = Bishop.pointScore;
 
+
+
+        return score;
+    }
+
+    private static float calculatePawnScore(State state, Piece p) {
+        float score = Pawn.pointScore;
+
+        int sign = (Player.parseIdentifier(p.fieldValue) == Player.BLACK) ? 1 : -1;
+
+        // If Pawn is at the opposite and of the field and can be promoted to a Queen
+        if(p.player == Player.BLACK && p.y == Board.ROWS-1 || p.player == Player.WHITE && p.y == 1) {
+            score += Queen.pointScore/3.0f;
+        }
+        else {
+            //Is Pawn blocked?
+            if(state.board[p.y+sign][p.x] != '.')
+                score -= .3f;
+
+            //Can Pawn capture to the left?
+            if(p.x != 0) {
+                char pieceLeft = state.board[p.y+sign][p.x-1];
+                if(pieceLeft != '.' && Player.parseIdentifier(pieceLeft) != p.player)
+                    score += .9f;
+            }
+            //Can Pawn capture to the right?
+            if(p.x != Board.COLUMNS-1) {
+                char pieceRight = state.board[p.y+sign][p.x+1];
+                if(pieceRight != '.' && Player.parseIdentifier(pieceRight) != p.player)
+                    score += .9f;
+            }
+        }
+        return score;
+    }
 
     private static class Piece {
         char identifier;
