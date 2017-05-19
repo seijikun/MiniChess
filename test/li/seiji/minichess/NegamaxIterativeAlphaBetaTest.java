@@ -3,7 +3,6 @@ package li.seiji.minichess;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.player.NegamaxIterativeAlphaBetaPlayer;
 import li.seiji.minichess.player.NegamaxPlayer;
-import li.seiji.minichess.player.RandomPlayer;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -23,6 +22,7 @@ public class NegamaxIterativeAlphaBetaTest {
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
             NegamaxIterativeAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxIterativeAlphaBetaPlayer(5);
+            negamaxAlphaBetaPlayer.start(Player.WHITE);
 
             Game game = new Game(negamaxAlphaBetaPlayer, negamaxPlayer);
             game.run();
@@ -34,7 +34,7 @@ public class NegamaxIterativeAlphaBetaTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.6);
+        assertTrue(wins > ITERATIONS * 0.9);
         assertEquals(0, loss);
     }
 
@@ -46,6 +46,7 @@ public class NegamaxIterativeAlphaBetaTest {
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
             NegamaxIterativeAlphaBetaPlayer negamaxAlphaBetaPlayer = new NegamaxIterativeAlphaBetaPlayer(5);
+            negamaxAlphaBetaPlayer.start(Player.BLACK);
 
             Game game = new Game(negamaxPlayer, negamaxAlphaBetaPlayer);
             game.run();
@@ -57,7 +58,7 @@ public class NegamaxIterativeAlphaBetaTest {
 
             System.out.println(game.getResult() + " - " + game.getTurns());
         }
-        assertTrue(wins > ITERATIONS * 0.6);
+        assertTrue(wins > ITERATIONS * 0.9);
         assertEquals(0, loss);
     }
 }

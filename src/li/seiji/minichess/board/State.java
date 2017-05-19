@@ -7,7 +7,6 @@ import li.seiji.minichess.figure.*;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -123,9 +122,9 @@ public class State implements Cloneable {
                 char fieldValue = board[y][x];
                 char identifier = Square.getIdentifier(board, x, y);
                 if(turn == Player.parseIdentifier(fieldValue))
-                    score += getScore(identifier);
+                    score += getScoreFromPiece(identifier);
                 else
-                    score -= getScore(identifier);
+                    score -= getScoreFromPiece(identifier);
             }
         }
 
@@ -181,7 +180,7 @@ public class State implements Cloneable {
         }
     }
 
-    private float getScore(char identifier) {
+    private float getScoreFromPiece(char identifier) {
         switch (identifier) {
             case King.identifier:
                 return King.pointScore;
@@ -197,6 +196,83 @@ public class State implements Cloneable {
                 return Pawn.pointScore;
             default:
                 return 0.0f;
+        }
+    }
+
+    public float calculateScoreWithMove(Move move) {
+        float score = 0.0f;
+
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                char fieldValue = board[y][x];
+                char identifier = Square.getIdentifier(board, x, y);
+
+                Piece p = new Piece(identifier, fieldValue, Player.parseIdentifier(fieldValue), x, y);
+                if(turn == Player.parseIdentifier(fieldValue))
+                    score += getScoreFromPieceOptimized(p);
+                else
+                    score -= getScoreFromPieceOptimized(p);
+            }
+        }
+
+        return score + processMove(move);
+    }
+
+    private float getScoreFromPieceOptimized(Piece p) {
+        switch (p.identifier) {
+            case King.identifier:
+                return King.pointScore;
+            case Queen.identifier:
+                return Queen.pointScore;
+            case Rook.identifier:
+                return Rook.pointScore;
+            case Bishop.identifier:
+                return Bishop.pointScore;
+            case Knight.identifier:
+                return Knight.pointScore;
+            case Pawn.identifier:
+                return calculatePawnScore(p);
+            default:
+                return 0.0f;
+        }
+    }
+
+    private float processMove(Move move) {
+        float score = 0.0f;
+        if(move.to.getFieldValue(this) != '.') {
+            score += getScoreFromPiece(move.to.getIdentifier(this)) / 7.0f;
+        }
+
+        return score;
+    }
+
+
+
+    private float calculatePawnScore(Piece p) {
+        float score = Pawn.pointScore;
+
+        int sign = (Player.parseIdentifier(p.fieldValue) == Player.BLACK) ? 1 : -1;
+
+        if(p.player == Player.BLACK && p.y == Board.ROWS-1 || p.player == Player.WHITE && p.y == 1) {
+            score += Queen.pointScore/3.0f;
+        }
+
+
+        return score;
+    }
+
+    private class Piece {
+        char identifier;
+        char fieldValue;
+        Player player;
+        int x,y;
+
+        public Piece(char identifier, char fieldValue, Player player, int x, int y) {
+            this.identifier = identifier;
+            this.fieldValue = fieldValue;
+            this.player = player;
+            this.x = x;
+            this.y = y;
         }
     }
 }
