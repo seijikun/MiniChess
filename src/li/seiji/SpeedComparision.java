@@ -15,13 +15,13 @@ public class SpeedComparision {
     public static void main(String[] args) throws InvalidMoveException {
         Board board = new Board();
 
-        Map<String, IPlayer> players = new HashMap<>();
+        Map<String, PlayerBase> players = new HashMap<>();
         players.put("HeuristicPlayer", new HeuristicPlayer());
         players.put("NegamaxPlayer", new NegamaxPlayer(8));
         players.put("NegamaxAlphaBetaPlayer", new NegamaxAlphaBetaPlayer(8));
         players.put("ThreadedNegamaxAlphaBetaPlayer", new ThreadedNegamaxAlphaBetaPlayer(8));
 
-        for(Map.Entry<String, IPlayer> player : players.entrySet()) {
+        for(Map.Entry<String, PlayerBase> player : players.entrySet()) {
             player.getValue().start(Player.WHITE);
             System.out.print(player.getKey() + ": ");
 

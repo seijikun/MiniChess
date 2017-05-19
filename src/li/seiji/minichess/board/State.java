@@ -118,7 +118,6 @@ public class State implements Cloneable {
 
     public float calculateScore() {
         float score = 0.0f;
-
         for(int y = 0; y < Board.ROWS; ++y) {
             for(int x = 0; x < Board.COLUMNS; ++x) {
                 char fieldValue = board[y][x];
@@ -129,6 +128,19 @@ public class State implements Cloneable {
                     score -= getScore(identifier);
             }
         }
+
+        return score;
+    }
+
+    public float calculateScoreOptimized(Move move) {
+        if(gameState.isDefinitiveWin() && gameState.ordinal() == turn.ordinal()) {
+            return Float.MAX_VALUE / turnCounter; //safe, no one wins after 1 turn
+        }
+
+        float score = calculateScore();
+//        if(move.from.getIdentifier(this) == Pawn.identifier) {
+//
+//        }
 
         return score;
     }

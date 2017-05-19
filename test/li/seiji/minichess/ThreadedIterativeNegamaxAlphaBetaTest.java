@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class ThreadedIterativeNegamaxAlphaBetaTest {
 
     private static final int RAND_ITERATIONS = 50;
-    private static final int ITERATIONS = 10;
+    private static final int ITERATIONS = 5;
 
     @Test
     public void testVsRandomBlack() throws InvalidMoveException, IOException {
@@ -22,7 +22,7 @@ public class ThreadedIterativeNegamaxAlphaBetaTest {
 
         for(int i = 0; i < RAND_ITERATIONS; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
-            IPlayer negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
+            PlayerBase negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
 
             Game game = new Game(randomPlayer, negamaxAlphaBetaPlayer);
             game.run();
@@ -43,7 +43,7 @@ public class ThreadedIterativeNegamaxAlphaBetaTest {
 
         for(int i = 0; i < RAND_ITERATIONS; ++i) {
             RandomPlayer randomPlayer = new RandomPlayer();
-            IPlayer negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
+            PlayerBase negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
 
             Game game = new Game(negamaxAlphaBetaPlayer, randomPlayer);
             game.run();
@@ -59,13 +59,13 @@ public class ThreadedIterativeNegamaxAlphaBetaTest {
 
 
     @Test
-    public void test2vs5DepthWhite() throws InvalidMoveException, IOException {
+    public void test2vs7secDepthWhite() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
-            IPlayer negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
+            PlayerBase negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
 
             Game game = new Game(negamaxAlphaBetaPlayer, negamaxPlayer);
             game.setLogger(new ConsoleLogger());
@@ -83,13 +83,13 @@ public class ThreadedIterativeNegamaxAlphaBetaTest {
     }
 
     @Test
-    public void test2vs5DepthBlack() throws InvalidMoveException, IOException {
+    public void test2vs7secDepthBlack() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
         for(int i = 0; i < ITERATIONS; ++i) {
             NegamaxPlayer negamaxPlayer = new NegamaxPlayer(2);
-            IPlayer negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
+            PlayerBase negamaxAlphaBetaPlayer = new ThreadedIterativeNegamaxAlphaBetaPlayer(20);
 
             Game game = new Game(negamaxPlayer, negamaxAlphaBetaPlayer);
             game.setLogger(new ConsoleLogger());

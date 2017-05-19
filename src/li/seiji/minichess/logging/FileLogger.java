@@ -1,9 +1,8 @@
 package li.seiji.minichess.logging;
 
 import li.seiji.minichess.board.Board;
-import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
-import li.seiji.minichess.player.IPlayer;
+import li.seiji.minichess.player.PlayerBase;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,7 +18,7 @@ public class FileLogger implements IGameLogger {
     }
 
     @Override
-    public void start(Board board, IPlayer white, IPlayer black) {
+    public void start(Board board, PlayerBase white, PlayerBase black) {
 
     }
 

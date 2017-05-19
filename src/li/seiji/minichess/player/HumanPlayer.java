@@ -8,7 +8,7 @@ import li.seiji.minichess.move.MoveValidator;
 
 import java.util.Scanner;
 
-public class HumanPlayer implements IPlayer {
+public class HumanPlayer extends PlayerBase {
 
     Scanner scanner = null;
 

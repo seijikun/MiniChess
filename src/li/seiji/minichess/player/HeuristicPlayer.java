@@ -3,13 +3,12 @@ package li.seiji.minichess.player;
 import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
-import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class HeuristicPlayer implements IPlayer {
+public class HeuristicPlayer extends PlayerBase {
 
     @Override
     public void start(Player color) {}

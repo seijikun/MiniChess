@@ -4,18 +4,18 @@ import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.logging.IGameLogger;
 import li.seiji.minichess.move.Move;
-import li.seiji.minichess.player.IPlayer;
+import li.seiji.minichess.player.PlayerBase;
 
 import java.io.IOException;
 
 public class Game {
 
     private Board board = null;
-    private IPlayer white;
-    private IPlayer black;
+    private PlayerBase white;
+    private PlayerBase black;
     private IGameLogger logger = null;
 
-    public Game(IPlayer white, IPlayer black) {
+    public Game(PlayerBase white, PlayerBase black) {
         this.white = white;
         this.black = black;
     }
@@ -40,8 +40,8 @@ public class Game {
         try {
 
             while(board.state.gameState == GameState.ONGOING) {
-                IPlayer turnPlayer;
-                IPlayer otherPlayer;
+                PlayerBase turnPlayer;
+                PlayerBase otherPlayer;
                 if(board.state.turn == Player.WHITE) {
                     turnPlayer = white; otherPlayer = black;
                 } else {

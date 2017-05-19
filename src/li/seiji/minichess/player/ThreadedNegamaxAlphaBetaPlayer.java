@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class ThreadedNegamaxAlphaBetaPlayer implements IPlayer {
+public class ThreadedNegamaxAlphaBetaPlayer extends PlayerBase {
 
     private ExecutorService threadPool;
     private int maxDepth;

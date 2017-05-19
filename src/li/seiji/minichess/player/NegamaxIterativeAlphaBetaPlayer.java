@@ -9,7 +9,7 @@ import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
 
 
-public class NegamaxIterativeAlphaBetaPlayer implements IPlayer {
+public class NegamaxIterativeAlphaBetaPlayer extends PlayerBase {
 
     private int maxDepth;
     private Player color;

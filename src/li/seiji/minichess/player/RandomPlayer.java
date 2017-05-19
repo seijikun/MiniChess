@@ -6,7 +6,7 @@ import li.seiji.minichess.move.Move;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomPlayer implements IPlayer {
+public class RandomPlayer extends PlayerBase {
 
     @Override
     public void start(Player color) {

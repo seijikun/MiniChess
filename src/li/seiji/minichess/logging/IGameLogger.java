@@ -1,9 +1,8 @@
 package li.seiji.minichess.logging;
 
-import com.sun.org.apache.regexp.internal.RE;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.move.Move;
-import li.seiji.minichess.player.IPlayer;
+import li.seiji.minichess.player.PlayerBase;
 
 import java.io.IOException;
 
@@ -43,7 +42,7 @@ public interface IGameLogger {
 
 
 
-    void start(Board board, IPlayer white, IPlayer black);
+    void start(Board board, PlayerBase white, PlayerBase black);
 
     void logMove(Board board, Move move, long nanoSeconds) throws IOException;
 

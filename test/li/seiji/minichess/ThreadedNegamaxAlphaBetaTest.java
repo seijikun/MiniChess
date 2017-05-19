@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class ThreadedNegamaxAlphaBetaTest {
 
     static final int RAND_ITERATIONS = 50;
-    static final int ITERATIONS = 10;
+    static final int ITERATIONS = 5;
 
     @Test
     public void testVsRandomBlack() throws InvalidMoveException, IOException {
@@ -61,7 +61,7 @@ public class ThreadedNegamaxAlphaBetaTest {
 
 
     @Test
-    public void test2vs5DepthWhite() throws InvalidMoveException, IOException {
+    public void test2vs6DepthWhite() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 
@@ -84,7 +84,7 @@ public class ThreadedNegamaxAlphaBetaTest {
     }
 
     @Test
-    public void test2vs5DepthBlack() throws InvalidMoveException, IOException {
+    public void test2vs6DepthBlack() throws InvalidMoveException, IOException {
         int wins = 0;
         int loss = 0;
 

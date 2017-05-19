@@ -8,10 +8,9 @@ import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
 
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class NegamaxPlayer implements IPlayer {
+public class NegamaxPlayer extends PlayerBase {
 
     private int maxDepth = 0;
 

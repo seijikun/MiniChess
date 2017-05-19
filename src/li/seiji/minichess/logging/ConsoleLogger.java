@@ -4,16 +4,16 @@ import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.move.Move;
-import li.seiji.minichess.player.IPlayer;
+import li.seiji.minichess.player.PlayerBase;
 
 public class ConsoleLogger implements IGameLogger {
 
     private long nanoSecondsSum[] = new long[2];
-    private IPlayer white;
-    private IPlayer black;
+    private PlayerBase white;
+    private PlayerBase black;
 
     @Override
-    public void start(Board board, IPlayer white, IPlayer black) {
+    public void start(Board board, PlayerBase white, PlayerBase black) {
         this.white = white;
         this.black = black;
 

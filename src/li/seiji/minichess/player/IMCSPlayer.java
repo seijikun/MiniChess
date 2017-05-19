@@ -7,7 +7,7 @@ import li.seiji.minichess.move.Move;
 
 import java.io.IOException;
 
-public class IMCSPlayer implements IPlayer {
+public class IMCSPlayer extends PlayerBase {
 
     private Client imcs;
 

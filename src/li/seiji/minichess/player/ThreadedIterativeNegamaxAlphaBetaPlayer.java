@@ -5,6 +5,7 @@ import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.figure.King;
 import li.seiji.minichess.move.FutureIteratedMove;
 import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
@@ -14,11 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class ThreadedIterativeNegamaxAlphaBetaPlayer implements IPlayer {
-
+public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
 
     private ThreadPool threadPool = new ThreadPool();
     private int maxDepth;
+
+    //move select optimization
+    private int lastCapture = 0;
 
     public ThreadedIterativeNegamaxAlphaBetaPlayer(int maxDepth) {
         if(maxDepth < 2)
@@ -39,7 +42,7 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer implements IPlayer {
 
         abort = false;
 
-        for(int i = 2; i <= maxDepth; ++i) {
+        for(int i = 5; i <= maxDepth; ++i) {
             try {
                 results.add(threadPool.addTask( new NegamaxTask(board.state.clone(), i) ));
             } catch (InterruptedException e) {}
