@@ -28,10 +28,10 @@ public class Main {
                 System.out.print("What to do: ");
                 String[] cmd = scanner.nextLine().split(" ");
 
-                if(cmd.length == 2 && cmd[0] == "accept") {
-                    System.out.println("Accepting game: " + args[1]);
-                    playAccept(args[1]);
-                } else if(cmd.length == 1 && cmd[0] == "offer") {
+                if(cmd.length == 2 && cmd[0].equals("accept")) {
+                    System.out.println("Accepting game: " + cmd[1]);
+                    playAccept(cmd[1]);
+                } else if(cmd.length == 1 && cmd[0].equals("offer")) {
                     System.out.println("Offering game...");
                     playOffer();
                 }
@@ -87,7 +87,7 @@ public class Main {
         playerWhite.start(Player.WHITE);
         playerBlack.start(Player.BLACK);
 
-        for(int i = 0; i < 8; ++i) {
+        for(int i = 0; i < 4; ++i) {
             if(i % 2 == 0) {
                 board.move(playerWhite.getMove(board));
             } else {
