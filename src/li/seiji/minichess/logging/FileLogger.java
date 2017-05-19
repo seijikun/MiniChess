@@ -3,6 +3,7 @@ package li.seiji.minichess.logging;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.State;
 import li.seiji.minichess.move.Move;
+import li.seiji.minichess.player.IPlayer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,12 +19,12 @@ public class FileLogger implements IGameLogger {
     }
 
     @Override
-    public void start(Board board) {
+    public void start(Board board, IPlayer white, IPlayer black) {
 
     }
 
     @Override
-    public void logMove(Board board, Move move) throws IOException {
+    public void logMove(Board board, Move move, long nanoSeconds) throws IOException {
         writer.write(move.toString() + System.lineSeparator());
     }
 

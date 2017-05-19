@@ -35,6 +35,7 @@ public class IMCSPlayer implements IPlayer {
 
     @Override
     public Move getMove(Board board) {
+        System.gc(); //use opponent's play time to run the GC
         try {
             return new Move(imcs.getMove());
         } catch (IOException e) {

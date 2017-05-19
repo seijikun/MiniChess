@@ -35,7 +35,7 @@ public class Game {
 
         white.start(Player.WHITE);
         black.start(Player.BLACK);
-        if(logger != null) logger.start(board);
+        if(logger != null) logger.start(board, white, black);
 
         try {
 
@@ -48,11 +48,13 @@ public class Game {
                     turnPlayer = black; otherPlayer = white;
                 }
 
+                long startTime = System.nanoTime();
                 Move move = turnPlayer.getMove(board);
+                long endTime = System.nanoTime();
                 board.move(move);
                 otherPlayer.setMove(board, move);
 
-                if(logger != null) logger.logMove(board, move);
+                if(logger != null) logger.logMove(board, move, (endTime - startTime));
             }
         } finally {
             if(logger != null) {

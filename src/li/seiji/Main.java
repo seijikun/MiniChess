@@ -30,8 +30,8 @@ public class Main {
                 IMCSPlayer netPlayer = new IMCSPlayer("imcs.svcs.cs.pdx.edu",  3589, "lazycat", "31337");
                 char ownPlayer = netPlayer.accept(serverGame.gameId);
 
-                NegamaxIterativeAlphaBetaPlayer player = new NegamaxIterativeAlphaBetaPlayer(8);
-                Game game = null;
+                ThreadedIterativeNegamaxAlphaBetaPlayer player = new ThreadedIterativeNegamaxAlphaBetaPlayer(25);
+                Game game;
 
                 if(ownPlayer == 'W') {
                     game = new Game(player, netPlayer);
@@ -41,9 +41,11 @@ public class Main {
                 game.setLogger(new ConsoleLogger());
                 game.run();
 
+                System.out.println();
                 System.out.println("########################");
                 System.out.println("####### end game #######");
                 System.out.println("########################");
+                System.out.println();
             }catch(Exception e) {
                 e.printStackTrace();
             }
