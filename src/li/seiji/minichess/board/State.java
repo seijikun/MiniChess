@@ -194,14 +194,35 @@ public class State implements Cloneable {
             for(int x = 0; x < Board.COLUMNS; ++x) {
                 char fieldValue = board[y][x];
                 char identifier = Square.getIdentifier(board, x, y);
+
+                Piece p = new Piece(identifier, fieldValue, Player.parseIdentifier(fieldValue), x, y);
                 if(turn == Player.parseIdentifier(fieldValue))
-                    score += getScoreFromPiece(identifier);
+                    score += getScoreFromPieceOptimized(p);
                 else
-                    score -= getScoreFromPiece(identifier);
+                    score -= getScoreFromPieceOptimized(p);
             }
         }
 
         return score + processMove(move);
+    }
+
+    private float getScoreFromPieceOptimized(Piece p) {
+        switch (p.identifier) {
+            case King.identifier:
+                return King.pointScore;
+            case Queen.identifier:
+                return Queen.pointScore;
+            case Rook.identifier:
+                return Rook.pointScore;
+            case Bishop.identifier:
+                return Bishop.pointScore;
+            case Knight.identifier:
+                return Knight.pointScore;
+            case Pawn.identifier:
+                return calculatePawnScore(p);
+            default:
+                return 0.0f;
+        }
     }
 
     private float processMove(Move move) {
@@ -211,5 +232,35 @@ public class State implements Cloneable {
         }
 
         return score;
+    }
+
+
+
+    private float calculatePawnScore(Piece p) {
+        float score = Pawn.pointScore;
+
+        int sign = (Player.parseIdentifier(p.fieldValue) == Player.BLACK) ? 1 : -1;
+
+        if(p.player == Player.BLACK && p.y == Board.ROWS-1 || p.player == Player.WHITE && p.y == 1) {
+            score += Queen.pointScore/3.0f;
+        }
+
+
+        return score;
+    }
+
+    private class Piece {
+        char identifier;
+        char fieldValue;
+        Player player;
+        int x,y;
+
+        public Piece(char identifier, char fieldValue, Player player, int x, int y) {
+            this.identifier = identifier;
+            this.fieldValue = fieldValue;
+            this.player = player;
+            this.x = x;
+            this.y = y;
+        }
     }
 }
