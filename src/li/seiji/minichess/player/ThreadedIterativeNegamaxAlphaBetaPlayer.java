@@ -49,7 +49,7 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
         }
 
         try {
-            Thread.sleep(7000);
+            Thread.sleep(7100);
             abort = true;
         } catch (InterruptedException e) {
             e.printStackTrace();
