@@ -42,14 +42,14 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
 
         abort = false;
 
-        for(int i = 5; i <= maxDepth; ++i) {
+        for(int i = 4; i <= maxDepth; ++i) {
             try {
                 results.add(threadPool.addTask( new NegamaxTask(board.state.clone(), i) ));
             } catch (InterruptedException e) {}
         }
 
         try {
-            Thread.sleep(7100);
+            Thread.sleep(7000);
             abort = true;
         } catch (InterruptedException e) {
             e.printStackTrace();

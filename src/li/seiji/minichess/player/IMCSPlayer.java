@@ -25,6 +25,10 @@ public class IMCSPlayer extends PlayerBase {
         return imcs.accept(gameId);
     }
 
+    public char offer() throws IOException {
+        return imcs.offerGameAndWait();
+    }
+
     public void offer(Player ownPlayer) throws IOException {
         imcs.offerGameAndWait(ownPlayer.toString().charAt(0));
     }
