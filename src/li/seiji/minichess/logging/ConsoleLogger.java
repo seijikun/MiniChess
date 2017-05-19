@@ -103,10 +103,13 @@ public class ConsoleLogger implements IGameLogger {
         switch(player) {
             case WHITE:
                 IGameLogger.activateColor(IGameLogger.FONT_BLUE);
+                break;
             case BLACK:
                 IGameLogger.activateColor(IGameLogger.FONT_BLACK);
+                break;
             case NONE:
                 IGameLogger.activateColor(IGameLogger.FONT_BLACK);
+                break;
         }
 
     }

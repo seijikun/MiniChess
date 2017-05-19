@@ -5,13 +5,13 @@ import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.board.State;
-import li.seiji.minichess.figure.King;
 import li.seiji.minichess.move.FutureIteratedMove;
 import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.util.ThreadPool;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -49,7 +49,7 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
         }
 
         try {
-            Thread.sleep(7400);
+            Thread.sleep(7000);
             abort = true;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -123,7 +123,12 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
                 throw new InterruptedException();
 
             FutureMove bestMove = new FutureMove(null, Float.NEGATIVE_INFINITY);
-            for(Move possibleMove : state.getPossibleMoves()) {
+
+            //ordering
+            List<Move> possibleMoves = state.getPossibleMoves();
+            Collections.shuffle(possibleMoves);
+
+            for(Move possibleMove : possibleMoves) {
                 state.move(possibleMove);
                 FutureMove nextMove = negamax(state, depth - 1, -b, -a, possibleMove);
                 state.unmove(possibleMove);

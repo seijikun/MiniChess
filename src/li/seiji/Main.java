@@ -5,6 +5,8 @@ import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.board.GameState;
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.evaluator.DefaultBoardEvaluator;
+import li.seiji.minichess.evaluator.ExtendedBoardEvaluator;
 import li.seiji.minichess.imcs.Client;
 import li.seiji.minichess.imcs.IMCSGame;
 import li.seiji.minichess.logging.ConsoleLogger;
@@ -16,11 +18,6 @@ import java.util.Optional;
 public class Main {
 
     public static void main(String[] args) throws InvalidMoveException, IOException, InterruptedException {
-//        Client client = new Client("imcs.svcs.cs.pdx.edu",  3589);
-//        IMCSGame game = client.waitForGame(g ->
-//            (!g.isRunning && g.ownerName.equals("TacklingDummy") && g.reservedPlayer == 'W')
-//        );
-//
         Client client = new Client("imcs.svcs.cs.pdx.edu",  3589);
 
         for(int i = 0; i < 30; ++i) {

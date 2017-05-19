@@ -23,9 +23,9 @@ public class ExtendedBoardEvaluator implements IBoardEvaluator {
 
                 Piece p = new Piece(identifier, fieldValue, Player.parseIdentifier(fieldValue), x, y);
                 if(state.turn == Player.parseIdentifier(fieldValue))
-                    score += getScoreFromPieceOptimized(state, p);
+                    score += IFigure.getScoreFromPiece(p.identifier);
                 else
-                    score -= getScoreFromPieceOptimized(state, p);
+                    score -= IFigure.getScoreFromPiece(p.identifier);
             }
         }
 
