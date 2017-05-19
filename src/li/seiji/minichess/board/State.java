@@ -7,7 +7,6 @@ import li.seiji.minichess.figure.*;
 import li.seiji.minichess.move.Move;
 import li.seiji.minichess.move.MoveGenerator;
 import li.seiji.minichess.move.MoveValidator;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -124,9 +123,9 @@ public class State implements Cloneable {
                 char fieldValue = board[y][x];
                 char identifier = Square.getIdentifier(board, x, y);
                 if(turn == Player.parseIdentifier(fieldValue))
-                    score += getScore(identifier);
+                    score += getScoreFromPiece(identifier);
                 else
-                    score -= getScore(identifier);
+                    score -= getScoreFromPiece(identifier);
             }
         }
 
@@ -169,7 +168,7 @@ public class State implements Cloneable {
         }
     }
 
-    private float getScore(char identifier) {
+    private float getScoreFromPiece(char identifier) {
         switch (identifier) {
             case King.identifier:
                 return King.pointScore;
@@ -186,5 +185,31 @@ public class State implements Cloneable {
             default:
                 return 0.0f;
         }
+    }
+
+    public float calculateScoreWithMove(Move move) {
+        float score = 0.0f;
+
+        for(int y = 0; y < Board.ROWS; ++y) {
+            for(int x = 0; x < Board.COLUMNS; ++x) {
+                char fieldValue = board[y][x];
+                char identifier = Square.getIdentifier(board, x, y);
+                if(turn == Player.parseIdentifier(fieldValue))
+                    score += getScoreFromPiece(identifier);
+                else
+                    score -= getScoreFromPiece(identifier);
+            }
+        }
+
+        return score + processMove(move);
+    }
+
+    private float processMove(Move move) {
+        float score = 0.0f;
+        if(move.to.getFieldValue(this) != '.') {
+            score += getScoreFromPiece(move.to.getIdentifier(this)) / 7.0f;
+        }
+
+        return score;
     }
 }
