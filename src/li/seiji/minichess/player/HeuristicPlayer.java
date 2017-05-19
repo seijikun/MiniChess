@@ -21,7 +21,7 @@ public class HeuristicPlayer extends PlayerBase {
         for(Move possibleMove : possibleMoves) {
 
             board.state.move(possibleMove);
-            float score = -board.state.calculateScore();
+            float score = -evaluator.calculate(board.state, possibleMove);
             board.state.unmove(possibleMove);
 
             if(score > bestScore || (score == bestScore && ThreadLocalRandom.current().nextBoolean())) {

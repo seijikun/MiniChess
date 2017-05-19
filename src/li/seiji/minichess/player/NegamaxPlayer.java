@@ -24,7 +24,7 @@ public class NegamaxPlayer extends PlayerBase {
 
     @Override
     public Move getMove(Board board) throws InvalidMoveException {
-        FutureMove move = negamax(board.state, maxDepth);
+        FutureMove move = negamax(board.state, maxDepth, null);
         return move.move;
     }
 
@@ -35,21 +35,21 @@ public class NegamaxPlayer extends PlayerBase {
     public void end() {}
 
 
-    private FutureMove negamax(State state, int depth) throws InvalidMoveException {
+    private FutureMove negamax(State state, int depth, Move parentMove) throws InvalidMoveException {
         if(depth == 0)
-            return new FutureMove(null, state.calculateScore());
+            return new FutureMove(null, evaluator.calculate(state, parentMove));
 
         FutureMove move = new FutureMove(null, Float.NEGATIVE_INFINITY);
         for(Move possibleMove : state.getPossibleMoves()) {
             state.move(possibleMove);
-            float subScore = state.calculateScore();
+            float subScore = evaluator.calculate(state, possibleMove);
 
             if(state.gameState != GameState.ONGOING) {
                 state.unmove(possibleMove);
                 return new FutureMove(possibleMove, -1.0f * subScore);
             }
 
-            FutureMove next = negamax(state, depth - 1);
+            FutureMove next = negamax(state, depth - 1, possibleMove);
             float score = (-1) * next.value;
             state.unmove(possibleMove);
 

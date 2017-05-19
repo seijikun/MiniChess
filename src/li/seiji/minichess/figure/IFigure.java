@@ -97,4 +97,27 @@ public interface IFigure {
         return false;
     }
 
+
+
+
+
+    static float getScoreFromPiece(char identifier) {
+        switch (identifier) {
+            case King.identifier:
+                return King.pointScore;
+            case Queen.identifier:
+                return Queen.pointScore;
+            case Rook.identifier:
+                return Rook.pointScore;
+            case Bishop.identifier:
+                return Bishop.pointScore;
+            case Knight.identifier:
+                return Knight.pointScore;
+            case Pawn.identifier:
+                return Pawn.pointScore;
+            default:
+                return 0.0f;
+        }
+    }
+
 }

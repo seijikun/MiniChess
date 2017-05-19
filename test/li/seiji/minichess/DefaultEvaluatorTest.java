@@ -1,6 +1,7 @@
 package li.seiji.minichess;
 
 import li.seiji.minichess.board.State;
+import li.seiji.minichess.evaluator.DefaultBoardEvaluator;
 import li.seiji.minichess.figure.*;
 import li.seiji.minichess.move.Move;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class StateScoreTest {
+public class DefaultEvaluatorTest {
 
     public static final String testState =
             "....." + System.lineSeparator() +
@@ -31,18 +32,19 @@ public class StateScoreTest {
 
     @Test
     public void testStateScore() throws IOException, InvalidMoveException {
+        DefaultBoardEvaluator eval = new DefaultBoardEvaluator();
         State state = new State();
         state.initialize();
 
         float maxScore = King.pointScore + Queen.pointScore + Rook.pointScore + Bishop.pointScore + Knight.pointScore + 5*Pawn.pointScore;
 
-        assertEquals(0.0f, state.calculateScore());
+        assertEquals(0.0f, eval.calculate(state, null));
 
         state.read(new StringReader(testState));
-        assertEquals(maxScore, state.calculateScore());
+        assertEquals(maxScore, eval.calculate(state, null));
 
         state.read(new StringReader(testState2));
-        assertEquals(-maxScore, state.calculateScore());
+        assertEquals(-maxScore, eval.calculate(state, null));
 
         Move[] gameLog = {
                 new Move("b2-b3"),
@@ -57,7 +59,7 @@ public class StateScoreTest {
         for(Move m : gameLog)
             state.move(m);
 
-        float score = state.calculateScore();
+        float score = eval.calculate(state, null);
         assertEquals(-1010.0f, score);
     }
 }

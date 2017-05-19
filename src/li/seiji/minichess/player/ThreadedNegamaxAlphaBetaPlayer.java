@@ -73,7 +73,7 @@ public class ThreadedNegamaxAlphaBetaPlayer extends PlayerBase {
 
 
 
-    private static class NegamaxTask implements Callable<FutureMove> {
+    private class NegamaxTask implements Callable<FutureMove> {
         private State stateCopy;
         private Move rootMove;
         private int depth;
@@ -92,22 +92,22 @@ public class ThreadedNegamaxAlphaBetaPlayer extends PlayerBase {
         public FutureMove call() throws Exception {
             stateCopy.move(rootMove);
             if(stateCopy.gameState != GameState.ONGOING)
-                return new FutureMove(rootMove, stateCopy.calculateScore());
+                return new FutureMove(rootMove, evaluator.calculate(stateCopy, rootMove));
 
             return new FutureMove(
                     rootMove,
-                    negamax(stateCopy, depth, a, b).value
+                    negamax(stateCopy, depth, a, b, rootMove).value
             );
         }
 
-        private FutureMove negamax(State state, int depth, float a, float b) throws InvalidMoveException {
+        private FutureMove negamax(State state, int depth, float a, float b, Move parentMove) throws InvalidMoveException {
             if(depth == 0 || state.gameState != GameState.ONGOING)
-                return new FutureMove(null, state.calculateScore());
+                return new FutureMove(null, evaluator.calculate(state, parentMove));
 
             FutureMove bestMove = new FutureMove(null, Float.NEGATIVE_INFINITY);
             for(Move possibleMove : state.getPossibleMoves()) {
                 state.move(possibleMove);
-                FutureMove nextMove = negamax(state, depth - 1, -b, -a);
+                FutureMove nextMove = negamax(state, depth - 1, -b, -a, possibleMove);
                 state.unmove(possibleMove);
                 float score = (-1) * nextMove.value;
 

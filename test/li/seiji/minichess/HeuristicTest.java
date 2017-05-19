@@ -1,15 +1,17 @@
 package li.seiji.minichess;
 
 import li.seiji.minichess.board.GameState;
+import li.seiji.minichess.evaluator.ExtendedBoardEvaluator;
 import li.seiji.minichess.player.HeuristicPlayer;
-import li.seiji.minichess.player.OptimizedHeuristicPlayer;
 import li.seiji.minichess.player.RandomPlayer;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertTrue;
 
+@Ignore
 public class HeuristicTest {
 
     public static final int TESTED_GAMES = 10000;
@@ -38,7 +40,8 @@ public class HeuristicTest {
         int ties = 0;
 
         for(int i = 0; i < TESTED_GAMES; ++i) {
-            OptimizedHeuristicPlayer optimizedHeuristicPlayer = new OptimizedHeuristicPlayer();
+            HeuristicPlayer optimizedHeuristicPlayer = new HeuristicPlayer();
+            optimizedHeuristicPlayer.setEvaluator(new ExtendedBoardEvaluator());
             HeuristicPlayer heuristicPlayer = new HeuristicPlayer();
 
             Game game = new Game(heuristicPlayer, optimizedHeuristicPlayer);
@@ -62,7 +65,8 @@ public class HeuristicTest {
         int ties = 0;
 
         for(int i = 0; i < TESTED_GAMES; ++i) {
-            OptimizedHeuristicPlayer optimizedHeuristicPlayer = new OptimizedHeuristicPlayer();
+            HeuristicPlayer optimizedHeuristicPlayer = new HeuristicPlayer();
+            optimizedHeuristicPlayer.setEvaluator(new ExtendedBoardEvaluator());
             HeuristicPlayer heuristicPlayer = new HeuristicPlayer();
 
             Game game = new Game(optimizedHeuristicPlayer, heuristicPlayer);

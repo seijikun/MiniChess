@@ -9,6 +9,7 @@ import li.seiji.minichess.move.FutureMove;
 import li.seiji.minichess.move.Move;
 
 
+@Deprecated //seems to be broken
 public class NegamaxIterativeAlphaBetaPlayer extends PlayerBase {
 
     private int maxDepth;
@@ -43,11 +44,11 @@ public class NegamaxIterativeAlphaBetaPlayer extends PlayerBase {
     private FutureMove negamaxIterative(State state, int timeLimit) throws InvalidMoveException {
         int depth = 2;
 
-        FutureMove bestMove = negamax(state, 1, -Float.MAX_VALUE, Float.MAX_VALUE);
+        FutureMove bestMove = negamax(state, 1, -Float.MAX_VALUE, Float.MAX_VALUE, null);
         long startTime = System.currentTimeMillis();
 
         while(true) {
-            FutureMove possibleMove = negamax(state, depth, -Float.MAX_VALUE, Float.MAX_VALUE);
+            FutureMove possibleMove = negamax(state, depth, -Float.MAX_VALUE, Float.MAX_VALUE, null);
 
             if((System.currentTimeMillis() - startTime >= timeLimit))
                 return bestMove;
@@ -68,14 +69,14 @@ public class NegamaxIterativeAlphaBetaPlayer extends PlayerBase {
         }
     }
 
-    private FutureMove negamax(State state, int depth, float a, float b) throws InvalidMoveException {
+    private FutureMove negamax(State state, int depth, float a, float b, Move parentMove) throws InvalidMoveException {
         if(depth == 0 || state.gameState != GameState.ONGOING)
-            return new FutureMove(null, state.calculateScore());
+            return new FutureMove(null, evaluator.calculate(state, parentMove));
 
         FutureMove bestMove = new FutureMove(null, Float.NEGATIVE_INFINITY);
         for(Move possibleMove : state.getPossibleMoves()) {
             state.move(possibleMove);
-            FutureMove nextMove = negamax(state, depth - 1, -b, -a);
+            FutureMove nextMove = negamax(state, depth - 1, -b, -a, parentMove);
             state.unmove(possibleMove);
             float score = (-1) * nextMove.value;
 

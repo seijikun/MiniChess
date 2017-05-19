@@ -107,7 +107,7 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
         public FutureIteratedMove call() throws Exception {
             if(!abort) {
                 try {
-                    FutureMove move = negamax(stateCopy, this.localMaxDepth, -Float.MAX_VALUE, Float.MAX_VALUE);
+                    FutureMove move = negamax(stateCopy, this.localMaxDepth, -Float.MAX_VALUE, Float.MAX_VALUE, null);
                     return new FutureIteratedMove(localMaxDepth, move.move);
                 } catch (InterruptedException e) {}
             }
@@ -115,9 +115,9 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
             return FutureIteratedMove.EMPTY;
         }
 
-        private FutureMove negamax(State state, int depth, float a, float b) throws InvalidMoveException, InterruptedException {
+        private FutureMove negamax(State state, int depth, float a, float b, Move parentMove) throws InvalidMoveException, InterruptedException {
             if(depth == 0 || state.gameState != GameState.ONGOING)
-                return new FutureMove(null, state.calculateScore());
+                return new FutureMove(null, evaluator.calculate(state, parentMove));
 
             if(abort)
                 throw new InterruptedException();
@@ -125,7 +125,7 @@ public class ThreadedIterativeNegamaxAlphaBetaPlayer extends PlayerBase {
             FutureMove bestMove = new FutureMove(null, Float.NEGATIVE_INFINITY);
             for(Move possibleMove : state.getPossibleMoves()) {
                 state.move(possibleMove);
-                FutureMove nextMove = negamax(state, depth - 1, -b, -a);
+                FutureMove nextMove = negamax(state, depth - 1, -b, -a, possibleMove);
                 state.unmove(possibleMove);
                 float score = (-1) * nextMove.value;
 

@@ -3,9 +3,18 @@ package li.seiji.minichess.player;
 import li.seiji.minichess.InvalidMoveException;
 import li.seiji.minichess.Player;
 import li.seiji.minichess.board.Board;
+import li.seiji.minichess.evaluator.DefaultBoardEvaluator;
+import li.seiji.minichess.evaluator.IBoardEvaluator;
 import li.seiji.minichess.move.Move;
 
 public abstract class PlayerBase {
+
+    protected IBoardEvaluator evaluator = new DefaultBoardEvaluator();
+
+    public void setEvaluator(IBoardEvaluator evaluator) {
+        this.evaluator = evaluator;
+    }
+
 
     /**
      * Notifies the player that the game is about to start.
